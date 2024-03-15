@@ -1,7 +1,7 @@
 <?php  function getBdd()
     {
-        if (file_exists('param.ini')) {
-            $tParam = parse_ini_file('config/param.ini', true);
+        if (file_exists('config/param.ini')) {
+            $tParam = parse_ini_file('param.ini', true);
             extract($tParam['BDD']);
         } else {
             throw new ModelException("Fichier param.ini inexistant");

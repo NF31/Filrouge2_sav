@@ -10,12 +10,11 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-}
+} 
+
 
 body {
   font-family: "Poppins", sans-serif;
-  overflow: hidden;
 }
 
 ul {
@@ -51,7 +50,7 @@ header {
   color: var(--clr-light);
 }
 
-header .container {
+header .container_header {
   padding: 0 2rem;
   margin: 0 auto;
   display: flex;
