@@ -6,5 +6,5 @@
     
     require('config/connexion.php');
 
-
+  $bdd = getBdd()
 

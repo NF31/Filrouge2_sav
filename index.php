@@ -1,4 +1,5 @@
 <?php
 
- require_once 'Vues/vue_sidebar.php';
+ require_once 'vues/vue_sidebar.php';
+ require_once 'model/modele.inc.php'; 
 ?>

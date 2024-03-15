@@ -12,7 +12,6 @@
 <body>
   <header>
     <div class="deconnexion">
-
       <h4> Bonjour prenom </h4> <a href="">Déconnexion</a>
     </div>
 

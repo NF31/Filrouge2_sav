@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class='d-flex justify-content-around p-2 m-3'>
-        <div class=' col-4 shadow-sm m-1 p-4 rounded '>
+        <div class=' col-4 shadow-lg m-1 p-4 rounded '>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">En cours</a>
@@ -66,7 +66,7 @@
             </div>
 
         </div>
-        <div class='col-7 shadow-sm mx-3 rounded'>
+        <div class='col-8 shadow-lg mx-3 rounded'>
                 <h1>div droite</h1>
         </div>
     </div>
