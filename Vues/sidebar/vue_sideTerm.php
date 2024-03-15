@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style/sidebar.css">
-    <title>SideBar</title>
-</head>
-<body>
-    <div class='d-flex justify-content-around p-2 m-3'>
-        <div class=' col-4 shadow-sm m-1 p-4 rounded '>
+<?php 
+        // Affichage des erreurs php 
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+
+        // Ouverture du buffer
+        ob_start();
+?>
+        <div class=' col-4 shadow-lg m-1 p-4 rounded '>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">En cours</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link  " href="#">Commandes</a>
+                        <a class="nav-link " href="index.php?action=encours">En cours</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Archivés</a>
+                        <a class="nav-link  " href="index.php?action=allcom">Commandes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.php?action=archives">Archivés</a>
                     </li>
                 </ul>
-            <div class="moteurRecherche" >
-                <h4 class="text-center my-5 " >Rechercher une commande</h4>
+             
+            <!-- Affichage du moteur de recherche -->     
+            <div class="moteurRecherche">
+                <h4 class="text-center my-5 ">Rechercher une commande</h4>
                 <form class="px-3 d-flex flex-column " action="#" method='GET'>
                     <div class=" row my-2 justify-content-center">
                         <label for="num_com" class="col-form-label col-md-4 text-md-right">N° Commande :</label>
@@ -59,18 +59,13 @@
                         </div>
                     </div>
                         <div class="col-12 my-5 text-center">
-                            <input class='btn boutton px-5 ' type="submit" value='Rechercher'>
+                            <input class='btn boutton px-5 py-3' type="submit" value='Rechercher'>
                         </div>
 
                 </form>
             </div>
-
         </div>
-        <div class='col-7 shadow-sm mx-3 rounded'>
-                <h1>div droite</h1>
-        </div>
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+ <?php
+    // Fermeture du Buffer et insertion dans la variable contenu
+    $sideTerm = ob_get_clean();
+     ?>
