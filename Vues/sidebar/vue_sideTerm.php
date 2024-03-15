@@ -22,8 +22,8 @@
              
             <!-- Affichage du moteur de recherche -->     
             <div class="moteurRecherche">
-                <h4 class="text-center my-5 ">Rechercher une commande</h4>
-                <form class="px-3 d-flex flex-column " action="#" method='GET'>
+                <h5 class="text-center my-5 ">Rechercher une commande terminée</h5>
+                <form class="px-3 d-flex flex-column " action="index.php?" method='GET'>
                     <div class=" row my-2 justify-content-center">
                         <label for="num_com" class="col-form-label col-md-4 text-md-right">N° Commande :</label>
                         <div class="col-md-7">
@@ -61,7 +61,7 @@
                         <div class="col-12 my-5 text-center">
                             <input class='btn boutton px-5 py-3' type="submit" value='Rechercher'>
                         </div>
-
+                        <input type='hidden' name='action' value='searchTerm'>
                 </form>
             </div>
         </div>
