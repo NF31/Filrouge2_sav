@@ -7,13 +7,15 @@
   <title>Document</title>
   <script src="https://kit.fontawesome.com/3b161c540c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../style/gabarit.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 </head>
 
 <body>
   <header>
     <div class="deconnexion">
 
-      <h4> Bonjour prenom </h4> <a href="">Déconnexion</a>
+      <h4> <i class='bx bx-user'></i> prenom </h4> <a href="">Déconnexion</a>
     </div>
 
     <div class="container">
