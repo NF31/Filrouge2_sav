@@ -8,8 +8,8 @@
   <title>Document</title>
   <script src="https://kit.fontawesome.com/3b161c540c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../style/gabarit.css">
-  <link rel="stylesheet" href="style/global.css">
-  <link rel="stylesheet" href="style/font.css">
+  <link rel="stylesheet" href="../style/global.css">
+  <link rel="stylesheet" href="../style/font.css">
   <link rel="stylesheet" href="../style/sidebar.css">
 </head>
 
@@ -22,24 +22,24 @@
     <div class="container_header">
       <input type="checkbox" name="check" id="check">
       <div class="logo-container">
-        <h3 class="logo"><img src="./ressources/images/logo.png " alt="" srcset=""></h3>
+        <h3 class="logo"><img src="../ressources/images/logo.png " alt="" srcset=""></h3>
       </div>
 
       <div class="nav-btn">
         <div class="nav-links">
           <ul>
-            <li class="nav-link" style="--i: .6s">
+            <li class="nav-link lien-nav" style="--i: .6s">
               <a href="#">Accueil</a>
             </li>
-            <li class="nav-link" style="--i: .85s">
+            <li class="nav-link lien-nav" style="--i: .85s">
               <a href="#">Expedition</i></a>
 
             </li>
-            <li class="nav-link" style="--i: 1.1s">
+            <li class="nav-link lien-nav" style="--i: 1.1s">
               <a href="#">Sav</a>
 
             </li>
-            <li class="nav-link" style="--i: 1.35s">
+            <li class="nav-link lien-nav" style="--i: 1.35s">
               <a href="#">Archives</a>
             </li>
           </ul>
@@ -55,7 +55,7 @@
     </div>
   </header>
   <!--  DEBUT de section à mettre dans la variable contenu   -->
-    <main class='container  d-flex justify-content-around py-5 px-3' style="max-height: 88vh; max-width: 100vw">
+    <main class='row justify-content-around py-3 px-3' >
         <?= $contenu ?> 
     </main> 
     <!--  FIN de section à mettre dans la variable contenu   -->

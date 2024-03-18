@@ -4,10 +4,10 @@
 // la var "$contenu"  est une concatenation car c'est la suite de "vue_sidebar_.."
 
 //On creer les colonnes du tableau dans l'espace reservé au tableau sur la page.
-$contenu .= '<div class="col-7 shadow-sm mx-3 rounded">
+$contenu .= '<div class="col-lg-7 col-sm-12 shadow-lg rounded">
 
-<h1>'.$titreliste.'</h1>
-    <div class="container"><table class="table">
+<h4 class="p-3 text-center">'.$titreliste.'</h4>
+    <div class="container overflow-auto style="max-height: 80%""><table class="table table-bordered table-striped">
         <thead>
         <tr>
         <th scope="col">ID</th>

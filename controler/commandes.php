@@ -12,16 +12,18 @@
     if(isset($_GET['action'])){
         $action = $_GET['action'];
     }
-
+    
+    try{
+        
     switch ($action) {
-
         // Affichage de toutes les commandes
             case 'allcom':
                 $commandes = getAllCom();
+                $titreResultats = "Resultat de toutes les commandes";
                 require_once '../vues/sideBar/vue_sideBarAll.php';
-                require_once '../vues/affichageRes/vue_resAll.php';
+                require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideBarAll ;
-                $contenu .= $affichResAll ; 
+                $contenu .= $affichResultats ; 
                 require_once '../vues/gabarit.php';
             break;
 
@@ -31,14 +33,14 @@
                 $nom_client = $_GET['nom_client'];
                 $code_postal = $_GET['code_postal'];
                 $ville= $_GET['ville']; 
-                
+                $titreResultats = "Resultat de la recherche";
                 $commandes = searchAll($num_com, $nom_client, $code_postal, $ville);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 $contenu = $sideBarAll ;
                 
                 if( $commandes > 0 ){
-                    require_once '../vues/affichageRes/vue_resAll.php';
-                    $contenu .= $affichResAll;
+                    require_once '../vues/affichageRes/vue_resultats.php';
+                    $contenu .= $affichResultats;
                 };
                 require_once '../vues/gabarit.php';
             break;
@@ -48,10 +50,11 @@
 
             case 'encours':
                 $commandes = getEnCourCom();
+                $titreResultats = "Resultat des commandes en cours";
                 require_once '../vues/sideBar/vue_sideEnCours.php';
-                require_once '../vues/affichageRes/vue_resEnCours.php';
+                require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideEncours ;
-                $contenu .= $affichResEnCours ; 
+                $contenu .= $affichResultats ; 
                 require_once '../vues/gabarit.php';
             break;
 
@@ -62,28 +65,28 @@
                 $nom_client = $_GET['nom_client'];
                 $code_postal = $_GET['code_postal'];
                 $ville= $_GET['ville']; 
-
+                $titreResultats = "Resultat des commandes en cours";
                 $commandes = searchEnCours($num_com, $nom_client, $code_postal, $ville);
                 require_once '../vues/sideBar/vue_sideEnCours.php';
                 $contenu = $sideEncours ;
                 
                 if( $commandes > 0 ){
-                    require_once '../vues/affichageRes/vue_resEnCours.php';
-                    $contenu .= $affichResEnCours;
+                    require_once '../vues/affichageRes/vue_resultats.php';
+                    $contenu .= $affichResultats;
                 };
                 require_once '../vues/gabarit.php';
             break;
           
-
         // Affichage des commandes Terminés
         // TODO Voir pour changer le terme 'Archivés' 
 
             case 'archives':
                 $commandes = getTermCom();
+                $titreResultats = "Resultat des commandes archivés";
                 require_once '../vues/sideBar/vue_sideTerm.php';
-                require_once '../vues/affichageRes/vue_resTerm.php';
+                require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideTerm ;
-                $contenu .= $affichResTerm ; 
+                $contenu .= $affichResultats ; 
                 require_once '../vues/gabarit.php';
             break;
 
@@ -93,15 +96,17 @@
                 $num_com = $_GET['num_com'];
                 $nom_client = $_GET['nom_client'];
                 $code_postal = $_GET['code_postal'];
-                $ville= $_GET['ville']; 
+                $ville= $_GET['ville'];
+                
+                $titreResultats = "Resultat des commandes archivés";
                 
                 $commandes = searchTerm($num_com, $nom_client, $code_postal, $ville);
                 require_once '../vues/sideBar/vue_sideTerm.php';
                 $contenu = $sideTerm ;
                 
                 if( $commandes > 0 ){
-                    require_once '../vues/affichageRes/vue_resTerm.php';
-                    $contenu .= $affichResTerm;
+                    require_once '../vues/affichageRes/vue_resultats.php';
+                    $contenu .= $affichResultats;
                 };
                 require_once '../vues/gabarit.php';
             break;
@@ -118,5 +123,24 @@
                 $contenu .= $affichCom ; 
                 require_once '../vues/gabarit.php';
             break;
+        // Afficahge du detail d'une commande
+            case 'detail':
+                if(isset($_GET['num_com'])){
+                    $id = $_GET['num_com'];
+                }
+                $detailCommande = getDetailCom($id);
+                require_once '../vues/sideBar/vue_sideBarAll.php';
+                require_once '../vues/affichageRes/vue_detail.php';
+                $contenu = $sideBarAll ;
+                $contenu .= $affichDetail ; 
+                require_once '../vues/gabarit.php';
+            break;    
         }
+
+    } catch (Exception $e){
+        echo ($e->getMessage());
+        $msgErreur = $e->getMessage();
+        require_once '../vues/vue_sideBarAll.php';
+        require_once '../vues/erreur.php';
+    }
 ?>
