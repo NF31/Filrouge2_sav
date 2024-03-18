@@ -23,7 +23,7 @@
                                 $num_com = $commande['NUM_COMMANDE']; 
                                 ?>
                                 <tr>
-                                    <td><a href="index.php?num_com=<?=$num_com?>&action=commande"><?= $commande['NUM_COMMANDE'] ?></a></td>
+                                    <td><a href="commandes.php?num_com=<?=$num_com?>&action=commande"><?= $commande['NUM_COMMANDE'] ?></a></td>
                                     <td><?= $commande['NOM_CLIENT'] ?> </td>
                                     <td><?= $commande['DATE_COM'] ?></td>
                                     <td><?= $commande['VILLE_CLIENT'] ?></td>

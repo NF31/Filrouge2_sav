@@ -5,7 +5,7 @@
     error_reporting(E_ALL);
 
     // Recupére la connection à la BDD
-    require('config/connexion.php');
+    require('../config/connexion.php');
 
     ///////////////////////////////////////////////
     //        LISTER TOUTES LES COMMANDES        //
