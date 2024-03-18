@@ -110,7 +110,16 @@
         $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);  
         return $resultat; 
     } 
-
+    
+    /**
+     * Recherche une commande avec ces paramètres et le statut En cours
+     *
+     * @param  string $num_com
+     * @param  string $nom_client
+     * @param  string $code_postal
+     * @param  string $ville
+     * @return Array
+     */
     function searchEnCours(string $num_com, string $nom_client, string $code_postal, string $ville ) {
         $bdd = getbdd(); 
 
@@ -134,7 +143,16 @@
         $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);  
         return $resultat; 
     } 
-
+    
+    /**
+     * Recherche une commande avec ces paramètres et le statut Terminé
+     *
+     * @param  string $num_com
+     * @param  string $nom_client
+     * @param  string $code_postal
+     * @param  string $ville
+     * @return Array
+     */
     function searchTerm(string $num_com, string $nom_client, string $code_postal, string $ville ) {
         $bdd = getbdd(); 
 
@@ -158,3 +176,33 @@
         $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);  
         return $resultat; 
     } 
+
+
+    ////////////////////////////////////////////////////
+    //     AFFICHER LES DETAIL D'UNE COMMANDE         //
+    ////////////////////////////////////////////////////
+
+    /**
+     * La fonction permet de récupérer les détails d'une commande
+     *
+     * @param  int $num_com
+     * @return Array
+     */
+    function getDetailCom(int $num_com){
+        $bdd = getBdd();
+        $sql = "SELECT CLIENT.NOM_CLIENT, ARTICLE.NOM_ARTICLE, CONCERNE.QUANTITE_CONCERNE 
+                FROM CONCERNE 
+                INNER JOIN COMMANDE ON CONCERNE.NUM_COMMANDE = COMMANDE.NUM_COMMANDE 
+                INNER JOIN ARTICLE ON CONCERNE.CODE_ARTICLE = ARTICLE.CODE_ARTICLE 
+                INNER JOIN CLIENT ON COMMANDE.ID_CLIENT = CLIENT.ID_CLIENT 
+                WHERE CONCERNE.NUM_COMMANDE = :nom_com ;";
+
+        $curseur = $bdd->prepare($sql);
+        try {
+            $curseur->execute(array('nom_com' => $num_com ));
+            $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+            return $resultat;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+    }

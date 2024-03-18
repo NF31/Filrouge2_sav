@@ -1,7 +1,7 @@
 <?php 
 // Affiche un formulaire de modification qui récupère les infos du tech sélectionné.
 // J'ai fais le choix de ne pas pouvoir modifier le poste 1 SEUL select ligne 25.
-$contenu .= '<div class="col-7 shadow-sm mx-3 rounded">
+$contenu .= '<div class="col-lg-7 col-sm-12 shadow-lg  rounded">
     <div class="p-4">
         <h4 class="text-center my-5">Modifier un technicien</h4>
         <form class="px-3 d-flex flex-column" action="admin.php?action=listTechsALL" method="GET">

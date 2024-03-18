@@ -3,17 +3,13 @@
     color: white; 
 } 
 
-.nav-link {
+.nav-tab>.nav-item>.nav-link>.lien-nav {
     background-color: #3b4fa137;
     color: white;
 } 
 
-.nav-link:hover{
-    color:white;
-}
-
 .nav-item.active {
-    background-color: #3B50A1;
+    background-color: #3b4fa177;
     opacity: 100%;
     border-radius: 5px 5px 0px 0px;
 } 

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
 :root {
   --clr-bg-header: #3b50a1;
   --clr-btn: #3b50a1;
@@ -12,10 +10,6 @@
   margin: 0;
 } 
 
-
-body {
-  font-family: "Poppins", sans-serif;
-}
 
 ul {
   list-style: none;
@@ -276,12 +270,6 @@ header .container_header {
 
   .nav-links > ul {
     flex-direction: column;
-  }
-
-  .nav-link {
-    width: 100%;
-    opacity: 0;
-    transform: translateY(15px);
   }
 
   .nav-link > a {

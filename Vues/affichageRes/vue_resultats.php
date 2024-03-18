@@ -8,10 +8,10 @@
         ob_start();
 ?>
        <!-- Affichage des résultats -->
-       <div class='col-8 shadow-lg ms-2 py-2 rounded  style="max-height: 100vh"'>
-       <h4 class="p-3 text-center" >Résultat de toutes les commandes </h4>
+       <div class="col-lg-7 col-sm-12 shadow-lg  rounded"  style='max-height: 80vh'>
+       <h4 class="p-3 text-center" ><?= $titreResultats ?></h4>
                 <div class="container overflow-auto " style="max-height: 80%">
-                    <table class='table table-bordered table-striped' >
+                    <table class='table table-bordered table-striped' style="max-height: 80%" >
                             <th>N°Commande</th>
                             <th>Nom client</th>
                             <th>Date</th>
@@ -19,23 +19,23 @@
                             <th>Code postal</th>
                             <th>Rue</th>
                             <th>Statut</th>
-                            <?php foreach ($commandes as $commande) { 
+                            <?php foreach ($commandes as $commande) {
                                 $num_com = $commande['NUM_COMMANDE'];
                                 ?>
                                 
-                                <tr>
+                               <a href=""><tr>
                                     <td><a href="commandes.php?num_com=<?=$num_com?>&action=commande"><?= $commande['NUM_COMMANDE'] ?></a></td>
-                                    <td><?= $commande['NOM_CLIENT'] ?> </td>    
+                                    <td><?= $commande['NOM_CLIENT'] ?> </td>
                                     <td><?= $commande['DATE_COM'] ?></td>
                                     <td><?= $commande['VILLE_CLIENT'] ?></td>
                                     <td><?= $commande['CODE_POSTAL_CLIENT'] ?></td>
                                     <td><?= $commande['RUE_CLIENT'] ?></td>
                                     <td><?= $commande['STATU_COMMANDE'] ?> </td>
-                                </tr>
+                                </tr></a>
                             <?php } ?>
                     </table>
                 </div>
         </div>
 
         <!-- Fermeture du buffer -->
-   <?php     $affichResAll = ob_get_clean() ?>
+   <?php     $affichResultats = ob_get_clean() ?>
