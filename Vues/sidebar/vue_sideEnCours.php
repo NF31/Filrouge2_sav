@@ -10,20 +10,20 @@
         <div class='col-4 shadow-lg m-1 p-4 rounded '>
                 <ul class="nav nav-tabs">
                     <li class="nav-item active">
-                        <a class="nav-link " href="index.php?action=encours">En cours</a>
+                        <a class="nav-link " href="commandes.php?action=encours">En cours</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  " href="index.php?action=allcom">Commandes</a>
+                        <a class="nav-link  " href="commandes.php?action=allcom">Commandes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=archives">Archivés</a>
+                        <a class="nav-link" href="commandes.php?action=archives">Archivés</a>
                     </li>
                 </ul>
              
             <!-- Affichage du moteur de recherche -->     
             <div class="moteurRecherche">
-                <h4 class="text-center my-5 ">Rechercher une commande</h4>
-                <form class="px-3 d-flex flex-column " action="#" method='GET'>
+                <h5 class="text-center my-5 ">Rechercher une commande en cours</h5>
+                <form class="px-3 d-flex flex-column " action="commandes.php?" method='GET'>
                     <div class=" row my-2 justify-content-center">
                         <label for="num_com" class="col-form-label col-md-4 text-md-right">N° Commande :</label>
                         <div class="col-md-7">
@@ -61,7 +61,7 @@
                         <div class="col-12 my-5 text-center">
                             <input class='btn boutton px-5 py-3' type="submit" value='Rechercher'>
                         </div>
-
+                        <input type='hidden' name='action' value='searchEnCours'>
                 </form>
             </div>
         </div>

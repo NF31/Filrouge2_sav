@@ -13,23 +13,23 @@
                 <div class="container overflow-auto " style="max-height: 80%">
                     <table class='table table-bordered table-striped' >
                             <th>N°Commande</th>
+                            <th>Nom client</th>
                             <th>Date</th>
                             <th>Ville</th>
                             <th>Code postal</th>
                             <th>Rue</th>
-                            <th>Id client</th>
                             <th>Statut</th>
                             <?php foreach ($commandes as $commande) {
                                 $num_com = $commande['NUM_COMMANDE'];
                                 ?>
                                 
                                <a href=""><tr>
-                                    <td><a href="index.php?num_com=<?=$num_com?>&action=commande"><?= $commande['NUM_COMMANDE'] ?></a></td>
+                                    <td><a href="commandes.php?num_com=<?=$num_com?>&action=commande"><?= $commande['NUM_COMMANDE'] ?></a></td>
+                                    <td><?= $commande['NOM_CLIENT'] ?> </td>
                                     <td><?= $commande['DATE_COM'] ?></td>
                                     <td><?= $commande['VILLE_CLIENT'] ?></td>
                                     <td><?= $commande['CODE_POSTAL_CLIENT'] ?></td>
                                     <td><?= $commande['RUE_CLIENT'] ?></td>
-                                    <td><?= $commande['ID_CLIENT'] ?> </td>
                                     <td><?= $commande['STATU_COMMANDE'] ?> </td>
                                 </tr></a>
                             <?php } ?>
