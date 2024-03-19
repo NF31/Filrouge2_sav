@@ -29,6 +29,12 @@
         <div class="nav-links">
           <ul>
             <li class="nav-link lien-nav" style="--i: .6s">
+              <a href="../controler/commandes.php">Commandes</a> <!-- Liens provisoire  -->
+            </li>
+            <li class="nav-link lien-nav" style="--i: .6s">
+              <a href="../controler/admin.php">Admin</a> <!-- Liens provisoire  -->
+            </li>
+            <li class="nav-link lien-nav" style="--i: .6s">
               <a href="#">Accueil</a>
             </li>
             <li class="nav-link lien-nav" style="--i: .85s">
@@ -55,7 +61,7 @@
     </div>
   </header>
   <!--  DEBUT de section à mettre dans la variable contenu   -->
-    <main class='row justify-content-around py-3 px-3' >
+    <main class='row justify-content-around py-3 px-3' style='height:100vh' >
         <?= $contenu ?> 
     </main> 
     <!--  FIN de section à mettre dans la variable contenu   -->
