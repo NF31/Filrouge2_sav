@@ -2,7 +2,7 @@
 // VUE QUI AFFICHE LA PARTIE "TECH HOTLINE" DE LA SIDE BAR 
 
 $contenu = '
-    <div class="col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded">
+    <div class="col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded" style="max-height: 80vh">
         <ul class="nav nav-tabs">
             <li class="nav-item ">
                 <a class="nav-link" aria-current="page" href="admin.php?action=listTechsALL">TECH ALL</a>

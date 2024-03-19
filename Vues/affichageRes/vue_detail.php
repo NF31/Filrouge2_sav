@@ -9,7 +9,7 @@
 ?>
 
 <!-- Affichage des résultats -->
-<div class='col-lg-7 col-sm-12 shadow-lg rounded '>
+<div class='col-lg-7 col-sm-11 shadow-lg rounded ' style='max-height: 80vh'>
     <?php if (count($detailCommande) > 0 ){?>
     <h4 class="p-3 text-center" >Détail de la commande de Mr / Mme : <span class=""><?= $detailCommande[1]['NOM_CLIENT'] ?></span></h4>
     <div class="row overflow-auto d-flex justify-content-center " style="max-height: 80%">

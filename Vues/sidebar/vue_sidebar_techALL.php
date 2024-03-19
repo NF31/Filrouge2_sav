@@ -2,7 +2,7 @@
 // VUE QUI AFFICHE LA PARTIE "TECH ALL" DE LA SIDE BAR 
 
 $contenu = '
-    <div class="col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded">
+    <div class="col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded" style="max-height: 80vh">
         <ul class="col-12 nav nav-tabs">
             <li class="nav-item active">
                 <a class="nav-link" aria-current="page" href="admin.php?action=listTechsALL">TECH ALL</a>
