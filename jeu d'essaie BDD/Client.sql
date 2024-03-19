@@ -18,4 +18,3 @@ INSERT INTO CLIENT (ADRESSE_MAIL, NOM_CLIENT, PRENOM_CLIENT) VALUES
 ('client17@example.com', 'David', 'Juliette'),
 ('client18@example.com', 'Bertrand', 'Alexandre'),
 ('client19@example.com', 'Roux', 'Caroline'),
-('client20@example.com', 'Vincent', 'Hugo');
