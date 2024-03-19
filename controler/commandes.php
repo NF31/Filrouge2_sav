@@ -19,7 +19,7 @@
         // Affichage de toutes les commandes
             case 'allcom':
                 $commandes = getAllCom();
-                $titreResultats = "Resultat de toutes les commandes";
+                $titreResultats = "Résultats de toutes les commandes";
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideBarAll ;
@@ -50,7 +50,7 @@
 
             case 'encours':
                 $commandes = getEnCourCom();
-                $titreResultats = "Resultat des commandes en cours";
+                $titreResultats = "Résultats des commandes en cours";
                 require_once '../vues/sideBar/vue_sideEnCours.php';
                 require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideEncours ;
@@ -65,7 +65,7 @@
                 $nom_client = $_GET['nom_client'];
                 $code_postal = $_GET['code_postal'];
                 $ville= $_GET['ville']; 
-                $titreResultats = "Resultat des commandes en cours";
+                $titreResultats = "Résultats des commandes en cours";
                 $commandes = searchEnCours($num_com, $nom_client, $code_postal, $ville);
                 require_once '../vues/sideBar/vue_sideEnCours.php';
                 $contenu = $sideEncours ;
@@ -82,7 +82,7 @@
 
             case 'archives':
                 $commandes = getTermCom();
-                $titreResultats = "Resultat des commandes archivés";
+                $titreResultats = "Résultats des commandes terminées";
                 require_once '../vues/sideBar/vue_sideTerm.php';
                 require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideTerm ;
@@ -98,7 +98,7 @@
                 $code_postal = $_GET['code_postal'];
                 $ville= $_GET['ville'];
                 
-                $titreResultats = "Resultat des commandes archivés";
+                $titreResultats = "Résultats des commandes archivés";
                 
                 $commandes = searchTerm($num_com, $nom_client, $code_postal, $ville);
                 require_once '../vues/sideBar/vue_sideTerm.php';

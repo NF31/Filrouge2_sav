@@ -272,12 +272,6 @@ header .container_header {
     flex-direction: column;
   }
 
-  .nav-link {
-    width: 100%;
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
   .nav-link > a {
     line-height: 1;
     padding: 1.6rem 2rem;
