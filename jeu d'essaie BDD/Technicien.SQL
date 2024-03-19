@@ -80,3 +80,4 @@ VALUES
         'julie.fournier@example.com',
         'mdpJulie890'
     );
+

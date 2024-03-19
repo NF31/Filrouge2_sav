@@ -17,5 +17,4 @@ INSERT INTO COMMANDE (CODE_POSTAL_CLIENT, DATE_COM, ID_CLIENT, RUE_CLIENT, VILLE
 ('69003', '2024-03-14', 16, 'Rue de la République', 'Lyon'),
 ('59000', '2024-03-14', 17, 'Rue de la République', 'Lille'),
 ('75002', '2024-03-14', 18, 'Rue de Rivoli', 'Paris'),
-('33000', '2024-03-14', 19, 'Rue Sainte-Catherine', 'Bordeaux'),
-('75003', '2024-03-14', 20, 'Rue de Rivoli', 'Paris');
+('33000', '2024-03-14', 19, 'Rue Sainte-Catherine', 'Bordeaux');
