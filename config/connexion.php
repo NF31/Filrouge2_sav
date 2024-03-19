@@ -1,7 +1,5 @@
 <?php
 
-require("../ModelException.php");
-
 function getBdd()
 {
     if (file_exists('../config/param.ini')) {
