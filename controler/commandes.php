@@ -30,18 +30,16 @@
         // Recherche parmis toutes les commandes         
             case 'searchAll': 
                 $num_com = $_GET['num_com'];
+                $code_art = $_GET['code_art'];
                 $nom_client = $_GET['nom_client'];
                 $code_postal = $_GET['code_postal'];
                 $ville= $_GET['ville']; 
                 $titreResultats = "Resultat de la recherche";
-                $commandes = searchAll($num_com, $nom_client, $code_postal, $ville);
+                $commandes = searchAll($num_com, $code_art, $nom_client, $code_postal, $ville);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
+                require_once '../vues/affichageRes/vue_resultats.php';
                 $contenu = $sideBarAll ;
-                
-                if( $commandes > 0 ){
-                    require_once '../vues/affichageRes/vue_resultats.php';
-                    $contenu .= $affichResultats;
-                };
+                $contenu .= $affichResultats ; 
                 require_once '../vues/gabarit.php';
             break;
         
