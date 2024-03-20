@@ -6,15 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <title>Document</title>
-  <script src="https://kit.fontawesome.com/3b161c540c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../style/gabarit.css">
 
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../style/global.css">
+  <!-- <link rel="stylesheet" href="../style/global.css"> -->
   <link rel="stylesheet" href="../style/font.css">
   <link rel="stylesheet" href="../style/sidebar.css">
+
+  <link rel="stylesheet" type="text/css" href="../style/connexion/connexion.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/3b161c540c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="../../../Filrouge2_sav/style/connexion/connexion.css">
+
 
 </head>
 
@@ -34,12 +36,13 @@
       <div class="nav-btn">
         <div class="nav-links">
           <ul>
-            <li class="nav-link lien-nav" style="--i: .6s">
-              <a href="../controler/commandes.php">Commandes</a> <!-- Liens provisoire  -->
+             <li  style="display: none"  class="nav-link lien-nav" style="--i: .6s">
+              <a href="../controler/commandes.php">Commandes</a> 
             </li>
+            <!--
             <li class="nav-link lien-nav" style="--i: .6s">
-              <a href="../controler/admin.php">Admin</a> <!-- Liens provisoire  -->
-            </li>
+              <a href="../controler/admin.php">Admin</a> Liens provisoire 
+            </li> -->
             <li class="nav-link lien-nav" style="--i: .6s">
               <a href="#">Accueil</a>
             </li>
@@ -71,6 +74,10 @@
         <?= $contenu ?> 
     </main> 
     <!--  FIN de section à mettre dans la variable contenu   -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="../script/connexion.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
