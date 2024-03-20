@@ -8,7 +8,7 @@
         ob_start();
 ?>
        <!-- Affichage des résultats -->
-       <div class='col-lg-7 col-sm-11 shadow-lg rounded ' style='max-height: 80vh'>
+       <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light' style='max-height: 80vh'>
         <h5 class="p-3 text-center" >Commande sélectionnée </h5>
         <div class="container overflow-auto " style="max-height: 80%">
             <table class='table table-bordered table-striped'>
