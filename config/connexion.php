@@ -1,4 +1,6 @@
-<?php  function getBdd()
+<?php 
+
+function getBdd()
     {
         if (file_exists('../config/param.ini')) {
             $tParam = parse_ini_file('param.ini', true);
