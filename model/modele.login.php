@@ -37,9 +37,9 @@ function getEmails()
 
 $emails = getEmails(); // Récupérer toutes les adresses email depuis la base de données
 
-foreach ($emails as $email) {
-    echo "Email : $email<br>";
-}
+// foreach ($emails as $email) {
+//     echo "Email : $email<br>";
+// }
 
 function getPasswords()
 {
@@ -57,9 +57,9 @@ function getPasswords()
 
 $passwords = getPasswords(); // Récupérer tous les mots de passe depuis la base de données
 
-foreach ($passwords as $password) {
-    echo "Mot de passe : $password<br>";
-}
+// foreach ($passwords as $password) {
+//     echo "Mot de passe : $password<br>";
+// }
 
 function loginAdmin()
 {
@@ -91,9 +91,9 @@ function getEmailsAdmin()
 
 $emails = getEmailsAdmin(); // Récupérer toutes les adresses email depuis la base de données
 
-foreach ($emails as $email) {
-    echo "Email : $email<br>";
-}
+// foreach ($emails as $email) {
+//     echo "Email : $email<br>";
+// }
 
 function getPasswordsAdmin()
 {
@@ -111,6 +111,6 @@ function getPasswordsAdmin()
 
 $passwords = getPasswordsAdmin(); // Récupérer tous les mots de passe depuis la base de données
 
-foreach ($passwords as $password) {
-    echo "Mot de passe : $password<br>";
-}
+// foreach ($passwords as $password) {
+//     echo "Mot de passe : $password<br>";
+// }

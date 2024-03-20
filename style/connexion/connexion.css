@@ -6,10 +6,9 @@
   color: var(--clr-light);
   display: none;
 }
-.error-message{
+p{
   color: crimson;
 }
-
 .form {
   display: flex;
   justify-content: center;
@@ -20,6 +19,8 @@
   background-position: center;
   background-size: cover;
   perspective: 1500px;
+  position: fixed;
+  margin-top: -1%; 
 }
 
 .form * {
@@ -44,6 +45,8 @@
   transition: transform var(--rotation-duration);
   transform-style: preserve-3d;
   overflow: hidden;
+  margin-top: -12%; 
+ 
 }
 
 .form .form-box.turned {
@@ -165,4 +168,9 @@
 
 .form .register-form {
   transform: rotateY(180deg);
+}
+
+@media screen and (max-width: 992px){
+  .form {margin-top: -3%;  }
+  .form-box { margin-top: -75% !important; }
 }
