@@ -9,7 +9,7 @@
     ?>
 
     <!-- Affichage des résultats -->
-    <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light' style='max-height: 80vh'>
+    <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light overflow-auto ' style='max-height: 80vh'>
         <?php if (count($detailCommande) > 0 ){?>
             <h3 class="bg-secondary text-center mx-3 py-3 my-3 text-light rounded">Détail de la commande</h3>
         <div class="d-flex justify-content-between px-3 py-3 m-3 border rounded">
@@ -31,27 +31,48 @@
                             <li class="list-group-item">
                                 <span ><strong>Adresse de livraison :</strong></span><br>
                                 <?=$detailCommande[1]['RUE_CLIENT']?>
-                                <?=' '. $detailCommande[1]['VILLE_CLIENT']?>&nbsp; &nbsp;
-                                <i class="fa-solid fa-pen"></i>
+                                <?=' '. $detailCommande[1]['VILLE_CLIENT']?>
+                                <p>
+                                <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                    <i class="fas fa-caret-up"></i>
+                                </button>
+
+                                </p>
+                                <div class="collapse collapse-vertical" id="collapseWidthExample">
+                                    <div >
+                                     <form action="">
+                                        <div>
+                                            <input class="col-10 text-center mb-2" name="rue_client" type="text" placeholder="Nouvelle rue">
+                                        </div>
+                                        <div>
+                                            <input class="col-10 text-center mb-2" name="ville_client" type="text" placeholder="Nouvelle ville">
+                                        </div>
+                                         <button class='btn btn-success' type="submit" value='modifier'>modifier
+                                            <input type="hidden" name="action" value="modifAdress">
+                                            <input type="hidden" name="num_com" value="<?=$detailCommande[1]['NUM_COMMANDE']?>">
+                                     </form>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
-                    <div class='d-flex mx-auto justify-content-between  row col-12 mt-3 '> 
-                        <form action="tickets.php?" method="GET">
-                            <button type='submit' class='col-5 py-2 bg-white border-success rounded'>
+                    <div class='d-flex pt-3 mx-auto justify-content-between'>
+                        <form action="tickets.php?" method="GET" class="col-5 d-inline">
+                            <button type='submit' class='col-10 py-2 bg-white border-success rounded'>
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                             <input type="hidden" name="num_com" value="<?= $detailCommande[1]['NUM_COMMANDE'] ?>">
                             <input type="hidden" name="action" value="createT_Exp">
                         </form>
-                        <form action="tickets.php?" method="GET">
-                            <button type='submit' class='col-5 py-2 bg-white border-warning rounded'>
+                        <form action="tickets.php?" method="GET" class="col-5 d-inline">
+                            <button type='submit' class='col-10 py-2 bg-white border-warning rounded'>
                                 <i class="fa-solid fa-ticket"></i>
                             </button>
                             <input type="hidden" name="num_com" value="<?= $detailCommande[1]['NUM_COMMANDE'] ?>">
                             <input type="hidden" name="action" value="showT_Exp">
                         </form>
                     </div>
+
                 </div>
         </div>    
         <div class="row overflow-auto d-flex justify-content-center " style="max-height: 80%">

@@ -23,7 +23,27 @@
 
         $curseur =  $bdd->prepare($sql);
         $curseur->execute(array('num_com' => $num_com ));
-        $resultat = $curseur->fetch();
+        $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
         return $resultat; 
+    }
+    
+    /**
+     * La fonction créer un ticket expédition
+     *
+     * @param  string $code_ticket
+     * @param  int $num_com
+     * @param  string $statut_ticket
+     * @return void
+     */
+    function creatTicketExp( string $code_ticket, int $num_com, string $statut_ticket){
+        $bdd = getBdd(); 
+        $sql = "INSERT INTO TICKET_EXP (CODE_TICKET , NUM_COMMANDE, STATUT_TICKET)
+                VALUES (:code_ticket, :num_commande, :statut_commande )"; 
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array(
+            'code_ticket' => $code_ticket, 
+            'num_commande' => $num_com, 
+            'statut_commande' => $statut_ticket
+        ));
     }
 ?>

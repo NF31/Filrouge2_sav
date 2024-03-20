@@ -96,7 +96,6 @@
             break;
 
         // Recherche parmis toutes les commandes Terminés
-
             case 'searchTerm': 
                 $num_com = $_GET['num_com'];
                 $nom_client = $_GET['nom_client'];
@@ -139,7 +138,16 @@
                 $contenu = $sideBarAll ;
                 $contenu .= $affichDetail ; 
                 require_once '../vues/gabarit.php';
-            break;    
+            break; 
+            
+            case 'modifAdress':
+                $rue_client = $_GET['rue_client'];
+                $ville_client = $_GET['ville_client'];
+                $num_com = intval($_GET['num_com']);
+                changeAdress($rue_client, $ville_client, $num_com);
+                header('location: commandes.php?num_com='.$num_com.'&action=detail');
+                
+            break;
         }
 
     } catch (Exception $e){
