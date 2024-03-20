@@ -32,7 +32,13 @@
                 $contenu = $sideBarAll;
                 $contenu .= $affichConfTicket;
                 require_once '../vues/gabarit.php';
-                break;         
+                break; 
+            case 'creatOk':
+                $statut_ticket = $_GET['statut_ticket'];
+                $code_ticket = $_GET['code_ticket'];
+                $nouveauTicket = creatTicketExp( $code_ticket,  $num_com,  $statut_ticket);
+                header('location: commandes.php?num_com='.$num_com.'&action=detail');
+            break;        
         }
     }
 ?>
