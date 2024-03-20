@@ -10,6 +10,7 @@
        <!-- Affichage des résultats -->
        <div class="col-lg-7 col-sm-11 shadow-lg  rounded"  style='max-height: 80vh'>
        <h4 class="p-3 text-center" ><?= $titreResultats ?></h4>
+      <?php if(isset($commandes) && !empty($commandes)){ ?>
                 <div class="container overflow-auto " style="max-height: 80%">
                     <table class='table table-bordered table-striped' style="max-height: 80%" >
                             <th>N°Commande</th>
@@ -35,6 +36,11 @@
                             <?php } ?>
                     </table>
                 </div>
+                <?php } else { ?> 
+                    <div class="alert alert-warning text-center" role="alert">
+                        Aucun résultat le correspond à votre recherche
+                    </div> 
+                    <?php } ?>
         </div>
 
         <!-- Fermeture du buffer -->
