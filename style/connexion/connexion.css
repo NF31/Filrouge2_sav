@@ -6,9 +6,10 @@
   color: var(--clr-light);
   display: none;
 }
-p{
+.error-message{
   color: crimson;
 }
+
 .form {
   display: flex;
   justify-content: center;

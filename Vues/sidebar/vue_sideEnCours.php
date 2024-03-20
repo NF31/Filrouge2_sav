@@ -7,7 +7,7 @@
         // Ouverture du buffer
         ob_start();
 ?>
-        <div class='col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded' style='max-height: 80vh'>
+        <div class='col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded bg-light' style='max-height: 80vh'>
                 <ul class="nav nav-tabs">
                     <li class="nav-item active">
                         <a class="nav-link " href="commandes.php?action=encours">En cours</a>
