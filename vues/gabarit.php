@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="../style/global.css">
   <link rel="stylesheet" href="../style/font.css">
   <link rel="stylesheet" href="../style/sidebar.css">
+  <script src="https://kit.fontawesome.com/3b161c540c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../../../Filrouge2_sav/style/connexion/connexion.css">
 
 </head>
 

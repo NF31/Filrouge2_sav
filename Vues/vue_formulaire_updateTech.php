@@ -4,7 +4,7 @@
 $contenu .= '<div class="col-lg-7 col-sm-11 shadow-lg  rounded" style="max-height: 80vh">
     <div class="p-4">
         <h4 class="text-center my-5">Modifier un technicien</h4>
-        <form class="px-3 d-flex flex-column" action="admin.php?action=listTechsALL" method="GET">
+        <form class="px-3 d-flex flex-column" id="updateTechForm" action="#" method="GET">
             <input type="hidden" name="action" value="updateTechMAJ"> 
             <div class="row my-2 justify-content-center">
                 <label for="nom_tech" class="col-form-label col-md-4 text-md-right">Nom tech :</label>
@@ -18,12 +18,54 @@ $contenu .= '<div class="col-lg-7 col-sm-11 shadow-lg  rounded" style="max-heigh
                     <input type="text" id="prenom_tech" name="prenom_tech" class="form-control" placeholder="Veuillez saisir un prénom" pattern="[a-zA-Z]{3,}" title="Veuillez saisir au moins 3 lettres" value="' . $prenom . '" required>
                 </div>
             </div>
+            
+            <div class="row my-2 justify-content-center">
+                <label for="email_tech" class="col-form-label col-md-4 text-md-right">Email :</label>
+                <div class="col-md-7">
+                    <input type="email" id="email_tech" name="email_tech" class="form-control" placeholder="Entrez votre email" required>
+                </div>
+            </div>';
+
+            if (isset($_SESSION['error-messageEmail'])) {
+                $contenu .= '   <div class="offset-md-5 col-md-7">
+                                    <p style="color: red;">'.$_SESSION['error-messageEmail'].'</p>
+                                </div>
+                            '; 
+                            unset($_SESSION['error-messageEmail']);              
+            }
+            
+          $contenu .=  
+          '<div class="row my-2 justify-content-center">
+                <label for="mdp_tech" class="col-form-label col-md-4 text-md-right">Mot de passe :</label>
+                <div class="col-md-7">
+                    <input type="password" id="mdp_tech" name="mdp_tech" class="form-control" placeholder="Entrez votre mot de passe" required>
+                </div>';
+
+                if (isset($_SESSION['error-messagePassword'])) {
+                    $contenu .= '   <div class="offset-md-5 col-md-7">
+                                        <p style="color: red;">'.$_SESSION['error-messagePassword'].'</p>
+                                    </div>
+                                '; 
+                    unset($_SESSION['error-messagePassword']);
+                   
+                }
+
+                $contenu .='
+            </div>
+            <div class="row my-2 justify-content-center">
+                <label for="confirm_mdp_tech" class="col-form-label col-md-4 text-md-right">Confirmer mot de passe :</label>
+                <div class="col-md-7">
+                    <input type="password" id="confirm_mdp_tech" name="confirm_mdp_tech" class="form-control" placeholder="Confirmez votre mot de passe" required>
+                </div>
+            </div>
+            
             <div class="row my-2 justify-content-center">
                 <label for="categorie_tech" class="col-form-label col-md-4 text-md-right">Poste :</label>
                 <div class="col-md-7">
-                    <select id="categorie_tech" name="categorie_tech" class="form-control">
-                        <option value="' . $poste . '" selected>' . $poste . '</option>
-                    </select>
+                <select id="poste_technicien" name="poste_technicien" class="form-control">
+                <option value="SAV" ' . ($poste === 'SAV' ? 'selected' : '') . '>SAV</option>
+                <option value="Hotline" ' . ($poste === 'Hotline' ? 'selected' : '') . '>Hotline</option>
+            </select>
                 </div>
             </div>
             <div class="col-12 my-5 text-center">
@@ -33,5 +75,8 @@ $contenu .= '<div class="col-lg-7 col-sm-11 shadow-lg  rounded" style="max-heigh
             </div>
         </form>
     </div>
+    
 </div>';
 ?>
+
+

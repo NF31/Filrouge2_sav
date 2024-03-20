@@ -15,18 +15,59 @@ $contenu = '
             </li>
         </ul>
         <div class="moteurRecherche">
-            <h4 class="text-center mt-4 mb-2">Créer un technicien HOTLINE</h5>
-            <form class="px-3 d-flex flex-column text-center" action="admin.php" method="GET">
-            <div class=" row my-2 justify-content-center">
-            <label for="nom_tech" class="col-form-label col-md-4 text-md-right">Nom tech :</label>
-            <div class="col-8">
-                <input type="text" id="nom_techHOTLINE" name="nom_techHOTLINE" class="form-control" placeholder="Veuillez respecter le format" pattern="[a-zA-Z]{3,}" title="Veuillez saisir au moins 3 lettres" required>
+        <h4 class="text-center mt-4 mb-2">Créer un technicien HOTLINE</h5>
+        <form class="px-3 d-flex flex-column text-center" id ="form_techHOTLINE" action="admin.php" method="GET">
+            <div class="row my-2 justify-content-center">
+                <label for="nom_tech" class="col-form-label col-md-4 text-md-right">Nom tech :</label>
+                <div class="col-8">
+                    <input type="text" id="nom_techHOTLINE" name="nom_techHOTLINE" class="form-control" placeholder="Veuillez respecter le format" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres, des espaces ou des tirets" required>
+                </div>
             </div>
-        </div>
-        <div class="row my-2 justify-content-center">
-            <label for="prenom_techHOTLINE" class="col-form-label col-md-4 text-md-right">Prenom tech :</label>
+            <div class="row my-2 justify-content-center">
+                <label for="prenom_techHOTLINE" class="col-form-label col-md-4 text-md-right">Prénom tech :</label>
+                <div class="col-8">
+                    <input type="text" id="prenom_techHOTLINE" name="prenom_techHOTLINE" class="form-control" placeholder="Veuillez saisir un prénom" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres, des espaces ou des tirets" required>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-center">
+                <label for="email_techHOTLINE" class="col-form-label col-md-4 text-md-right">Email :</label>
+                <div class="col-8">
+                    <input type="email" id="email_techHOTLINE" name="email_techHOTLINE" class="form-control" placeholder="Entrez votre email" required>
+                </div>
+                </div>';
+
+                if (isset($_SESSION['error-messageEmail'])) {
+                    $contenu .= '   <div class="" style="margin-left: 50px;">
+                                        <p style="color: red;">'.$_SESSION['error-messageEmail'].'</p>
+                                    </div>
+                                '; 
+                                unset($_SESSION['error-messageEmail']);              
+                }
+        
+                $contenu .='
+           
+            <div class="row my-2 justify-content-center">
+                <label for="mdp_techHOTLINE" class="col-form-label col-md-4 text-md-right">Mot de passe :</label>
+                <div class="col-8">
+                    <input type="password" id="mdp_techHOTLINE" name="mdp_techHOTLINE" class="form-control" placeholder="Entrez votre mot de passe" required>
+                </div>
+            </div>'
+            ;
+    
+                    if (isset($_SESSION['error-messagePassword'])) {
+                        $contenu .= '   <div class="offset-md-4  row">
+                                            <p style="color: red;">'.$_SESSION['error-messagePassword'].'</p>
+                                        </div>
+                                    '; 
+                        unset($_SESSION['error-messagePassword']);
+                       
+                    }
+    
+                    $contenu .='
+            <div class="row my-2 justify-content-center">
+            <label for="confirm_mdp_techHOTLINE" class="col-form-label col-md-4 text-md-right">Confirmer mot de passe :</label>
             <div class="col-8">
-                <input type="text" id="prenom_techHOTLINE" name="prenom_techHOTLINE" class="form-control" placeholder="Veuillez saisir un prenom" pattern="[a-zA-Z]{3,}" title="Veuillez saisir au moins 3 lettres" required>
+                <input type="password" id="confirm_mdp_techHOTLINE" name="confirm_mdp_techHOTLINE" class="form-control" placeholder="Confirmez votre mot de passe" required>
             </div>
         </div>
         
@@ -49,3 +90,4 @@ $contenu = '
     </div>
 ';
 ?>
+
