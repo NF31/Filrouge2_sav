@@ -63,7 +63,7 @@
 
   // PERMET DE CREER UN NOUVEAU TECH SAV (LIMITER A 3 MAXIMUM SINON BLOQUE )
 
-    function createTechSAV(string $nom, string $prenom, string $poste) {
+    function createTechSAV(string $nom, string $prenom,string $email,string $motdepasse, string $poste) {
   
         $connexion = getBdd();
         $sql_count = "SELECT COUNT(*) AS total_techniciens FROM techniciens WHERE poste = 'SAV'";
@@ -75,18 +75,21 @@
             echo "<script>La limite de techniciens est atteinte (maximum 3).</script>";
             return false;
         }
-        $sql_insert = "INSERT INTO techniciens (nom, prenom, poste) VALUES (:nom, :prenom, :poste)";
+        $sql_insert = "INSERT INTO techniciens (nom, prenom, email, motdepasse, poste) VALUES (:nom, :prenom,:email,:motdepasse, :poste)";
         $requete_insert = $connexion->prepare($sql_insert);
         $requete_insert->execute(array(
             ":nom" => $nom,
             ":prenom" => $prenom,
+            ":email" => $email,
+            ":motdepasse" => $motdepasse,
             ":poste" => $poste
+       
         ));
 }
 
   // PERMET DE CREER UN NOUVEAU TECH HOTLINE (LIMITER A 10 MAXIMUM SINON BLOQUE )
 
-  function createTechHOTLINE(string $nom, string $prenom, string $poste) {
+  function createTechHOTLINE(string $nom, string $prenom,string $email,string $motdepasse, string $poste) {
       $connexion = getBdd();
       $sql_count = "SELECT COUNT(*) AS total_techniciens FROM techniciens WHERE poste = 'Hotline'";
       $requete_count = $connexion->query($sql_count);
@@ -97,11 +100,13 @@
           echo "<script>alert: La limite de techniciens est atteinte (maximum 10).</script>";
           return false;
       }
-      $sql_insert = "INSERT INTO techniciens (nom, prenom, poste) VALUES (:nom, :prenom, :poste)";
+      $sql_insert = "INSERT INTO techniciens (nom, prenom,email, motdepasse, poste) VALUES (:nom, :prenom, :email, :motdepasse, :poste)";
       $requete_insert = $connexion->prepare($sql_insert);
       $requete_insert->execute(array(
           ":nom" => $nom,
           ":prenom" => $prenom,
+          ":email" => $email,
+          ":motdepasse" => $motdepasse,
           ":poste" => $poste
       ));
 
@@ -110,19 +115,54 @@
 
     }
 
+    function checkEmailCreate(string $email){
+       
+            $connexion = getBdd();
+            $sql ="SELECT COUNT(*) FROM techniciens WHERE email = :email";
+            $requete = $connexion->prepare($sql);
+            $requete->execute(['email' => $email]);
+            
+            $nbrColonne= $requete->fetchColumn();
+            if ($nbrColonne > 0) {
+                return false; // Email déjà utilisé
+            } else {
+                return true; // Email disponible
+            }
+    
+        }
+
+
+// L'email est comparé avec toute les autres de la BDD sauf la sienne
+    function checkEmail(string $email, int $id) {
+        $connexion = getBdd();
+        $sql ="SELECT COUNT(*) FROM techniciens WHERE email = :email AND id != :id";
+        $requete = $connexion->prepare($sql);
+        $requete->execute(['email' => $email,
+                            'id' => $id]);
+        
+        $nbrColonne= $requete->fetchColumn();
+        if ($nbrColonne > 0) {
+            return false; // Email déjà utilisé
+        } else {
+            return true; // Email disponible
+        }
+
+    }
+
   // PERMET DE METTRE A JOUR LES INFORMATIONS D'UN TECHNICIEN
 
-
-    function updTech(int $id, string $nom, string $prenom, string $poste) {
+    function updTech(int $id, string $nom, string $prenom, string $email,string $motdepasse, string $poste) {
       $connexion = getBdd();
        // Requête SQL pour METTRE A JOUR LES INFORMATIONS D'UN TECHNICIEN
-      $sql = "UPDATE techniciens SET nom = :nom, prenom = :prenom, poste = :poste WHERE id = :id";  
+      $sql = "UPDATE techniciens SET nom = :nom, prenom = :prenom, email = :email, motdepasse = :motdepasse, poste = :poste WHERE id = :id";  
       $requete = $connexion->prepare($sql);
 
       if($requete->execute(array(
           ":id" => $id,
           ":nom" => $nom,
           ":prenom" => $prenom,
+          ":email" => $email,
+          ":motdepasse" => $motdepasse,
           ":poste" => $poste
       ))) {echo "<script>alert('Mise à jour effectuée avec succès !');</script>";
       }

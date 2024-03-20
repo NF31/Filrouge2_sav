@@ -13,6 +13,7 @@ $contenu .= '<div class="col-lg-7 col-sm-11 shadow-lg rounded" style="max-height
         <th scope="col">ID</th>
         <th scope="col">Nom</th>
         <th scope="col">Prénom</th>
+        <th scope="col">Email</th>
         <th scope="col">Poste</th>
         <th scope="col">Mise à jour</th>
         <th scope="col">Suppression</th>
@@ -29,7 +30,9 @@ if (isset($techniciens) && !empty($techniciens)) {
         $contenu .= '<td>' . $technicien['id'] . '</td>';
         $contenu .= '<td>' . $technicien['nom'] . '</td>';
         $contenu .= '<td>' . $technicien['prenom'] . '</td>';
+        $contenu .= '<td>' . $technicien['email'] . '</td>';
         $contenu .= '<td>' . $technicien['poste'] . '</td>';
+
         $contenu .= '<td>
         <form action="admin.php" method="GET">
         <input type="hidden" name="action" value="updTech">
@@ -37,6 +40,8 @@ if (isset($techniciens) && !empty($techniciens)) {
         <input type="hidden" name="nom_technicien" value="' . $technicien['nom'] . '">
         <input type="hidden" name="prenom_technicien" value="' . $technicien['prenom'] . '"> 
         <input type="hidden" name="poste_technicien" value="' . $technicien['poste'] . '"> 
+        <input type="hidden" name="email_technicien" value="' . $technicien['email'] . '"> 
+
         <button type="submit" class="btn btn-warning">Modifier</button>
         </form>
         </td>';
@@ -61,7 +66,7 @@ $contenu .= '<div class="modal fade" id="confirmationModal_'.$technicien['id'].'
                 </button>
             </div>
             <div class="modal-body">
-                Êtes-vous sûr de vouloir supprimer cet élément ?
+                Êtes-vous sûr de vouloir supprimer le technicien '.$technicien['nom'].' '.$technicien['prenom'].' au poste '.$technicien['poste'].' ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>

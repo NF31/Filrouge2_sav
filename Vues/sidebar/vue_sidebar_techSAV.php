@@ -20,16 +20,55 @@ $contenu = '
             <div class=" row my-2 justify-content-center">
             <label for="nom_tech" class="col-form-label col-md-4 text-md-right">Nom tech :</label>
             <div class="col-8">
-                <input type="text" id="nom_techSAV" name="nom_techSAV" class="form-control" placeholder="Veuillez respecter le format" pattern="[a-zA-Z]{3,}" title="Veuillez saisir au moins 3 lettres" required>
+                <input type="text" id="nom_techSAV" name="nom_techSAV" class="form-control" placeholder="Veuillez respecter le format" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres" required>
             </div>
         </div>
         <div class="row my-2 justify-content-center">
             <label for="prenom_techSAV" class="col-form-label col-md-4 text-md-right">Prenom tech :</label>
             <div class="col-8">
-                <input type="text" id="prenom_techSAV" name="prenom_techSAV" class="form-control" placeholder="Veuillez saisir un prenom" pattern="[a-zA-Z]{3,}" title="Veuillez saisir au moins 3 lettres" required>
+                <input type="text" id="prenom_techSAV" name="prenom_techSAV" class="form-control" placeholder="Veuillez saisir un prenom" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres" required>
             </div>
         </div>
-        
+        <div class="row my-2 justify-content-center">
+            <label for="email_techSAV" class="col-form-label col-md-4 text-md-right">Email :</label>
+            <div class="col-8">
+                <input type="email" id="email_techSAV" name="email_techSAV" class="form-control" placeholder="Entrez votre email" required>
+            </div>
+        </div>';
+        if (isset($_SESSION['error-messageEmail'])) {
+            $contenu .= '   <div class="class="col-4 offset-md-5"  >
+                                <p style="color: red;">'.$_SESSION['error-messageEmail'].'</p>
+                            </div>
+                        '; 
+                        unset($_SESSION['error-messageEmail']);              
+        }
+
+        $contenu .='
+        <div class="row my-2 justify-content-center">
+            <label for="mdp_techSAV" class="col-form-label col-md-4 text-md-right">Mot de passe :</label>
+            <div class="col-8">
+                <input type="password" id="mdp_techSAV" name="mdp_techSAV" class="form-control" placeholder="Entrez votre mot de passe" required>
+            </div>
+        </div>'
+        ;
+
+                if (isset($_SESSION['error-messagePassword'])) {
+                    $contenu .= '   <div class="offset-md-4  row">
+                                        <p style="color: red;">'.$_SESSION['error-messagePassword'].'</p>
+                                    </div>
+                                '; 
+                    unset($_SESSION['error-messagePassword']);
+                   
+                }
+
+                $contenu .='
+        <div class="row my-2 justify-content-center">
+            <label for="confirm_mdp_techSAV" class="col-form-label col-md-4 text-md-right">Confirmer mot de passe :</label>
+            <div class="col-8">
+                <input type="password" id="confirm_mdp_techSAV" name="confirm_mdp_techSAV" class="form-control" placeholder="Confirmez votre mot de passe" required>
+            </div>
+        </div>
+
                 <div class="row my-2 justify-content-center">
                     <label for="poste_techniciens" class="col-form-label col-md-4 text-md-right">POSTE :</label>
                     <div class="col-8">
