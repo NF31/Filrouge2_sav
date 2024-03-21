@@ -46,4 +46,29 @@
             'statut_commande' => $statut_ticket
         ));
     }
+    
+
+    /**
+     * La fonction créer un ticket Erreur Client
+     *
+     * @param  mixed $code_ticket = ERREUR TICKET
+     * @param  mixed $num_com 
+     * @param  mixed $statut_ticket= EN COURS / TERMINEE
+     * @param  mixed $cdeArticle = 
+     * @return void
+     */
+    function createTicketEC(string $code_ticket, int $num_com, string $statut_ticket, int $cdeArticle,){
+        $bdd = getBdd(); 
+        $sql = "INSERT INTO TICKET (CODE_TICKET, NUM_COMMANDE, CODE_ARTICLE, STATUT_TICKET)
+                VALUES (:CODE_TICKET, :NUM_COMMANDE, :CODE_ARTICLE, :STATUT_TICKET )"; 
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array(
+            'CODE_TICKET' => $code_ticket, 
+            'NUM_COMMANDE' => $num_com, 
+            'CODE_ARTICLE' => $cdeArticle,
+            'STATUT_TICKET' => $statut_ticket
+        ));
+        
+    }
+    
 ?>

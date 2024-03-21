@@ -1,8 +1,8 @@
--- -- Supprimer la base de données SAV si elle existe déjà
--- DROP DATABASE IF EXISTS SAV;
--- -- Créer la base de données SAV
--- CREATE DATABASE SAV;
--- USE SAV;
+-- Supprimer la base de données SAV si elle existe déjà
+DROP DATABASE IF EXISTS SAV;
+-- Créer la base de données SAV
+CREATE DATABASE SAV;
+USE SAV;
 -- Création de la table techniciens
 CREATE TABLE techniciens (
     id INT AUTO_INCREMENT PRIMARY KEY,
