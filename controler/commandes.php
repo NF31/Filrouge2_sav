@@ -8,7 +8,7 @@
     require_once '../model/ModelException.php';  
 
     // Création d'un utilisateur 
-    $utilisateur = ['JEAN EUDES','hotline','8']; 
+    $utilisateur = ['JEAN EUDES','SAV','8']; 
     $nomUtilisateur = $utilisateur[0]; 
     $roleUtilisateur = $utilisateur[1];
     $idUtilisateur = $utilisateur[2];
