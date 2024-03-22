@@ -72,7 +72,7 @@
         $total_techniciens = $result_count['total_techniciens'];
 
         if ($total_techniciens >= 3) {
-            echo "<script>La limite de techniciens est atteinte (maximum 3).</script>";
+            $_SESSION['error-messageLimit'] = "La limite de techniciens SAV est atteinte (maximum 3).";
             return false;
         }
         $sql_insert = "INSERT INTO techniciens (nom, prenom, email, motdepasse, poste) VALUES (:nom, :prenom,:email,:motdepasse, :poste)";
@@ -97,8 +97,8 @@
       $total_techniciens = $result_count['total_techniciens'];
 
       if ($total_techniciens >= 10) {
-          echo "<script>alert: La limite de techniciens est atteinte (maximum 10).</script>";
-          return false;
+        $_SESSION['error-messageLimit'] = "La limite de techniciens est atteinte (maximum 10).";         
+        return false;
       }
       $sql_insert = "INSERT INTO techniciens (nom, prenom,email, motdepasse, poste) VALUES (:nom, :prenom, :email, :motdepasse, :poste)";
       $requete_insert = $connexion->prepare($sql_insert);
@@ -151,10 +151,10 @@
 
   // PERMET DE METTRE A JOUR LES INFORMATIONS D'UN TECHNICIEN
 
-    function updTech(int $id, string $nom, string $prenom, string $email,string $motdepasse, string $poste) {
+    function updTech(int $id, string $nom, string $prenom, string $email, string $poste) {
       $connexion = getBdd();
        // Requête SQL pour METTRE A JOUR LES INFORMATIONS D'UN TECHNICIEN
-      $sql = "UPDATE techniciens SET nom = :nom, prenom = :prenom, email = :email, motdepasse = :motdepasse, poste = :poste WHERE id = :id";  
+      $sql = "UPDATE techniciens SET nom = :nom, prenom = :prenom, email = :email, poste = :poste WHERE id = :id";  
       $requete = $connexion->prepare($sql);
 
       if($requete->execute(array(
@@ -162,7 +162,6 @@
           ":nom" => $nom,
           ":prenom" => $prenom,
           ":email" => $email,
-          ":motdepasse" => $motdepasse,
           ":poste" => $poste
       ))) {echo "<script>alert('Mise à jour effectuée avec succès !');</script>";
       }

@@ -30,15 +30,17 @@ error_reporting(E_ALL);
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-// Récupération du prénom du technicien depuis le cookie
-$technicianName = isset($_COOKIE['technician_name']) ? $_COOKIE['technician_name'] : '';
+// Vérifiez si le prénom du technicien est défini dans la session
+$technicianName = isset($_SESSION['technician_name']) ? $_SESSION['technician_name'] : '';
+
+// Maintenant, vous pouvez utiliser $technicianName dans votre header
 ?>
 
 <body>
   <header>
-  <div class="deconnexion">
-      <?php if (!empty($technicianName)) : ?>
-        <h4 style="display: block; margin-top:10px ; font-size: 20px;" class="logged-in"><i class='bx bx-user'></i> <?php echo $technicianName; ?></h4>
+    <div class="deconnexion">
+      <?php if (isset($_SESSION['technician_name'])) : ?>
+        <h4 style="display: block; margin-top:10px ; font-size: 20px;" class="logged-in"><i class='bx bx-user'></i> <?php echo $_SESSION['technician_name']; ?></h4>
         <a style="display: block;" href="../controler/login.php?action=deconnexion">Déconnexion</a>
       <?php else : ?>
         <h4 class="logged-out"><i class='bx bx-user'></i> prenom</h4>

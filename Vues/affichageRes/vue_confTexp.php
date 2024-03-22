@@ -35,7 +35,7 @@
                     </div>
                     <div class="modal-footer text-center">
                         <form action="">
-                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                        <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
                             <button type="submit" class="btn btn-success">Enregistrer</button>
 
                             <!-- Donnée envoyé dans l'Url -->
@@ -56,7 +56,7 @@
 
                         <div class='d-flex col-6 justify-content-around py-3 mx-auto row'>
                             <form action="tickets.php?" method='GET'>
-                                <input type='submit' value='Annuler' class='col-4 bg-danger text-light rounded border-0 py-2'>
+                            <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
                                 <input type="hidden" name='num_com'  value='<?= $num_com?>'>             
                                 <input type="hidden" name='action'  value='createT_Exp'>             
                                 <input type='button' value='Confirmer' data-bs-toggle="modal" data-bs-target="#exampleModal" class='col-4  bg-success text-light rounded border-0 py-2'> 

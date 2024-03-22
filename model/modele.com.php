@@ -333,3 +333,25 @@
             'num_com' => $num_com
         ));
     }
+
+    function getCodeArticleAvecTicketOuvert(int $num_com) {
+        try {
+            $bdd = getBdd(); 
+            
+            // Requête SQL pour sélectionner tous les codes articles avec un ticket ouvert pour le numéro de commande donné
+            $sql = "SELECT DISTINCT TICKET.CODE_ARTICLE FROM CONCERNE 
+                    INNER JOIN TICKET ON CONCERNE.NUM_COMMANDE = TICKET.NUM_COMMANDE 
+                    WHERE CONCERNE.NUM_COMMANDE = :num_com AND TICKET.STATUT_TICKET = 'ouvert'";
+            
+            $statement = $bdd->prepare($sql);
+            $statement->execute(array('num_com' => $num_com));
+            $codes_articles = $statement->fetchAll(PDO::FETCH_COLUMN);
+            return $codes_articles;
+            
+        } catch (PDOException $e) {
+            die("Erreur de connexion à la base de données : " . $e->getMessage());
+        }
+    }
+    
+    
+    

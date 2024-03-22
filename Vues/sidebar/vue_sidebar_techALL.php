@@ -11,7 +11,7 @@ $contenu = '
                 <a class="nav-link" href="admin.php?action=listTechsSAV">TECH SAV</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="admin.php?action=listTechsHOLTLINE">TECH HOTLINES</a>
+                <a class="nav-link" href="admin.php?action=listTechsHOTLINE">TECH HOTLINES</a>
             </li>
         </ul>
         <div class="moteurRecherche">
