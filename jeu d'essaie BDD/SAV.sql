@@ -1,37 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost
--- Généré le : mar. 19 mars 2024 à 10:43
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `SAV`
---
--- Supprimer la base de données SAV si elle existe déjà
 DROP DATABASE IF EXISTS SAV;
 -- Créer la base de données SAV
 CREATE DATABASE SAV;
 USE SAV;
-Création de la table techniciens
--- --------------------------------------------------------
-
---
--- Structure de la table `administrateur`
---
-
 
 CREATE TABLE `administrateur` (
   `id` int(11) NOT NULL,
@@ -298,13 +268,12 @@ CREATE TABLE `GARANTIE` (
 --
 
 CREATE TABLE `techniciens` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nom` varchar(100) DEFAULT NULL,
   `prenom` varchar(100) DEFAULT NULL,
   `poste` enum('SAV','Hotline') DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `motdepasse` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `motdepasse` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -312,17 +281,14 @@ CREATE TABLE `techniciens` (
 --
 
 INSERT INTO `techniciens` (`id`, `nom`, `prenom`, `poste`, `email`, `motdepasse`) VALUES
-(1, 'Dupont', 'Jean', 'HOTLINE', 'jean.dupont@example.com', 'mdpJean123'),
-(2, 'Martin', 'Paul', 'HOTLINE', 'paul.martin@example.com', 'mdpPaul456'),
-(3, 'Dubois', 'Marie', 'HOTLINE', 'marie.dubois@example.com', 'mdpMarie789'),
-(4, 'Leclerc', 'Pierre', 'HOTLINE', 'pierre.leclerc@example.com', 'mdpPierre987'),
-(5, 'Lefebvre', 'Sophie', 'HOTLINE', 'sophie.lefebvre@example.com', 'mdpSophie654'),
-(6, 'Moreau', 'Luc', 'HOTLINE', 'luc.moreau@example.com', 'mdpLuc321'),
-(7, 'Roux', 'Emilie', 'HOTLINE', 'emilie.roux@example.com', 'mdpEmilie234'),
+(2, 'Martin', 'Paul', 'Hotline', 'paul.martin@example.com', 'mdpPaul456'),
+(3, 'Dubois', 'Marie', 'Hotline', 'marie.dubois@example.com', 'mdpMarie789'),
+(4, 'Leclerc', 'Pierre', 'Hotline', 'pierre.leclerc@example.com', 'mdpPierre987'),
+(5, 'Lefebvre', 'Sophie', 'Hotline', 'sophie.lefebvre@example.com', 'mdpSophie654'),
+(6, 'Moreau', 'Luc', 'Hotline', 'luc.moreau@example.com', 'mdpLuc321'),
+(7, 'Roux', 'Emilie', 'Hotline', 'emilie.roux@example.com', 'mdpEmilie234'),
 (8, 'Garcia', 'Thomas', 'SAV', 'thomas.garcia@example.com', 'mdpThomas567'),
 (9, 'Fournier', 'Julie', 'SAV', 'julie.fournier@example.com', 'mdpJulie890');
-
-
 
 -- --------------------------------------------------------
 
@@ -334,7 +300,20 @@ CREATE TABLE `TICKET` (
   `ID_TICKET` int(11) NOT NULL,
   `ERREUR_TICKET` varchar(255) DEFAULT NULL,
   `NUM_COMMANDE` int(11) DEFAULT NULL,
-  `ID_CLIENT` bigint(20) DEFAULT NULL
+  `CODE_ARTICLE` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `TICKET_EXP`
+--
+
+CREATE TABLE `TICKET_EXP` (
+  `NUM_TICKET` int(11) NOT NULL,
+  `NUM_COMMANDE` int(11) DEFAULT NULL,
+  `CODE_TICKET` varchar(10) DEFAULT NULL,
+  `STATUT_TICKET` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -391,7 +370,14 @@ ALTER TABLE `techniciens`
 ALTER TABLE `TICKET`
   ADD PRIMARY KEY (`ID_TICKET`),
   ADD KEY `NUM_COMMANDE` (`NUM_COMMANDE`),
-  ADD KEY `ID_CLIENT` (`ID_CLIENT`);
+  ADD KEY `CODE_ARTICLE` (`CODE_ARTICLE`);
+
+--
+-- Index pour la table `TICKET_EXP`
+--
+ALTER TABLE `TICKET_EXP`
+  ADD PRIMARY KEY (`NUM_TICKET`),
+  ADD KEY `NUM_COMMANDE` (`NUM_COMMANDE`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -440,6 +426,12 @@ ALTER TABLE `TICKET`
   MODIFY `ID_TICKET` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `TICKET_EXP`
+--
+ALTER TABLE `TICKET_EXP`
+  MODIFY `NUM_TICKET` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -460,7 +452,13 @@ ALTER TABLE `COMMANDE`
 --
 ALTER TABLE `TICKET`
   ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`NUM_COMMANDE`) REFERENCES `COMMANDE` (`NUM_COMMANDE`),
-  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`ID_CLIENT`) REFERENCES `CLIENT` (`ID_CLIENT`);
+  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`CODE_ARTICLE`) REFERENCES `ARTICLE` (`CODE_ARTICLE`);
+
+--
+-- Contraintes pour la table `TICKET_EXP`
+--
+ALTER TABLE `TICKET_EXP`
+  ADD CONSTRAINT `ticket_exp_ibfk_1` FOREIGN KEY (`NUM_COMMANDE`) REFERENCES `commande` (`NUM_COMMANDE`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

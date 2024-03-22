@@ -48,24 +48,29 @@
         ));
     }
     
+
+
     /**
-     * controlTicket cherche si il existe un ticket avec ces critères et retourne un false or true 
+     * La fonction créer un ticket Erreur Client
      *
-     * @param  string $code_ticket
-     * @param  int $num_com
-     * @return 
+     * @param  mixed $code_ticket = ERREUR TICKET
+     * @param  mixed $num_com 
+     * @param  mixed $statut_ticket= EN COURS / TERMINEE
+     * @param  mixed $cdeArticle = 
+     * @return void
      */
-    function controlTicket(string $code_ticket, int $num_com){
-        $bdd = getBdd();
-        $sql = "SELECT * FROM `TICKET_EXP` WHERE NUM_COMMANDE LIKE :num_com AND CODE_TICKET LIKE :code_ticket ;"; 
-
-        $curseur = $bdd->prepare($sql); 
+    function createTicketEC(string $code_ticket, int $num_com, string $statut_ticket, int $cdeArticle,){
+        $bdd = getBdd(); 
+        $sql = "INSERT INTO TICKET (CODE_TICKET, NUM_COMMANDE, CODE_ARTICLE, STATUT_TICKET)
+                VALUES (:CODE_TICKET, :NUM_COMMANDE, :CODE_ARTICLE, :STATUT_TICKET )"; 
+        $curseur = $bdd->prepare($sql);
         $curseur->execute(array(
-            'num_com' => $num_com,
-            'code_ticket' => $code_ticket
+            'CODE_TICKET' => $code_ticket, 
+            'NUM_COMMANDE' => $num_com, 
+            'CODE_ARTICLE' => $cdeArticle,
+            'STATUT_TICKET' => $statut_ticket
         ));
-
-        $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
-        return $resultat;
+        
     }
+  
 ?>

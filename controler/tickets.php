@@ -57,7 +57,16 @@
                 $code_ticket = $_GET['code_ticket'];
                 $nouveauTicket = creatTicketExp( $code_ticket,  $num_com,  $statut_ticket, $idSession );
                 header('location: commandes.php?num_com='.$num_com.'&action=detail');
-            break;        
+            break;      
+            
+            case 'createT_EC':
+                $commande = getComById($num_com);
+                require_once '../vues/sideBar/vue_sideBarAll.php';
+                require_once '../vues/affichageRes/vue_creatT_EC.php';
+                $contenu = $sideBarAll;
+                $contenu .= $affichCreatTexp;
+                require_once '../vues/gabarit.php';
+                break;
         }
     }
 ?>
