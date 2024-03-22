@@ -1,5 +1,16 @@
 <?php
+// Vérifie si la création du technicien a échoué en raison de la limite atteinte
+if (isset($_SESSION['error-messageLimit'])) {
+    echo '<script>alert("' . $_SESSION['error-messageLimit'] . '");</script>';
+    unset($_SESSION['error-messageLimit']);
+}
+?>
+
+<?php
 // VUE QUI AFFICHE LA PARTIE "TECH SAV" DE LA SIDE BAR 
+$nom = isset($_GET['nom_techSAV']) ? $_GET['nom_techSAV'] : '';
+$prenom = isset($_GET['prenom_techSAV']) ? $_GET['prenom_techSAV'] : '';
+$email = isset($_GET['email_techSAV']) ? $_GET['email_techSAV'] : '';
 
 $contenu = '
     <div class="col-lg-4 col-md-8 col-11 shadow-lg m-1 p-4 rounded" style="max-height: 80vh">
@@ -11,7 +22,7 @@ $contenu = '
                 <a class="nav-link" href="admin.php?action=listTechsSAV">TECH SAV</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="admin.php?action=listTechsHOLTLINE">TECH HOTLINES</a>
+                <a class="nav-link" href="admin.php?action=listTechsHOTLINE">TECH HOTLINES</a>
             </li>
         </ul>
         <div class="moteurRecherche">
@@ -20,19 +31,19 @@ $contenu = '
             <div class=" row my-2 justify-content-center">
             <label for="nom_tech" class="col-form-label col-md-4 text-md-right">Nom tech :</label>
             <div class="col-8">
-                <input type="text" id="nom_techSAV" name="nom_techSAV" class="form-control" placeholder="Veuillez respecter le format" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres" required>
+                <input type="text" id="nom_techSAV" name="nom_techSAV" class="form-control" placeholder="Veuillez respecter le format" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres" value="' . $nom . '" required>
             </div>
         </div>
         <div class="row my-2 justify-content-center">
             <label for="prenom_techSAV" class="col-form-label col-md-4 text-md-right">Prenom tech :</label>
             <div class="col-8">
-                <input type="text" id="prenom_techSAV" name="prenom_techSAV" class="form-control" placeholder="Veuillez saisir un prenom" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres" required>
+                <input type="text" id="prenom_techSAV" name="prenom_techSAV" class="form-control" placeholder="Veuillez saisir un prenom" pattern="[a-zA-Z\- ]{3,}" title="Veuillez saisir au moins 3 lettres" value="' . $prenom . '" required>
             </div>
         </div>
         <div class="row my-2 justify-content-center">
             <label for="email_techSAV" class="col-form-label col-md-4 text-md-right">Email :</label>
             <div class="col-8">
-                <input type="email" id="email_techSAV" name="email_techSAV" class="form-control" placeholder="Entrez votre email" required>
+                <input type="email" id="email_techSAV" name="email_techSAV" class="form-control" placeholder="Entrez votre email" value="' . $email . '" required>
             </div>
         </div>';
         if (isset($_SESSION['error-messageEmail'])) {

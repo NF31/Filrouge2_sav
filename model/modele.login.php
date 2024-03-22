@@ -75,6 +75,7 @@ function loginAdmin()
     }
 }
 
+//var_dump(loginAdmin());
 function getEmailsAdmin()
 {
     $connexion = getBdd();

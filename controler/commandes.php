@@ -159,6 +159,9 @@
                     $tickets = getTicketExp($id);
                 };
                 $detailCommande = getDetailCom($id);
+                // var_dump($detailCommande);
+                $codeArticleTicket = getCodeArticleAvecTicketOuvert($id);
+                var_dump($codeArticleTicket);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_detail.php';
                 $contenu = $sideBarAll ;

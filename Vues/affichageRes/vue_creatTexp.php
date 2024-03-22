@@ -32,7 +32,7 @@
                         </select>
                     </div>
                     <div class='d-flex col-6 justify-content-around py-3 mx-auto row'>
-                            <input type='submit' value='Annuler' class='col-4 bg-danger text-light rounded border- py-2'>
+                            <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
                             <input type='submit' value='Créer' class='col-4  bg-success text-light rounded border-0 py-2'> 
                             <input type="hidden" name='num_com'  value='<?= $commande['NUM_COMMANDE']?>'>             
                             <input type="hidden" name='action' value='confirmeCreatT_Exp'>             

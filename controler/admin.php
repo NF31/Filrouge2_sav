@@ -36,7 +36,7 @@
             require('../vues/gabarit.php');  
             break;
 
-        case "listTechsHOLTLINE":
+        case "listTechsHOTLINE":
             $titreSidebar="Creer un techniciens HOTLINE";
             $titreliste= "Liste des techniciens HOTLINE";
             $techniciens = getTechHotline();
@@ -54,20 +54,25 @@
                 $motdepasse = $_GET['mdp_techSAV'];
                 $confirm_mdp_techSAV= $_GET['confirm_mdp_techSAV'];
             }
-
+            
             if($motdepasse !== $confirm_mdp_techSAV) {
                 $_SESSION['error-messagePassword'] = "Le mot de passe ne correspond pas";
-                header('location:admin.php?action=listTechsSAV');
+                header('Location: admin.php?action=listTechsSAV&nom_techSAV=' . urlencode($nom) . 
+                '&prenom_techSAV=' . urlencode($prenom) . 
+                '&email_techSAV=' . urlencode($email));
+
                 exit();
             }
         
             if (checkEmailCreate($email) === false) {
                 $_SESSION['error-messageEmail'] = "L'email est déjà utilisé";
-                header('location:admin.php?action=listTechsSAV');
+                header('location:admin.php?action=listTechsSAV&nom_techSAV=' . urlencode($nom) .
+                '&prenom_techSAV=' . urlencode($prenom) .
+                '&email_techSAV=' . urlencode($email));
                 exit();
             }
             createTechSAV($nom,$prenom,$email,$motdepasse, "SAV");
-            header('location:admin.php?action=listTechsALL');
+            header('location:admin.php?action=listTechsSAV');
             break;
 
         case "createTechHOTLINE":
@@ -82,18 +87,24 @@
 
             if($motdepasse !== $confirm_mdp_techHOTLINE) {
                 $_SESSION['error-messagePassword'] = "Le mot de passe ne correspond pas";
-                header('location:admin.php?action=listTechsHOLTLINE');
+                header('location:admin.php?action=listTechsHOTLINE' . 
+                '&nom_techHOTLINE=' . urlencode($nom) . 
+                '&prenom_techHOTLINE=' . urlencode($prenom) . 
+                '&email_techHOTLINE=' . urlencode($email));
                 exit();
             }
         
             if (checkEmailCreate($email) === false) {
                 $_SESSION['error-messageEmail'] = "L'email est déjà utilisé";
-                header('location:admin.php?action=listTechsHOLTLINE');
+                header('location:admin.php?action=listTechsHOTLINE' . 
+                '&nom_techHOTLINE=' . urlencode($nom) . 
+                '&prenom_techHOTLINE=' . urlencode($prenom) . 
+                '&email_techHOTLINE=' . urlencode($email));
                 exit();
             }
             
             createTechHOTLINE($nom,$prenom,$email,$motdepasse,"Hotline");
-            header('location:admin.php?action=listTechsALL');
+            header('location:admin.php?action=listTechsHOTLINE');
             break;
 
         case "suppTech":
@@ -111,7 +122,7 @@
                 $nom =$_GET['nom_technicien'];   
                 $prenom =$_GET['prenom_technicien'];
                 $mail = $_GET['email_technicien'];   
-                $poste = isset($_GET['poste_technicien']) ? $_GET['poste_technicien'] : '';                $titreliste= "Saisissez les modifications"; 
+                $poste = $_GET['poste_technicien'];               $titreliste= "Saisissez les modifications"; 
             }
 
             require('../vues/sidebar/vue_sidebar_techALL.php');
@@ -124,18 +135,11 @@
                 $id = $_GET['id_technicien'];   
                 $nom = $_GET['nom_tech'];   
                 $email = $_GET['email_tech'];
-                $motdepasse = $_GET['mdp_tech'];   
-                $confirm_mdp_tech= $_GET['confirm_mdp_tech'];
                 $prenom = $_GET['prenom_tech'];   
-                $poste = $_GET['categorie_tech'];  
+                $poste = $_GET['poste_technicien'];  
             }
 
- // Vérifier si les mots de passe correspondent
-    if($motdepasse !== $confirm_mdp_tech) {
-        $_SESSION['error-messagePassword'] = "Le mot de passe ne correspond pas";
-        header('location:admin.php?action=updTech&id_technicien=' . $id . '&nom_technicien=' . $nom . '&prenom_technicien=' . $prenom . '&email_technicien=' . $email);
-        exit();
-    }
+
 
     // Vérifier si l'e-mail est déjà utilisé
     if (checkEmail($email, $id) === false) {
@@ -145,7 +149,7 @@
     }
 
     // Mettre à jour les données
-    updTech($id, $nom, $prenom, $email, $motdepasse, $poste);
+    updTech($id, $nom, $prenom, $email, $poste);
     header('location:admin.php?action=listTechsALL');
     exit();
 
