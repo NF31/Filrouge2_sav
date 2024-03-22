@@ -1,0 +1,176 @@
+.deconnexion h4 {
+  display: none;
+  font-size: 30px;
+}
+.deconnexion a {
+  color: var(--clr-light);
+  display: none;
+}
+p{
+  color: crimson;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: #519de9;
+  background-position: center;
+  background-size: cover;
+  perspective: 1500px;
+  position: fixed;
+  margin-top: -1%; 
+}
+
+.form * {
+  padding: 0px;
+  margin: 0px;
+}
+
+.form .form-box {
+  position: relative;
+  width: 400px;
+  height: 450px;
+  display: flex;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  -webkit-transition: transform var(--rotation-duration);
+  -moz-transition: transform var(--rotation-duration);
+  -o-transition: transform var(--rotation-duration);
+  transition: transform var(--rotation-duration);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  margin-top: -12%; 
+ 
+}
+
+.form .form-box.turned {
+  transform: rotateY(180deg);
+}
+
+.form h2 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+.form .input-box {
+  position: relative;
+  margin: 30px 0px;
+  width: 310px;
+  border-bottom: 2px solid #fff;
+}
+
+.form .input-box label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 1em;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.form .input-box input:focus ~ label,
+.form .input-box input:valid ~ label {
+  top: -5px;
+}
+
+.form .input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0px 35px 0px 5px;
+  color: #fff;
+}
+
+.form .input-box ion-icon {
+  position: absolute;
+  right: 8px;
+  top: 20px;
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.form .forget {
+  margin: -15px 0 15px;
+  font-size: 0.9em;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.forget label input {
+  margin-right: 3px;
+}
+
+.forget label a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.forget label a {
+  text-decoration: underline;
+}
+
+.form button {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-weight: 600;
+}
+
+.form .register {
+  font-size: 0.9em;
+  color: #fff;
+  text-align: center;
+  margin: 25px 0px 10px;
+}
+
+.register p a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.register p a:hover {
+  text-decoration: underline;
+}
+
+.form .login-form,
+.form .register-form {
+  overflow: hidden;
+  max-height: 500px;
+  transition: max-height calc(0.3 * var(--rotation-duration)) steps(1);
+}
+
+.form .login-form.hidden,
+.form .register-form.hidden {
+  max-height: 0;
+}
+
+.form-value {
+  overflow: hidden;
+}
+
+.form .register-form {
+  transform: rotateY(180deg);
+}
+
+@media screen and (max-width: 992px){
+  .form {margin-top: -3%;  }
+  .form-box { margin-top: -75% !important; }
+}

@@ -1,0 +1,31 @@
+.boutton {
+    background-color: #3B50A1;
+    color: white; 
+} 
+
+.nav-tab>.nav-item>.nav-link>.lien-nav {
+    background-color: #3b4fa137;
+    color: white;
+} 
+
+.nav-item.active {
+    background-color: #3b4fa177;
+    opacity: 100%;
+    border-radius: 5px 5px 0px 0px;
+} 
+
+.moteurRecherche {
+    border: 1px solid #3B50A1;
+    border-radius: 5px;
+} 
+
+input.form-control{
+    font-size: 14px;
+    color: rgba(128, 128, 128, 0.315);
+    background-color: #3b4fa127;
+} 
+
+h4#text_RC {
+    color:  #3B50A1;
+}
+
