@@ -24,12 +24,12 @@ function login()
 function getEmails()
 {
     $connexion = getBdd();
-    $sql = "SELECT email FROM techniciens";
+    $sql = "SELECT * FROM techniciens";
     $requete = $connexion->query($sql);
     if (!$connexion->query($sql)) {
         echo "problème de connexion à la table techniciens";
     } else {
-        $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     return $resultat;
 }
@@ -37,19 +37,20 @@ function getEmails()
 
 $emails = getEmails(); // Récupérer toutes les adresses email depuis la base de données
 
-// foreach ($emails as $email) {
-//     echo "Email : $email<br>";
-// }
+/*foreach ($emails as $technicien) {
+    echo "Email : " . $technicien['email'] . ", Poste : " . $technicien['poste'] . "<br>";
+}*/
+
 
 function getPasswords()
 {
     $connexion = getBdd();
-    $sql = "SELECT motdepasse FROM techniciens";
+    $sql = "SELECT motdepasse,poste FROM techniciens";
     $requete = $connexion->query($sql);
     if (!$connexion->query($sql)) {
         echo "problème de connexion à la table techniciens";
     } else {
-        $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
     return $resultat;
@@ -57,9 +58,11 @@ function getPasswords()
 
 $passwords = getPasswords(); // Récupérer tous les mots de passe depuis la base de données
 
-// foreach ($passwords as $password) {
-//     echo "Mot de passe : $password<br>";
-// }
+ /*foreach ($passwords as $technicien) {
+     echo "Mot de passe : " . $technicien['motdepasse'] . ", Poste : " . $technicien['poste'] . "<br>";
+ }
+*/
+
 
 function loginAdmin()
 {
@@ -79,12 +82,12 @@ function loginAdmin()
 function getEmailsAdmin()
 {
     $connexion = getBdd();
-    $sql = "SELECT email FROM administrateur";
+    $sql = "SELECT * FROM administrateur";
     $requete = $connexion->query($sql);
     if (!$connexion->query($sql)) {
         echo "problème de connexion à la table administrateur";
     } else {
-        $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     return $resultat;
 }
@@ -92,19 +95,19 @@ function getEmailsAdmin()
 
 $emails = getEmailsAdmin(); // Récupérer toutes les adresses email depuis la base de données
 
-// foreach ($emails as $email) {
-//     echo "Email : $email<br>";
-// }
+/*foreach ($emails as $admnistrateur) {
+    echo "Email : " . $admnistrateur['email'] . ", Poste : " . $admnistrateur['poste'] . "<br>";
+}*/
 
 function getPasswordsAdmin()
 {
     $connexion = getBdd();
-    $sql = "SELECT motdepasse FROM administrateur";
+    $sql = "SELECT motdepasse,poste FROM administrateur";
     $requete = $connexion->query($sql);
     if (!$connexion->query($sql)) {
         echo "problème de connexion à la table administrateur";
     } else {
-        $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
     return $resultat;
@@ -112,6 +115,8 @@ function getPasswordsAdmin()
 
 $passwords = getPasswordsAdmin(); // Récupérer tous les mots de passe depuis la base de données
 
-// foreach ($passwords as $password) {
-//     echo "Mot de passe : $password<br>";
-// }
+/*
+foreach ($passwords as $admnistrateur) {
+   echo "Mot de passe : " . $admnistrateur['motdepasse'] . ", Poste : " . $admnistrateur['poste'] . "<br>";
+ 
+}*/

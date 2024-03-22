@@ -8,7 +8,7 @@
     require_once '../model/ModelException.php';  
 
     // Création d'un utilisateur 
-    $utilisateur = ['JEAN EUDES','SAV','8']; 
+    $utilisateur = ['JEAN EUDES','hotline','8']; 
     $nomUtilisateur = $utilisateur[0]; 
     $roleUtilisateur = $utilisateur[1];
     $idUtilisateur = $utilisateur[2];
@@ -16,6 +16,18 @@
     //ouverture de la session
     session_start();
 
+
+                // ***** DEBUT ********* JEAN EUDES  
+                // Récupérer les informations depuis la session PHP
+                    // $technicianName = $_SESSION['technician_name'];
+                    // $posteTechnicien = $_SESSION['poste_technicien'];
+                    // $idTechnicien = $_SESSION['id_technicien'];
+                // Utilisez les informations récupérées comme vous le souhaitez dans votre page
+                // echo "Bienvenue, $technicianName ! Votre poste est : $posteTechnicien. Votre ID est : $idTechnicien.";
+                
+                // ***** DEBUT ********* JEAN EUDES 
+                
+                
     // Stockage des valeurs dans la session PHP
     $_SESSION['nomUtilisateur'] = $nomUtilisateur;
     $_SESSION['roleUtilisateur'] = $roleUtilisateur;

@@ -148,7 +148,6 @@
                 require_once '../vues/gabarit.php';
 
 
-
     }
         }
 
