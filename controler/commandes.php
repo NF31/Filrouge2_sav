@@ -7,7 +7,30 @@
     require_once '../model/modele.com.php';
     require_once '../model/ModelException.php';  
 
-    $action= 'allcom'; 
+    // Création d'un utilisateur 
+    $utilisateur = ['JEAN EUDES','SAV','8']; 
+    $nomUtilisateur = $utilisateur[0]; 
+    $roleUtilisateur = $utilisateur[1];
+    $idUtilisateur = $utilisateur[2];
+    
+    //ouverture de la session
+    session_start();
+
+    // Stockage des valeurs dans la session PHP
+    $_SESSION['nomUtilisateur'] = $nomUtilisateur;
+    $_SESSION['roleUtilisateur'] = $roleUtilisateur;
+    $_SESSION['idUtilisateur'] = $idUtilisateur;
+
+    // Récupération des valeurs de la session
+    $nomSession = $_SESSION['nomUtilisateur'];
+    $roleSession = $_SESSION['roleUtilisateur'];
+    $idSession = $_SESSION['idUtilisateur'];
+
+// print_r('<strong>Utilisateur connecté : </strong>'. $nomSession . '  ');
+// print_r('<strong>Role utilisateur : </strong>'. $roleSession . ' ');
+// print_r('<strong>Id utilisateur : </strong>'. $idSession . ' ');
+
+    $action= 'allcom';
      
     if(isset($_GET['action'])){
         $action = $_GET['action'];
@@ -132,6 +155,9 @@
                 if(isset($_GET['num_com'])){
                     $id = $_GET['num_com'];
                 }
+                if(count(getTicketExp($id))!=0){
+                    $tickets = getTicketExp($id);
+                };
                 $detailCommande = getDetailCom($id);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_detail.php';

@@ -5,7 +5,7 @@
     error_reporting(E_ALL);
 
     // Recupére la connection à la BDD
-    require('../config/connexion.php');
+    require_once('../config/connexion.php');
 
     ///////////////////////////////////////////////
     //        LISTER TOUTES LES COMMANDES        //
@@ -333,3 +333,23 @@
             'num_com' => $num_com
         ));
     }
+
+    ///////////////////////////////////////////////////////
+    //   AFFICHE LES TICKETS EXISTANTS SUR LA COMMANDE   //
+    ///////////////////////////////////////////////////////
+    
+    /**
+     * getTicketExp permet de rechercher les tickets d'expédition d'une commande
+     *
+     * @param  int $num_com
+     * @return array
+     */
+    function getTicketExp(int $num_com) {
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET_EXP WHERE NUM_COMMANDE = :num_com";
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array('num_com' => $num_com));
+        $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+    

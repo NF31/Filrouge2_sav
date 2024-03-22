@@ -13,11 +13,26 @@
         <?php if (count($detailCommande) > 0 ){?>
             <h3 class="bg-secondary text-center mx-3 py-3 my-3 text-light rounded">Détail de la commande</h3>
         <div class="d-flex justify-content-between px-3 py-3 m-3 border rounded">
-            <div>
-                <strong>Statut de la commande : </strong><br> 
-                <?=$detailCommande[1]['STATU_COMMANDE']?>
+            <div class='d-flex flex-column align-items-between col-7'>
+                <strong>Statut commande : </strong><br> 
+                <?=$detailCommande[1]['STATU_COMMANDE']?><br>
+                <div class='card border rounded bg-light-subtle mt-auto p-2' style='height:50%'>
+                    <strong>Tickets commande : </strong>
+                    <!-- afficher le ticket uniquement si il en existe -->
+                    <?php
+                    
+                    if(isset($tickets) && !empty($tickets)){
+                     foreach($tickets as $ticket){
+                        echo "N° Ticket : " . $ticket['NUM_TICKET'] . ' - Code Ticket : ' . $ticket['CODE_TICKET'] . ' - Statut Ticket : ' . $ticket['STATUT_TICKET'] . ' - ID tech : ' . $ticket['ID'] . '<br>';
+                        }
+                        } else {
+                            echo "Aucun ticket n'est associé à cette commande";
+                        
+                        } ?>
+                   
+                </div>
             </div>
-                <div class=' text-center'>
+                <div class='col-4 text-center'>
                     <div class="card text-light bg-light-subtle" style="width: 18rem;">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -56,23 +71,22 @@
                             </li>
                         </ul>
                     </div>
-                    <div class='d-flex pt-3 mx-auto justify-content-between'>
+                    <!-- DEBUT Zone -   Affichage du bouton créer ticket si role = SAV -->
+                    <?php
+                    //var_dump($roleSession) ;
+                    if($roleSession === "SAV") {?>
+                    <div class='d-flex pt-3 mx-auto justify-content-center'>
                         <form action="tickets.php?" method="GET" class="col-5 d-inline">
+                            
                             <button type='submit' class='col-10 py-2 bg-white border-success rounded'>
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                             <input type="hidden" name="num_com" value="<?= $detailCommande[1]['NUM_COMMANDE'] ?>">
                             <input type="hidden" name="action" value="createT_Exp">
                         </form>
-                        <form action="tickets.php?" method="GET" class="col-5 d-inline">
-                            <button type='submit' class='col-10 py-2 bg-white border-warning rounded'>
-                                <i class="fa-solid fa-ticket"></i>
-                            </button>
-                            <input type="hidden" name="num_com" value="<?= $detailCommande[1]['NUM_COMMANDE'] ?>">
-                            <input type="hidden" name="action" value="showT_Exp">
-                        </form>
                     </div>
-
+                    <?php } ?>
+                    <!-- FIN Zone -   Affichage du bouton créer ticket si role = SAV -->
                 </div>
         </div>    
         <div class="row overflow-auto d-flex justify-content-center " style="max-height: 80%">
