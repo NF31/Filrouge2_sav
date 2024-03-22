@@ -21,12 +21,42 @@
 
 </head>
 
-<body >
-  <header>
-    <div class="deconnexion">
-      <h4> <i class='bx bx-user'></i> prenom </h4> <a href="">Déconnexion</a>
+<?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+// Démarrez la session si elle n'est pas déjà démarrée
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+// Récupération du prénom du technicien depuis le cookie
+$technicianName = isset($_SESSION['technician_name']) ? $_SESSION['technician_name'] : '';
+
+$poste= isset($_SESSION['poste_technicien']) ? $_SESSION['poste_technicien'] : '';
+
+$id= isset($_SESSION['id_technicien']) ? $_SESSION['id_technicien'] : '';
+// Récupération du prénom du technicien depuis le cookie
+$AdminName = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : '';
+?>
+
+<body>
+  <header>
+  <div class="deconnexion">
+      <?php if (!empty($technicianName)) : ?>
+        <h4 style="display: block; margin-top:10px ; font-size: 20px;" class="logged-in"><i class='bx bx-user'></i> <?php echo $technicianName; ?></h4>
+        <a style="display: block; color :#ffffff !important;" href="../controler/login.php?action=deconnexion">Déconnexion</a>
+      <?php else : ?>
+        <h4 class="logged-out"><i class='bx bx-user'></i> prenom</h4>
+      <?php endif; ?>
+      <?php if (!empty($AdminName)) : ?>
+        <h4 style="display: block; margin-top:10px ; font-size: 20px;" class="logged-in"><i class='bx bx-user'></i> <?php echo $AdminName; ?></h4>
+        <a style="display: block; color :#ffffff !important" href="../controler/login.php?action=deconnexion">Déconnexion</a>
+      <?php else : ?>
+        <h4 class="logged-out"><i class='bx bx-user'></i> prenom</h4>
+      <?php endif; ?>
     </div>
+
 
     <div class="container_header">
       <input type="checkbox" name="check" id="check">
@@ -37,8 +67,8 @@
       <div class="nav-btn">
         <div class="nav-links">
           <ul>
-             <li  style="display: none"  class="nav-link lien-nav" style="--i: .6s">
-              <a href="../controler/commandes.php">Commandes</a> 
+            <li style="display: none" class="nav-link lien-nav" style="--i: .6s">
+              <a href="../controler/commandes.php">Commandes</a>
             </li>
             <!--
             <li class="nav-link lien-nav" style="--i: .6s">
@@ -71,15 +101,15 @@
     </div>
   </header>
   <!--  DEBUT de section à mettre dans la variable contenu   -->
-    <main class='row justify-content-around py-3 px-3' style='height:100vh' >
-        <?= $contenu ?> 
-    </main> 
-    <!--  FIN de section à mettre dans la variable contenu   -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="../script/connexion.js"></script>
+  <main class='row justify-content-around py-3 px-3' style='height:100vh'>
+    <?= $contenu ?>
+  </main>
+  <!--  FIN de section à mettre dans la variable contenu   -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="../script/connexion.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

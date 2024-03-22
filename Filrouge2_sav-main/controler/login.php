@@ -10,10 +10,9 @@ require_once '../model/modele.login.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'accueil';
 
-
 try {
     switch ($action) {
-        case "accueil": 
+        case "accueil":
             require('../vues/connexion/vue_connexion.php');
             require('../vues/gabarit.php');
             break;
@@ -24,74 +23,123 @@ try {
                 $email = $_POST['identifiant'];
                 $password = $_POST['mdp'];
 
-                $emails = getEmails();
+
+                // Extraction du nom à partir de l'adresse e-mail
+                $parts = explode('@', $email);
+                $username = $parts[0];
+                $nameParts = explode('.', $username);
+                $firstName = ucfirst($nameParts[0]);
+
+
+                $techniciens = getEmails();
                 $passwords = getPasswords();
 
-                $emailExists = in_array($email, $emails);
+                foreach ($techniciens as $key => $technicien) {
+                    if ($email === $technicien['email']) {
+                        $storedPassword = $passwords[$key]['motdepasse'];
+                        $idTechnicien = $technicien['id'];
+                       // var_dump($idTechnicien);
+                        $poste = $passwords[$key]['poste'];
+                        if ($password === $storedPassword) {
+                            session_start();
+                         /*    $_idtechnicien = $technicien['id'];
+                            $_roleTechnicien = $technicien['poste'];
+                            $_SESSION['email'] = $email;
+                          $_SESSION['idTechnicien'] =$_idtechnicien;
+                          $_SESSION["roleTechnicien"] = $_roleTechnicien;
+                            //  setcookie('technician_name', $firstName, time() + 3600, '/');
+                         */
+                            $_SESSION['technician_name'] = $firstName;
+                            $_SESSION['poste_technicien'] = $poste;
+                            $_SESSION['id_technicien'] = $idTechnicien;
+                            header("location:../controler/commandes.php");
 
-                if ($emailExists) {
-                    $index = array_search($email, $emails);
-                    $storedPassword = $passwords[$index];
-                    if ($password === $storedPassword) {
-                        header("location:../controler/commandes.php");
-                        exit();
-                    } else {
-                        $_SESSION['error_password'] = "Mot de passe incorrect";
-                        header("Location:login.php?action=accueil");
-                        exit();
+                            exit();
+                        }
                     }
-                } else {
-                    $_SESSION['error_email'] = "Adresse email non trouvée";
-                     header("Location:login.php?action=accueil");
-                     exit();
                 }
-            } else {
-                $_SESSION['error_general'] = "Veuillez saisir l'identifiant et le mot de passe";
-                 header("Location:login.php?action=accueil");
             }
-            
-            exit;
+            // Si l'email ou le mot de passe est incorrect, redirigez vers l'accueil avec un message d'erreur
+            $_SESSION['error_general'] = "Veuillez saisir l'identifiant et le mot de passe";
+            header("Location:login.php?action=accueil");
+            exit();
             break;
 
         case "admin":
             // Logique pour la connexion en tant qu'administrateur
-            if (isset($_POST['identifiant']) && isset($_POST['mdp']) && !empty($_POST['identifiant']) && !empty($_POST['mdp'])) {
-                $email = $_POST['identifiant'];
-                $password = $_POST['mdp'];
+            if (isset($_POST['identifiant_admin']) && isset($_POST['mdp_admin']) && !empty($_POST['identifiant_admin']) && !empty($_POST['mdp_admin'])) {
+                $email = $_POST['identifiant_admin'];
+                $password = $_POST['mdp_admin'];
 
-                $emails = getEmailsAdmin();
+                // Extraction du nom à partir de l'adresse e-mail
+                $parts = explode('@', $email);
+                $username = $parts[0];
+                $nameParts = explode('.', $username);
+                $adminFirstName = ucfirst($nameParts[0]); // Utilisez une variable distincte pour le prénom de l'administrateur
+
+                $admins = getEmailsAdmin();
                 $passwords = getPasswordsAdmin();
 
-                $emailExists = in_array($email, $emails);
+                foreach ($admins as $key => $admin) {
+                    if ($email === $admin['email']) {
+                        $storedPassword = $passwords[$key]['motdepasse'];
+                        $idAdministrateur = $admin['id'];
+                    
+                        $poste = $passwords[$key]['poste'];
+                        if ($password === $storedPassword) {
+                            session_start();
+                            // setcookie('admin_name', $adminFirstName, time() + 3600, '/');
+                            $_SESSION['admin_name'] = $adminFirstName;
+                            $_SESSION['poste_administrateur'] = $poste;
+                            $_SESSION['id_administrateur'] = $idAdministrateur;
+                            header("location:../controler/admin.php");
 
-                if ($emailExists) {
-                    $index = array_search($email, $emails);
-                    $storedPassword = $passwords[$index];
-                    if ($password === $storedPassword) {
-                        header("location:../controler/admin.php");
-                        exit();
-                    } else {
-                        $_SESSION['error_password'] = "Mot de passe incorrect";
-                        header("Location:login.php?action=accueil");
-                        exit();
+                            exit();
+                        }
                     }
-                } else {
-                    $_SESSION['error_email'] = "Adresse email non trouvée";
-                     header("Location:login.php?action=accueil");
-                     exit();
                 }
-            } else {
-                $_SESSION['error_general'] = "Veuillez saisir l'identifiant et le mot de passe";
-                 header("Location:login.php?action=accueil");
+                // Vérifier si l'email fourni existe dans la liste des emails des administrateurs
+                /*          if (in_array($email, $emails)) {
+                        $index = array_search($email, $emails);
+                        $storedPassword = $passwords[$index];
+                        // Vérifier si le mot de passe correspond
+                        if ($password === $storedPassword) {
+                            // Authentification réussie
+                            setcookie('admin_name', $adminFirstName, time() + 3600, '/');
+                       
+                            // Rediriger l'utilisateur vers la page d'accueil ou toute autre page appropriée
+                            header("location:../controler/admin.php");
+                            exit();
+                        }
+                    }*/
             }
 
-            exit;
+            // Si l'email ou le mot de passe est incorrect, redirigez vers l'accueil avec un message d'erreur
+            $_SESSION['error_general'] = "Veuillez saisir l'identifiant et le mot de passe";
+            header("Location:login.php?action=accueil");
+            exit();
             break;
+
+        case "deconnexion":
+            // Suppression du cookie 'technician_name'
+            // setcookie('technician_name', '', time() - 3600, '/');
+            unset($_SESSION['technician_name']);
+            session_destroy();
+            //  setcookie('admin_name', '', time() - 3600, '/');
+            unset($_SESSION['admin_name']);
+            // Redirection vers la page d'accueil avec un message de déconnexion
+            $_SESSION['message'] = "Vous avez été déconnecté avec succès.";
+            header("Location: login.php?action=accueil");
+            exit();
+            break;
+
 
         default:
             echo  "Action non reconnue";
             exit;
     }
+} catch (Exception $e) {
+    echo 'Exception capturée : ',  $e->getMessage(), "\n";
 } catch (PDOException $e) {
     die("<h1>Erreur de connexion: </h1>" . $e->getMessage());
 }

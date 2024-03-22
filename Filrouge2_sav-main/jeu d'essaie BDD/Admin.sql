@@ -6,10 +6,13 @@ CREATE TABLE administrateur (
     motdepasse VARCHAR(255)
 );
 
-INSERT INTO
-    administrateur (nom, prenom, email, motdepasse)
-VALUES
-    ('Admin', 'JEFI', 'JEFI@admin.com', 'mdpAdmin');
+ALTER TABLE administrateur
+ADD COLUMN poste VARCHAR(50) DEFAULT 'admin' NOT NULL;
+
+
+INSERT INTO administrateur (nom, prenom, email, motdepasse, poste)
+VALUES ('Admin', 'JEFI', 'JEFI@admin.com', 'mdpAdmin', 'admin');
+
 
 GRANT
 SELECT

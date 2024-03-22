@@ -1,0 +1,5 @@
+gerer le poste dans la requete et l'associer a l'adresse mail et au mdp de l'utilisateur et en fonction du mail envoyer dans la requete trouver le posxte du technicien  et renvoyer une page differente en fonction du poste.
+
+AFFICHER ES ECHO OU VAR DUMP QUON ca reconnait une adresse e-mail et ca dit le pote de l'adresse email.
+
+RECUPERER AUSSI L'id quand on est connecter a 

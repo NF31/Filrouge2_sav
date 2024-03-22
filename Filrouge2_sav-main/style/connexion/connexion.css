@@ -1,11 +1,13 @@
+
 .deconnexion h4 {
   display: none;
-  font-size: 30px;
+  font-size: 20px;
 }
 .deconnexion a {
   color: var(--clr-light);
   display: none;
 }
+
 p{
   color: crimson;
 }
@@ -15,7 +17,7 @@ p{
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  background: #519de9;
+  background-color: var(--clr-bg-header);
   background-position: center;
   background-size: cover;
   perspective: 1500px;
@@ -171,6 +173,10 @@ p{
 }
 
 @media screen and (max-width: 992px){
+  .deconnexion a{
+    color: var(--clr-bg-header) !important;
+     font-size: 20px;;
+  }
   .form {margin-top: -3%;  }
-  .form-box { margin-top: -75% !important; }
+  .form-box { margin-top: -35% !important; }
 }

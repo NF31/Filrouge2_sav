@@ -6,7 +6,17 @@
 
     require_once '../model/modele.com.php';
     require_once '../model/ModelException.php';  
+session_start();
 
+// Récupérer les informations depuis la session PHP
+$technicianName = $_SESSION['technician_name'];
+$posteTechnicien = $_SESSION['poste_technicien'];
+$idTechnicien = $_SESSION['id_technicien'];
+
+// Utilisez les informations récupérées comme vous le souhaitez dans votre page
+echo "Bienvenue, $technicianName ! Votre poste est : $posteTechnicien. Votre ID est : $idTechnicien.";
+
+    
     $action= 'allcom'; 
      
     if(isset($_GET['action'])){
