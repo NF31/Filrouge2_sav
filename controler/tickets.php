@@ -107,10 +107,13 @@
                 $suggestions = getSuggestionsArticles();
                 $num_com = $_GET['num_com'];
                 $code_article = $_GET['code_article'];
-                var_dump($num_com);
-                var_dump($code_article);
+                // var_dump($num_com);
+                // var_dump($code_article);
                 $qte_concerne= getQuantiteConcernee($num_com, $code_article);
                 var_dump($qte_concerne);
+            
+            case 'AfficheTicketHotline': 
+                break;
 
            
                 $commande = getComById($num_com);

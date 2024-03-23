@@ -7,7 +7,7 @@
         // Ouverture du buffer
         ob_start();
     ?>
-     
+
     <!-- Affichage des résultats -->
     <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light overflow-auto ' style='max-height: 80vh'>
         <?php if (count($detailCommande) > 0 ){?>
@@ -71,9 +71,7 @@
                         </ul>
                     </div>
                     <!-- DEBUT Zone -   Affichage du bouton créer ticket si role = SAV -->
-                    <?php
-                    //var_dump($roleSession) ;
-                    if($posteTechnicien === "SAV") {?>
+                 
                     <div class='d-flex pt-3 mx-auto justify-content-center'>
                         <form action="tickets.php?" method="GET" class="col-5 d-inline">
                             
@@ -84,7 +82,7 @@
                             <input type="hidden" name="action" value="createT_Exp">
                         </form>
                     </div>
-                    <?php } ?>
+                   
                     <!-- FIN Zone -   Affichage du bouton créer ticket si role = SAV -->
                 </div>
         </div>    
@@ -109,18 +107,24 @@
                             </div>
                             <?php foreach ($codeArticleTicket as $codearticleT){ ?>
                                 <?php if ($codearticleT === $commande['CODE_ARTICLE']): ?>
+                                    <?php //var_dump($roleSession) ;
+                                        if($posteTechnicien === "SAV") {
+                                            $affichageTicket ='AfficheTicket';
+                                        } else    
+                                            $affichageTicket ='AfficheTicketHotline';
+                                         ?>
                                     <div class='col-5 card card-body mx-1 border-warning'>
                                         <form action='tickets.php?' method='GET' class='col-12 d-inline'>
                                             <button type='submit' class='col-12 py-2 bg-white border-warning rounded'>
                                                 <i class='fa-solid fa-ticket'></i>
                                             </button>
-                                            <input type='hidden' name='action' value='AfficheTicket'>
+                                            <input type='hidden' name='action' value='<?= $affichageTicket ?>'>
                                             <input type="hidden" name="num_com" value="<?= $commande['NUM_COMMANDE'] ?>">
                                             <input type="hidden" name="nom_article" value="<?= $commande['NOM_ARTICLE'] ?>">
                                             <input type="hidden" name="code_article" value="<?= $commande['CODE_ARTICLE'] ?>">
                                             <input type="hidden" name="qte_article" value="<?= $commande['QUANTITE_CONCERNE'] ?>">
                                         </form>
-                                    </div>
+                                    </div>        
                                 <?php endif; ?>
                             <?php } ?>
                         </div>
