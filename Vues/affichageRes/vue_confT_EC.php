@@ -46,7 +46,7 @@
                                 <input type="hidden" name='num_com'  value='<?= $num_com?>'>             
                                 <input type="hidden" name='code_ticket' value='<?= $code_ticket?>'> 
                                 <input type="hidden" name='code_article' value='<?= $code_article?>'>                         
-                                <input type="hidden" name="qte_ticket" value="<?= $qte_concerne ?>">                       
+                                <input type="hidden" name='qte_concerne' value="<?= $qte_concerne ?>">                       
                                 <input type="hidden" name='statut_ticket' value='<?= $statut_ticket?>'>             
                                 <input type="hidden" name='action' value='creatECOk'>             
                                 <!-- Fin des données envoyé dans l'Url -->
@@ -58,7 +58,8 @@
                     <div class='d-flex col-6 justify-content-around py-3 mx-auto row'>
                         <form action="tickets.php?" method='GET'>
                             <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
-                            <input type="hidden" name='num_com'  value='<?= $num_com?>'>             
+                            <input type="hidden" name='num_com'  value='<?= $num_com?>'>  
+                            <input type="hidden" name='qte_concerne' value="<?= $qte_concerne ?>">                                  
                             <input type="hidden" name='action'  value='creatECOk'>             
                             <input type='button' value='Confirmer' data-bs-toggle="modal" data-bs-target="#exampleModal" class='col-4  bg-success text-light rounded border-0 py-2'> 
                         </form>
