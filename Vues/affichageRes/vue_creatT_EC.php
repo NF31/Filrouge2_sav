@@ -32,7 +32,7 @@ ob_start();
                 <strong>Nom de l'article retourné:</strong>
                 <input type="text" name="nom_article" id="nom_article" class="form-control mt-2 mb-2" value="<?= $nom_article ?>" required>
                 <strong>Quantité de l'article :</strong>
-                <select  class="form-select mt-2 mb-2" name='qte_ticket' >
+                <select  class="form-select mt-2 mb-2" name='qte_concerne' >
                     <?php
                     // Génération des options de la liste déroulante pour la quantité d'articles
                     for ($i = 1; $i <= $qte_article; $i++) {

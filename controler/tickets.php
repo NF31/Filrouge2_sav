@@ -82,7 +82,7 @@
                 $statut_ticket = $_GET['statut_ticket'];
                 $code_ticket = $_GET['code_ticket'];
                 $nom_article = $_GET['nom_article'];
-                $qte_concerne = isset($_GET['qte_ticket']) ? $_GET['qte_ticket'] : null;
+                $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
                
                 $ticket = getComById($num_com);
                 $code_article = getCodeArticleByNom($nom_article);
@@ -98,7 +98,7 @@
                 $code_ticket = $_GET['code_ticket'];
                 $code_article = $_GET['code_article'];
                 $num_com = $_GET['num_com'];
-                $qte_concerne = isset($_GET['qte_ticket']) ? $_GET['qte_ticket'] : null;
+                $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
                 createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne);
                 header('location: commandes.php?num_com='.$num_com.'&action=detail');
             break;    
