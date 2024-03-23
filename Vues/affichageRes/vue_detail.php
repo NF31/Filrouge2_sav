@@ -47,26 +47,31 @@
                                 <span ><strong>Adresse de livraison :</strong></span><br>
                                 <?=$detailCommande[1]['RUE_CLIENT']?>
                                 <?=' '. $detailCommande[1]['VILLE_CLIENT']?>
-                                <p>
-                                    <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                        <i class="fas fa-caret-up"></i>
-                                    </button>
-                                </p>
-                                <div class="collapse collapse-vertical" id="collapseWidthExample">
-                                    <div >
-                                        <form action="">
-                                            <div>
-                                                <input class="col-10 text-center mb-2" name="rue_client" type="text" placeholder="Nouvelle rue">
-                                            </div>
-                                            <div>
-                                                <input class="col-10 text-center mb-2" name="ville_client" type="text" placeholder="Nouvelle ville">
-                                            </div>
-                                            <button class='btn btn-success' type="submit" value='modifier'>modifier
-                                                <input type="hidden" name="action" value="modifAdress">
-                                                <input type="hidden" name="num_com" value="<?=$detailCommande[1]['NUM_COMMANDE']?>">
-                                        </form>
+                                <?php if($posteTechnicien == 'SAV') { ?>
+                                    <p>
+                                        <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                            <i class="fas fa-caret-up"></i>
+                                        </button>
+                                    </p>
+                                    <div class="collapse collapse-vertical" id="collapseWidthExample">
+                                        <div >
+                                            <form action="">
+                                                <div>
+                                                    <input class="col-10 text-center mb-2" name="rue_client" type="text" placeholder="Nouvelle rue">
+                                                </div>
+                                                <div>
+                                                    <input class="col-10 text-center mb-2" name="ville_client" type="text" placeholder="Nouvelle ville">
+                                                </div>
+                                                <div>
+                                                    <input class="col-10 text-center mb-2" name="code_postal_client" type="text" placeholder="Nouveau CP">
+                                                </div>
+                                                <button class='btn btn-success' type="submit" value='modifier'>modifier
+                                                    <input type="hidden" name="action" value="modifAdress">
+                                                    <input type="hidden" name="num_com" value="<?=$detailCommande[1]['NUM_COMMANDE']?>">
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                             </li>
                         </ul>
                     </div>

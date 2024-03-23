@@ -320,16 +320,17 @@
         }
     }
 
-    function changeAdress(string $rue_client, string $ville_client, int $num_com){
+    function changeAdress(string $rue_client, string $ville_client, int $code_postal_client, int $num_com){
         $bdd = getBdd();
         $sql = "UPDATE COMMANDE 
-                SET RUE_CLIENT = :rue_client, VILLE_CLIENT = :ville_client
+                SET RUE_CLIENT = :rue_client, VILLE_CLIENT = :ville_client, CODE_POSTAL_CLIENT = :code_postal_client
                 WHERE NUM_COMMANDE = :num_com";
         
         $curseur = $bdd->prepare($sql);
         $curseur->execute(array(
             'rue_client' => $rue_client,
             'ville_client' => $ville_client,
+            'code_postal_client' => $code_postal_client,
             'num_com' => $num_com
         ));
     }

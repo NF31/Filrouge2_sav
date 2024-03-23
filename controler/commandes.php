@@ -185,8 +185,9 @@
             case 'modifAdress':
                 $rue_client = $_GET['rue_client'];
                 $ville_client = $_GET['ville_client'];
+                $code_postal_client = $_GET['code_postal_client'];
                 $num_com = intval($_GET['num_com']);
-                changeAdress($rue_client, $ville_client, $num_com);
+                changeAdress($rue_client, $ville_client, $code_postal_client, $num_com);
                 header('location: commandes.php?num_com='.$num_com.'&action=detail');
                 
             break;
