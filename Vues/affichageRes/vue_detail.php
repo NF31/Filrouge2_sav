@@ -18,18 +18,30 @@
                 <?=$detailCommande[1]['STATU_COMMANDE']?><br>
                 <div class='card border rounded bg-light-subtle mt-auto p-2' style='height:50%'>
                     <strong>Tickets commande : </strong>
-                    <!-- afficher le ticket uniquement si il en existe -->
-                    <?php
                     
-                    if(isset($tickets) && !empty($tickets)){
-                     foreach($tickets as $ticket){
-                        echo "N° Ticket : " . $ticket['NUM_TICKET'] . ' - Code Ticket : ' . $ticket['CODE_TICKET'] . ' - Statut Ticket : ' . $ticket['STATUT_TICKET'] . ' - ID tech : ' . $ticket['ID'] . '<br>';
-                        }
+                    <!-- afficher le ticket uniquement si il en existe -->
+                    <?php if(isset($tickets) && !empty($tickets)){
+                     foreach($tickets as $ticket){ 
+                        if($ticket['STATUT_TICKET'] == "FERMÉ" ){
+                            $colorLink = 'text-success';
                         } else {
-                            echo "Aucun ticket n'est associé à cette commande";
+                            $colorLink = 'text-warning';
+                        }?>
+                       
+                        <a class=' <?= $colorLink?> border-bottom mb-2'  href="tickets.php?action=showticket&num_com=<?=$detailCommande[1]['NUM_COMMANDE']?>&num_ticket=<?=$ticket['NUM_TICKET']?>">
+                            <span>
+                                <strong>N° Ticket :  </strong><?=$ticket['NUM_TICKET'] ?>
+                                <strong>Code Ticket : </strong><?=$ticket['CODE_TICKET'] ?>
+                                <strong>Statut Ticket : </strong><?=$ticket['STATUT_TICKET'] ?>
+                                <strong>ID tech : </strong><?=$ticket['ID'] ?>
+                            </span>
+                        </a>
+                        <?php }
+                        } else { ?>
+                            <span> "Aucun ticket n'est associé à cette commande"</span>
                         
-                        } ?>
-                   
+                        <?php } ?>
+                    
                 </div>
             </div>
                 <div class='col-4 text-center'>
@@ -75,7 +87,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- DEBUT Zone -   Affichage du bouton créer ticket si role = SAV -->
                  
                     <div class='d-flex pt-3 mx-auto justify-content-center'>
                         <form action="tickets.php?" method="GET" class="col-5 d-inline">
@@ -87,8 +98,6 @@
                             <input type="hidden" name="action" value="createT_Exp">
                         </form>
                     </div>
-                   
-                    <!-- FIN Zone -   Affichage du bouton créer ticket si role = SAV -->
                 </div>
         </div>    
         <div class="row overflow-auto d-flex justify-content-center" style="max-height: 80%">
@@ -136,10 +145,12 @@
                     </div>
                 </div>
             <?php } ?>
-        </div>
-    <?php } else {  ?>
-        <h5 class="p-3 text-center">Oups !</h5>
-        <div class="alert alert-warning text-center" role="alert">
-            Cette commande ne contient aucun article
-        </div>
-    <?php }   $affichDetail = ob_get_clean(); ?>
+        </div> 
+        
+        <?php } else {  ?>
+            <h5 class="p-3 text-center">Oups !</h5>
+            <div class="alert alert-warning text-center" role="alert">
+                Cette commande ne contient aucun article
+            </div>
+            <?php }   $affichDetail = ob_get_clean(); ?>
+    </div>  
