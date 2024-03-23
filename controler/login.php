@@ -31,18 +31,31 @@ try {
                 $firstName = ucfirst($nameParts[0]);
 
 
-                $emails = getEmails();
+                $techniciens = getEmails();
                 $passwords = getPasswords();
 
-                $emailExists = in_array($email, $emails);
+                foreach ($techniciens as $key => $technicien) {
+                    if ($email === $technicien['email']) {
+                        $storedPassword = $passwords[$key]['motdepasse'];
+                        $idTechnicien = $technicien['id'];
+                       // var_dump($idTechnicien);
+                        $poste = $passwords[$key]['poste'];
+                        if ($password === $storedPassword) {
+                            session_start();
+                         /*    $_idtechnicien = $technicien['id'];
+                            $_roleTechnicien = $technicien['poste'];
+                            $_SESSION['email'] = $email;
+                          $_SESSION['idTechnicien'] =$_idtechnicien;
+                          $_SESSION["roleTechnicien"] = $_roleTechnicien;
+                            //  setcookie('technician_name', $firstName, time() + 3600, '/');
+                         */
+                            $_SESSION['technician_name'] = $firstName;
+                            $_SESSION['poste_technicien'] = $poste;
+                            $_SESSION['id_technicien'] = $idTechnicien;
+                            header("location:../controler/commandes.php");
 
-                if ($emailExists) {
-                    $index = array_search($email, $emails);
-                    $storedPassword = $passwords[$index];
-                    if ($password === $storedPassword) {
-                        setcookie('technician_name', $firstName, time() + 3600, '/');
-                        header("location:../controler/commandes.php");
-                        exit();
+                            exit();
+                        }
                     }
                 }
             }
@@ -54,9 +67,9 @@ try {
 
         case "admin":
             // Logique pour la connexion en tant qu'administrateur
-            if (isset($_POST['identifiant']) && isset($_POST['mdp']) && !empty($_POST['identifiant']) && !empty($_POST['mdp'])) {
-                $email = $_POST['identifiant'];
-                $password = $_POST['mdp'];
+            if (isset($_POST['identifiant_admin']) && isset($_POST['mdp_admin']) && !empty($_POST['identifiant_admin']) && !empty($_POST['mdp_admin'])) {
+                $email = $_POST['identifiant_admin'];
+                $password = $_POST['mdp_admin'];
 
                 // Extraction du nom à partir de l'adresse e-mail
                 $parts = explode('@', $email);
@@ -64,21 +77,41 @@ try {
                 $nameParts = explode('.', $username);
                 $adminFirstName = ucfirst($nameParts[0]); // Utilisez une variable distincte pour le prénom de l'administrateur
 
+                $admins = getEmailsAdmin();
+                $passwords = getPasswordsAdmin();
 
-                
-                // Vérification des identifiants de l'administrateur
-                $adminCredentials = loginAdmin();
-                foreach ($adminCredentials as $admin) {
-                    if ($admin['email'] === $email && $admin['motdepasse'] === $password) {
-                        // Stockage du prénom du technicien dans la session
-                        $_SESSION['admin_name'] = $adminFirstName;
-                      
-          //              header("location:../controler/admin.php");
-                      
-                        header("Location: ../controler/admin.php?email=" . urlencode($email));
-                        exit();
+                foreach ($admins as $key => $admin) {
+                    if ($email === $admin['email']) {
+                        $storedPassword = $passwords[$key]['motdepasse'];
+                        $idAdministrateur = $admin['id'];
+                    
+                        $poste = $passwords[$key]['poste'];
+                        if ($password === $storedPassword) {
+                            session_start();
+                            // setcookie('admin_name', $adminFirstName, time() + 3600, '/');
+                            $_SESSION['admin_name'] = $adminFirstName;
+                            $_SESSION['poste_administrateur'] = $poste;
+                            $_SESSION['id_administrateur'] = $idAdministrateur;
+                            header("location:../controler/admin.php");
+
+                            exit();
+                        }
                     }
                 }
+                // Vérifier si l'email fourni existe dans la liste des emails des administrateurs
+                /*          if (in_array($email, $emails)) {
+                        $index = array_search($email, $emails);
+                        $storedPassword = $passwords[$index];
+                        // Vérifier si le mot de passe correspond
+                        if ($password === $storedPassword) {
+                            // Authentification réussie
+                            setcookie('admin_name', $adminFirstName, time() + 3600, '/');
+                       
+                            // Rediriger l'utilisateur vers la page d'accueil ou toute autre page appropriée
+                            header("location:../controler/admin.php");
+                            exit();
+                        }
+                    }*/
             }
 
             // Si l'email ou le mot de passe est incorrect, redirigez vers l'accueil avec un message d'erreur
@@ -87,17 +120,20 @@ try {
             exit();
             break;
 
-            case "deconnexion":
-                // Suppression du cookie 'technician_name'
-                setcookie('technician_name', '', time() - 3600, '/');
-            
-                // Redirection vers la page d'accueil avec un message de déconnexion
-                $_SESSION['message'] = "Vous avez été déconnecté avec succès.";
-                header("Location: login.php?action=accueil");
-                exit();
-                break;
-            
-            
+        case "deconnexion":
+            // Suppression du cookie 'technician_name'
+            // setcookie('technician_name', '', time() - 3600, '/');
+            unset($_SESSION['technician_name']);
+            session_destroy();
+            //  setcookie('admin_name', '', time() - 3600, '/');
+            unset($_SESSION['admin_name']);
+            // Redirection vers la page d'accueil avec un message de déconnexion
+            $_SESSION['message'] = "Vous avez été déconnecté avec succès.";
+            header("Location: login.php?action=accueil");
+            exit();
+            break;
+
+
         default:
             echo  "Action non reconnue";
             exit;

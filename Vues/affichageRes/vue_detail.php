@@ -7,7 +7,7 @@
         // Ouverture du buffer
         ob_start();
     ?>
-
+     
     <!-- Affichage des résultats -->
     <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light overflow-auto ' style='max-height: 80vh'>
         <?php if (count($detailCommande) > 0 ){?>
@@ -73,7 +73,7 @@
                     <!-- DEBUT Zone -   Affichage du bouton créer ticket si role = SAV -->
                     <?php
                     //var_dump($roleSession) ;
-                    if($roleSession === "SAV") {?>
+                    if($posteTechnicien === "SAV") {?>
                     <div class='d-flex pt-3 mx-auto justify-content-center'>
                         <form action="tickets.php?" method="GET" class="col-5 d-inline">
                             

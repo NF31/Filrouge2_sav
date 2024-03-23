@@ -31,7 +31,13 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 // Récupération du prénom du technicien depuis le cookie
-$technicianName = isset($_COOKIE['technician_name']) ? $_COOKIE['technician_name'] : '';
+$technicianName = isset($_SESSION['technician_name']) ? $_SESSION['technician_name'] : '';
+
+$poste= isset($_SESSION['poste_technicien']) ? $_SESSION['poste_technicien'] : '';
+
+$id= isset($_SESSION['id_technicien']) ? $_SESSION['id_technicien'] : '';
+// Récupération du prénom du technicien depuis le cookie
+$AdminName = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : '';
 ?>
 
 <body>
@@ -39,11 +45,16 @@ $technicianName = isset($_COOKIE['technician_name']) ? $_COOKIE['technician_name
   <div class="deconnexion">
       <?php if (!empty($technicianName)) : ?>
         <h4 style="display: block; margin-top:10px ; font-size: 20px;" class="logged-in"><i class='bx bx-user'></i> <?php echo $technicianName; ?></h4>
-        <a style="display: block;" href="../controler/login.php?action=deconnexion">Déconnexion</a>
+        <a style="display: block; color :#ffffff !important;" href="../controler/login.php?action=deconnexion">Déconnexion</a>
       <?php else : ?>
         <h4 class="logged-out"><i class='bx bx-user'></i> prenom</h4>
       <?php endif; ?>
-
+      <?php if (!empty($AdminName)) : ?>
+        <h4 style="display: block; margin-top:10px ; font-size: 20px;" class="logged-in"><i class='bx bx-user'></i> <?php echo $AdminName; ?></h4>
+        <a style="display: block; color :#ffffff !important" href="../controler/login.php?action=deconnexion">Déconnexion</a>
+      <?php else : ?>
+        <h4 class="logged-out"><i class='bx bx-user'></i> prenom</h4>
+      <?php endif; ?>
     </div>
 
 
