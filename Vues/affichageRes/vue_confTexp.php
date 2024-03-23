@@ -53,7 +53,6 @@
 
 
                 <!-- A ajouter dans la fenêtre modal pour confirmation -->
-
                         <div class='d-flex col-6 justify-content-around py-3 mx-auto row'>
                             <form action="tickets.php?" method='GET'>
                             <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>

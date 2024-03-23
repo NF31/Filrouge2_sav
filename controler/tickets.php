@@ -10,10 +10,7 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-     $nomSession = $_SESSION['nomUtilisateur'];
-     $roleSession = $_SESSION['roleUtilisateur'];
-     $idSession = $_SESSION['idUtilisateur'];
-
+    $idTech = $_SESSION['id_technicien'];
     // print_r('<strong>Utilisateur connecté : </strong>'. $nomSession . '  ');
     // print_r('<strong>Role utilisateur : </strong>'. $roleSession . ' ');
     // print_r('<strong>Id utilisateur : </strong>'. $idSession . ' ');
@@ -42,7 +39,6 @@
                 $contenu = $sideBarAll;
                 $contenu .= $affichConfTicket;
                 require_once '../vues/gabarit.php';
-                break; 
             
                 // Vérification si un ticket avec le même code existe déjà
                 $controlTicket = controlTicket($code_ticket, $num_com);  
@@ -64,7 +60,7 @@
             case 'creatOk':
                 $statut_ticket = $_GET['statut_ticket'];
                 $code_ticket = $_GET['code_ticket'];
-                $nouveauTicket = creatTicketExp( $code_ticket,  $num_com,  $statut_ticket, $idSession );
+                $nouveauTicket = creatTicketExp($code_ticket,  $num_com,  $statut_ticket, $idTech);
                 header('location: commandes.php?num_com='.$num_com.'&action=detail');
             break;  
 
@@ -136,18 +132,16 @@
                 $contenu .= $affichCreatT_EC;
                 require_once '../vues/gabarit.php';
 
-              case 'RetourStock_PRINCIPAL':
-                $commande = getComById($num_com);
-                $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
-                $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
-                transferStockToPrincipal($nom_article, $qte_concerne);
-                require_once '../vues/sideBar/vue_sideBarAll.php';
-                require_once '../vues/affichageRes/vue_AfficherT_EC_STOCKPRINCIPAL.php';
-                $contenu = $sideBarAll;
-                $contenu .= $affichCreatT_EC;
-                require_once '../vues/gabarit.php';
-
-
+            //   case 'RetourStock_PRINCIPAL':
+            //     $commande = getComById($num_com);
+            //     $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
+            //     $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
+            //     transferStockToPrincipal($nom_article, $qte_concerne);
+            //     require_once '../vues/sideBar/vue_sideBarAll.php';
+            //     require_once '../vues/affichageRes/vue_AfficherT_EC_STOCKPRINCIPAL.php';
+            //     $contenu = $sideBarAll;
+            //     $contenu .= $affichCreatT_EC;
+            //     require_once '../vues/gabarit.php';
     }
         }
 
