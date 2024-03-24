@@ -6,7 +6,42 @@
 
     // Recupére la connection à la BDD
     require_once('../config/connexion.php');
-    
+
+    ////////////////////////////////////////////////////
+    //        SELECTIONNER LES TICKETS PAR TYPE       //
+    ////////////////////////////////////////////////////
+        
+    /**
+     * getAllTickets récupére tout les tickets d'expédition
+     *
+     * @return void
+     */
+    function getAllTicketsExp(){
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET_EXP";
+        $curseur = $bdd->query($sql);
+        $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+    function getTicketNPAI(){
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET_EXP WHERE CODE_TICKET LIKE 'NPAI'";
+        $curseur = $bdd->query($sql);
+        $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }   
+
+    function getTicketNP(){
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET_EXP WHERE CODE_TICKET LIKE 'NP'";
+        $curseur = $bdd->query($sql);
+        $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+
+
     ////////////////////////////////////////////////////
     //    RECHERCHER UNE COMMANDE AVEC SON NUM_COM    //
     ////////////////////////////////////////////////////

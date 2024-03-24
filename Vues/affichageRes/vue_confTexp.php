@@ -6,18 +6,18 @@
         <h3 class="rounded border border-warning text-center mx-3 py-3 my-3 text-black ">
             Informations nouveau ticket</h3>
         <div class='flex-column text-center justify-content-between px-3 py-3 m-3 border rounded'>
-              <p>Nouveau ticket</p> 
+              <p class='text-black'>Nouveau ticket</p> 
                 <div class="d-flex justify-content-around  row">
                   <div class='col-3  text-center'>
-                      <strong><p>Numéro de commande :</p></strong>
+                      <strong><p class='text-black'>Numéro de commande :</p></strong>
                       <?= $num_com?>
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Statut du ticket :</p></strong>
+                        <strong><p class='text-black'>Statut du ticket :</p></strong>
                         <?= $statut_ticket?> 
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Code ticket :</p></strong>
+                        <strong><p class='text-black'>Code ticket :</p></strong>
                         <?= $code_ticket?> 
                     </div>
                 </div>
@@ -26,16 +26,18 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalConfirmation">Confirmer la création d'un ticket</h1>
+                        <h1 class="modal-title fs-3 text-center" id="modalConfirmation">Confirmer la création d'un ticket</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Enregistrer ce ticket dans la base de donnée
                     </div>
-                    <div class="modal-footer text-center">
+                    <div class="modal-footer d-flex justify-content-center mx-auto text-center">
                         <form action="">
-                        <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
-                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                            <div class='d-flex justify-content-center mx-auto'>
+                                <button type='button' value='Annuler' onclick='window.history.back();' class='btn btn-danger'>Annuler</button>
+                                <button type="submit" class="btn btn-success">Enregistrer</button>
+                            </div>
 
                             <!-- Donnée envoyé dans l'Url -->
                             <input type="hidden" name='num_com'  value='<?= $num_com?>'>             

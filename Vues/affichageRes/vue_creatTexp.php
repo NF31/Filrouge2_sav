@@ -6,19 +6,19 @@
     <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light' style='max-height: 80vh'>
         <h3 class="rounded border border-warning text-center mx-3 py-3 my-3 text-black ">Création d'un ticket de réexpedition</h3>
         <div class='flex-column text-center justify-content-between px-3 py-3 m-3 border rounded'>
-              <p>Récapitulatif des informations de livraison</p>
+              <p class='text-black'>Récapitulatif des informations de livraison</p>
                 <div class="d-flex justify-content-around  row">
                   <div class='col-3  text-center'>
-                      <strong><p>Numéro de commande :</p></strong>
+                      <strong><p class='text-black'>Numéro de commande :</p></strong>
                       <?= $commande['NUM_COMMANDE']?>
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Client :</p></strong>
+                        <strong><p class='text-black'>Client :</p></strong>
                         <?= $commande['PRENOM_CLIENT']?> 
                         <?= $commande['NOM_CLIENT']?> 
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Adresse</p></strong>
+                        <strong><p class='text-black'>Adresse</p></strong>
                         <?= $commande['RUE_CLIENT']?> 
                         <?= $commande['VILLE_CLIENT']?>
                     </div>

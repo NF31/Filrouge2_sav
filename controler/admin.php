@@ -6,15 +6,10 @@
     require('../model/modele_admin.inc.php');
     session_start();
 
-    // ***** DEBUT ********* JEAN EUDES  
     // Récupérer les informations depuis la session PHP
              $AdministrateurName = $_SESSION['admin_name'];
              $posteAdministrateur = $_SESSION['poste_administrateur'];
              $idAdministrateur = $_SESSION['id_administrateur'];
-
-             // Utilisez les informations récupérées comme vous le souhaitez dans votre page
-             echo "Bienvenue, $AdministrateurName ! Votre poste est : $posteAdministrateur. Votre ID est : $idAdministrateur.";
-    // ***** FIN ********* JEAN EUDES          
 
 // ON CONSIDERE QUE LA PAGE D'ACCUEIL DE L'ADMIN EST LA PAGE TECH ALL.
     $action = 'listTechsALL';

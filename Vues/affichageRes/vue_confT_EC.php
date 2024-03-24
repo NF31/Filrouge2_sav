@@ -7,22 +7,22 @@
         <h3 class="rounded border border-warning text-center mx-3 py-3 my-3 text-black ">
             Informations nouveau ticket</h3>
         <div class='flex-column text-center justify-content-between px-3 py-3 m-3 border rounded'>
-              <p>Nouveau ticket</p>
+              <p class='text-black'>Nouveau ticket</p>
                 <div class="d-flex justify-content-around  row">
                   <div class='col-3  text-center'>
-                      <strong><p>Numéro de commande :</p></strong>
+                      <strong><p class='text-black'>Numéro de commande :</p></strong>
                       <?= $num_com?>
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Statut du ticket :</p></strong>
+                        <strong><p class='text-black'>Statut du ticket :</p></strong>
                         <?= $statut_ticket?> 
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Code article :</p></strong>
+                        <strong><p class='text-black'>Code article :</p></strong>
                         <?= $code_article?> 
                     </div>
                     <div class='col-3  text-center'>
-                        <strong><p>Code ticket :</p></strong>
+                        <strong><p class='text-black'>Code ticket :</p></strong>
                         <?= $code_ticket?> 
                     </div>
                 </div>
