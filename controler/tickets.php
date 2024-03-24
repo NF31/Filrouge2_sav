@@ -54,10 +54,10 @@
                 require_once '../vues/gabarit.php';
             
                 // Vérification si un ticket avec le même code existe déjà
-                $controlTicket = controlTicket($code_ticket, $num_com);  
-                if(is_array($controlTicket) && $controlTicket['CODE_TICKET'] == $code_ticket){
+                $controlTicket = controlTicket( $num_com);  
+                if(isset($controlTicket['CODE_TICKET'])){
                     // Si le ticket existe déjà, afficher un message d'alerte et redirection
-                    echo "<script>alert('Un ticket $code_ticket a déjà été créé')</script>";
+                    echo "<script>alert('Un ticket a déjà été créé')</script>";
                     sleep(0.8);
                     echo "<script>window.location.href='commandes.php?num_com=$num_com&action=detail'</script>";
                 } else {
@@ -164,34 +164,7 @@
                 require_once '../vues/gabarit.php';
                 break;
 
-            case'TicketExpeditionEC':   
             
-            // case 'AfficheTicketHotline': 
-            //     break;
-
-           
-        
-            
-            // case 'RetourStock_EC':
-            //     $commande = getComById($num_com);
-            //     $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
-            //     $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
-            //     insertStockSAV($nom_article, $qte_concerne);
-            //     require_once '../vues/sideBar/vue_sideBarAll.php';
-            //     require_once '../vues/affichageRes/vue_AfficherT_EC_EXP.php';
-            //     $contenu = $sideBarAll;
-            //     $contenu .= $affichCreatT_EC;
-            //     require_once '../vues/gabarit.php';
-
-            //   case 'RetourStock_PRINCIPAL':
-            //     $commande = getComById($num_com);
-            //     $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
-            //     $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
-            //     require_once '../vues/sideBar/vue_sideBarAll.php';
-            //     require_once '../vues/affichageRes/vue_AfficherT_EC_STOCKPRINCIPAL.php';
-            //     $contenu = $sideBarAll;
-            //     $contenu .= $affichCreatT_EC;
-            //     require_once '../vues/gabarit.php';
     }
         }
 

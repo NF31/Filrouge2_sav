@@ -2,12 +2,11 @@
 
   ob_start();
 ?>
-
     <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light' style='max-height: 80vh'>
         <h3 class="rounded border border-warning text-center mx-3 py-3 my-3 text-black ">
             Informations nouveau ticket</h3>
         <div class='flex-column text-center justify-content-between px-3 py-3 m-3 border rounded'>
-              <p>Nouveau ticket</p>
+              <p>Nouveau ticket</p> 
                 <div class="d-flex justify-content-around  row">
                   <div class='col-3  text-center'>
                       <strong><p>Numéro de commande :</p></strong>
