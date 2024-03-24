@@ -55,9 +55,11 @@
      * @param  int $num_com
      * @return void
      */
+
     function controlTicket(int $num_com){
         $bdd = getBdd();
         $sql = "SELECT * FROM TICKET_EXP WHERE NUM_COMMANDE LIKE :num_com"; 
+
 
         $curseur = $bdd->prepare($sql);
         $curseur->execute(array('num_com' => $num_com));

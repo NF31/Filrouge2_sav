@@ -57,7 +57,9 @@
                 $controlTicket = controlTicket( $num_com);  
                 if(isset($controlTicket['CODE_TICKET'])){
                     // Si le ticket existe déjà, afficher un message d'alerte et redirection
-                    echo "<script>alert('Un ticket a déjà été créé')</script>";
+
+                    echo "<script>alert('Un ticket  a déjà été créé')</script>";
+
                     sleep(0.8);
                     echo "<script>window.location.href='commandes.php?num_com=$num_com&action=detail'</script>";
                 } else {

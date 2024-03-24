@@ -111,7 +111,9 @@
                         </span>";
                         ?>
                     <?php
-                    } else if(isset($tickets) && $tickets[0]['STATUT_TICKET'] === "FERMÉ") {
+
+                    } else if (isset($tickets) && $tickets[0]['STATUT_TICKET'] === "FERMÉ") {
+
                         $colorBorder = 'border-success';
                         $vignette = "<span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success'>
                         Terminée
@@ -125,7 +127,7 @@
                         <h5 class="pt-3 card-title text-secondary"><?= $commande['NOM_ARTICLE'] ?></h5>       
                         <span class='d-block '>Quantité : <?= $commande['QUANTITE_CONCERNE'] ?></span>
                         <div class="text-center row">
-                            <?php if($commande['STATUT_LIGN_COM'] !== "Terminée") { ?>
+                            <?php if(!isset($tickets)) { ?>
                             <div class='col-5 card-body mx-1 '>
                                 <form action="tickets.php?" method="GET" class="col-5 d-inline">
                                     <button type='submit' class='col-10 py-2 bg-white border-success rounded'>
