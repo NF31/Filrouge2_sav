@@ -6,41 +6,14 @@
 
     require_once '../model/modele.com.php';
     require_once '../model/ModelException.php';  
-
-    // Création d'un utilisateur 
-    // $utilisateur = ['JEAN EUDES','SAV','8']; 
-    // $nomUtilisateur = $utilisateur[0]; 
-    // $roleUtilisateur = $utilisateur[1];
-    // $idUtilisateur = $utilisateur[2];
     
     //ouverture de la session
     session_start();
 
-
-                // ***** DEBUT ********* JEAN EUDES  
-                // Récupérer les informations depuis la session PHP
-                    $technicianName = $_SESSION['technician_name'];
-                    $posteTechnicien = $_SESSION['poste_technicien'];
-                    $idTechnicien = $_SESSION['id_technicien'];
-                // Utilisez les informations récupérées comme vous le souhaitez dans votre page
-                // echo "Bienvenue, $technicianName ! Votre poste est : $posteTechnicien. Votre ID est : $idTechnicien.";
-                
-                // ***** DEBUT ********* JEAN EUDES 
-                
-                
-    // Stockage des valeurs dans la session PHP
-    // $_SESSION['nomUtilisateur'] = $nomUtilisateur;
-    // $_SESSION['roleUtilisateur'] = $roleUtilisateur;
-    // $_SESSION['idUtilisateur'] = $idUtilisateur;
-
-    // Récupération des valeurs de la session
-    // $nomSession = $_SESSION['nomUtilisateur'];
-    // $roleSession = $_SESSION['roleUtilisateur'];
-    // $idSession = $_SESSION['idUtilisateur'];
-
-// print_r('<strong>Utilisateur connecté : </strong>'. $nomSession . '  ');
-// print_r('<strong>Role utilisateur : </strong>'. $roleSession . ' ');
-// print_r('<strong>Id utilisateur : </strong>'. $idSession . ' ');
+    // Récupération des données de la session 
+    $technicianName = $_SESSION['technician_name'];
+    $posteTechnicien = $_SESSION['poste_technicien'];
+    $idTechnicien = $_SESSION['id_technicien'];        
 
     $action= 'allcom';
      
@@ -174,7 +147,6 @@
                 $detailCommande = getDetailCom($id);
                 // var_dump($detailCommande);
                 $codeArticleTicket = getCodeArticleAvecTicketOuvert($id);
-                var_dump($codeArticleTicket);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_detail.php';
                 $contenu = $sideBarAll ;

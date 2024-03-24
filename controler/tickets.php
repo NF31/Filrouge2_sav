@@ -3,7 +3,8 @@
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-
+    require_once '../model/modele.stock.php';
+    require_once '../model/modele.articles.php';
     require_once '../model/modele.tickets.php';
     require_once '../model/ModelException.php';
 
@@ -11,15 +12,27 @@
         session_start();
     }
     $idTech = $_SESSION['id_technicien'];
-    // print_r('<strong>Utilisateur connecté : </strong>'. $nomSession . '  ');
-    // print_r('<strong>Role utilisateur : </strong>'. $roleSession . ' ');
-    // print_r('<strong>Id utilisateur : </strong>'. $idSession . ' ');
-
+    $posteTechnicien = $_SESSION['poste_technicien'];
 
     if(isset($_GET['action'])){
         $action = $_GET['action']; 
         $num_com = $_GET['num_com'];
         switch ($action) {
+            case 'showticket':
+                $num_ticket = $_GET['num_ticket'];
+                $ticket = getTicketById($num_ticket);
+                require_once '../vues/sideBar/vue_sideBarAll.php';
+                require_once '../vues/affichageRes/vue_ticket.php';
+                $contenu = $sideBarAll;
+                $contenu .= $affichTicket;
+                require_once '../vues/gabarit.php';
+                break;
+            case 'fermerTicketExp': 
+                $num_ticket = $_GET['num_ticket'];
+                closeTicketExp($num_ticket);    
+                header('location: commandes.php?num_com='.$num_com.'&action=detail');
+                break;
+
             case 'createT_Exp':
                 $commande = getComById($num_com);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
@@ -45,6 +58,7 @@
                 if(is_array($controlTicket) && $controlTicket['CODE_TICKET'] == $code_ticket){
                     // Si le ticket existe déjà, afficher un message d'alerte et redirection
                     echo "<script>alert('Un ticket $code_ticket a déjà été créé')</script>";
+                    sleep(0.8);
                     echo "<script>window.location.href='commandes.php?num_com=$num_com&action=detail'</script>";
                 } else {
                     // Si le ticket n'existe pas encore donc je créer du ticket

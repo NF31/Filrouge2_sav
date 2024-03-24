@@ -12,24 +12,37 @@
     <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light overflow-auto ' style='max-height: 80vh'>
         <?php if (count($detailCommande) > 0 ){?>
         <h3 class="bg-secondary text-center mx-3 py-3 my-3 text-light rounded">Détail de la commande</h3>
-        <div class="d-flex justify-content-between px-3 py-3 m-3 border rounded">
+        <div class="d-flex justify-content-between px-3 py-3 m-3 border rounded overflow-auto ">
             <div class='d-flex flex-column align-items-between col-7'>
+                
                 <strong>Statut commande : </strong><br> 
                 <?=$detailCommande[1]['STATU_COMMANDE']?><br>
-                <div class='card border rounded bg-light-subtle mt-auto p-2' style='height:50%'>
+                <div class='card border rounded bg-light-subtle mt-auto p-2 overflow-auto ' style='height:60%'>
                     <strong>Tickets commande : </strong>
-                    <!-- afficher le ticket uniquement si il en existe -->
-                    <?php
                     
-                    if(isset($tickets) && !empty($tickets)){
-                     foreach($tickets as $ticket){
-                        echo "N° Ticket : " . $ticket['NUM_TICKET'] . ' - Code Ticket : ' . $ticket['CODE_TICKET'] . ' - Statut Ticket : ' . $ticket['STATUT_TICKET'] . ' - ID tech : ' . $ticket['ID'] . '<br>';
-                        }
+                    <!-- afficher le ticket uniquement si il en existe -->
+                    <?php if(isset($tickets) && !empty($tickets)){
+                     foreach($tickets as $ticket){ 
+                        if($ticket['STATUT_TICKET'] == "FERMÉ" ){
+                            $colorLink = 'text-success';
                         } else {
-                            echo "Aucun ticket n'est associé à cette commande";
+                            $colorLink = 'text-warning';
+                        }?>
+                       
+                        <a class=' <?= $colorLink?> border-bottom mb-2'  href="tickets.php?action=showticket&num_com=<?=$detailCommande[1]['NUM_COMMANDE']?>&num_ticket=<?=$ticket['NUM_TICKET']?>">
+                            <span>
+                                <strong>N° Ticket :  </strong><?=$ticket['NUM_TICKET'] ?>
+                                <strong>Code Ticket : </strong><?=$ticket['CODE_TICKET'] ?>
+                                <strong>Statut Ticket : </strong><?=$ticket['STATUT_TICKET'] ?>
+                                <strong>ID tech : </strong><?=$ticket['ID'] ?>
+                            </span>
+                        </a>
+                        <?php }
+                        } else { ?>
+                            <span> "Aucun ticket n'est associé à cette commande"</span>
                         
-                        } ?>
-                   
+                        <?php } ?>
+                    
                 </div>
             </div>
                 <div class='col-4 text-center'>
@@ -75,7 +88,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- DEBUT Zone -   Affichage du bouton créer ticket si role = SAV -->
                  
                     <div class='d-flex pt-3 mx-auto justify-content-center'>
                         <form action="tickets.php?" method="GET" class="col-5 d-inline">
@@ -87,20 +99,36 @@
                             <input type="hidden" name="action" value="createT_Exp">
                         </form>
                     </div>
-                   
-                    <!-- FIN Zone -   Affichage du bouton créer ticket si role = SAV -->
                 </div>
         </div>    
-        <div class="row overflow-auto d-flex justify-content-center" style="max-height: 80%">
+        <div class="p-3 row overflow-auto d-flex justify-content-center " style="max-height: 80%">
             <?php foreach ($detailCommande as $commande) { ?>
-                <div class="card text-center mx-3 mb-3" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title text-secondary"><?= $commande['NOM_ARTICLE'] ?></h5>
-                        <span class='d-block pb-2'>Quantité : <?= $commande['QUANTITE_CONCERNE'] ?></span>
-                        <div class="row">
-                            <div class='col-5 card card-body mx-1 border-success'>
-                                <form action="tickets.php?" method="GET" class="col-12 d-inline">
-                                    <button type='submit' class='col-12 py-2 bg-white border-success rounded'>
+                <?php if ($commande['STATUT_LIGN_COM'] === "En attente") {
+                        $colorBorder = 'border-danger';
+                        $vignette = "<span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger'>
+                        en attente
+                        <span class='visually-hidden'>unread messages</span>
+                        </span>";
+                        ?>
+                    <?php
+                    } else {
+                        $colorBorder = 'border-success';
+                        $vignette = "<span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success'>
+                        Terminée
+                        <span class='visually-hidden'>unread messages</span>
+                        </span>";
+                    } ?>
+                <div class="card  position-relative text-center mx-3 mb-3" style="width: 18rem;">
+                    <?=$vignette?>
+                   
+                    <div class="card-body text-center">
+                        <h5 class="pt-3 card-title text-secondary"><?= $commande['NOM_ARTICLE'] ?></h5>       
+                        <span class='d-block '>Quantité : <?= $commande['QUANTITE_CONCERNE'] ?></span>
+                        <div class="text-center row">
+                            <?php if($commande['STATUT_LIGN_COM'] !== "Terminée") { ?>
+                            <div class='col-5 card-body mx-1 '>
+                                <form action="tickets.php?" method="GET" class="col-5 d-inline">
+                                    <button type='submit' class='col-10 py-2 bg-white border-success rounded'>
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
                                     <input type="hidden" name="action" value="createT_EC">
@@ -110,6 +138,7 @@
                                     <input type="hidden" name="qte_article" value="<?= $commande['QUANTITE_CONCERNE'] ?>">
                                 </form>
                             </div>
+                            <?php } ?>
                             <?php foreach ($codeArticleTicket as $codearticleT){ ?>
                                 <?php if ($codearticleT === $commande['CODE_ARTICLE']): ?>
                                     <?php //var_dump($roleSession) ;
@@ -118,9 +147,9 @@
                                         } else    
                                             $affichageTicket ='AfficheTicketHotline';
                                          ?>
-                                    <div class='col-5 card card-body mx-1 border-warning'>
-                                        <form action='tickets.php?' method='GET' class='col-12 d-inline'>
-                                            <button type='submit' class='col-12 py-2 bg-white border-warning rounded'>
+                                    <div class='col-5 card-body mx-1'>
+                                        <form action='tickets.php?' method='GET' class='col-5 d-inline'>
+                                            <button type='submit' class='col-10 py-2 bg-white border-warning rounded'>
                                                 <i class='fa-solid fa-ticket'></i>
                                             </button>
                                             <input type='hidden' name='action' value='<?= $affichageTicket ?>'>
@@ -136,10 +165,12 @@
                     </div>
                 </div>
             <?php } ?>
-        </div>
-    <?php } else {  ?>
-        <h5 class="p-3 text-center">Oups !</h5>
-        <div class="alert alert-warning text-center" role="alert">
-            Cette commande ne contient aucun article
-        </div>
-    <?php }   $affichDetail = ob_get_clean(); ?>
+        </div> 
+        
+        <?php } else {  ?>
+            <h5 class="p-3 text-center">Oups !</h5>
+            <div class="alert alert-warning text-center" role="alert">
+                Cette commande ne contient aucun article
+            </div>
+            <?php }   $affichDetail = ob_get_clean(); ?>
+    </div>  
