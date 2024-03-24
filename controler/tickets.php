@@ -16,8 +16,17 @@
 
     if(isset($_GET['action'])){
         $action = $_GET['action']; 
-        $num_com = $_GET['num_com'];
+        if(isset($_GET['num_com'])) $num_com = $_GET['num_com'];
         switch ($action) {
+            case 'allTickets':
+                $allTickets = getAllTicketsExp(); 
+                $ticketNPAI = getTicketNPAI();
+                $ticketNP = getTicketNP();
+                require_once '../vues/affichageRes/vue_allTickets.php';
+                $contenu = $affichAllTickets;
+                require_once '../vues/gabarit.php';
+                break;
+
             case 'showticket':
                 $num_ticket = $_GET['num_ticket'];
                 $ticket = getTicketById($num_ticket);
@@ -41,7 +50,6 @@
                 $contenu .= $affichCreatTexp;
                 require_once '../vues/gabarit.php';
                 break;
-
 
             case 'confirmeCreatT_Exp':
                 $statut_ticket = $_GET['statut_ticket'];
@@ -72,7 +80,6 @@
                 }
             break;
                 
-
             case 'creatOk':
                 $statut_ticket = $_GET['statut_ticket'];
                 $code_ticket = $_GET['code_ticket'];
@@ -81,10 +88,8 @@
             break;  
 
             // CREATION D'UN TICKET ERREUR CLIENT : 
-
             case 'createT_EC':
                 $suggestions = getSuggestionsArticles();
-           
                 $commande = getComById($num_com);
                 // $code_article = getCodeArticle($num_com);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
@@ -92,7 +97,7 @@
                 $contenu = $sideBarAll;
                 $contenu .= $affichCreatT_EC;
                 require_once '../vues/gabarit.php';
-                break;
+            break;
 
             case 'confirmeCreatT_EC':
                 $statut_ticket = $_GET['statut_ticket'];
@@ -107,32 +112,31 @@
                 $contenu = $sideBarAll;
                 $contenu .= $affichConfTicket;
                 require_once '../vues/gabarit.php';
-                break; 
+            break; 
 
-                case 'creatECOk':
-                    $statut_ticket = $_GET['statut_ticket'];
-                    $code_ticket = $_GET['code_ticket'];
-                    $code_article = $_GET['code_article'];
-                    $nom_article = $_GET['nom_article'];
-                    $num_com = $_GET['num_com'];
-                    $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
-                    try {
-                        insertStockSAV($nom_article, $qte_concerne);
-                        createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne, $idTech);
-                        header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=OK');
+            case 'creatECOk':
+                $statut_ticket = $_GET['statut_ticket'];
+                $code_ticket = $_GET['code_ticket'];
+                $code_article = $_GET['code_article'];
+                $nom_article = $_GET['nom_article'];
+                $num_com = $_GET['num_com'];
+                $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
+                try {
+                    insertStockSAV($nom_article, $qte_concerne);
+                    createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne, $idTech);
+                    header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=OK');
 
-                    } catch (PDOException $e) {
-                        // Vérifier l'erreur spécifique de duplication de clé primaire
-                        $errorCode = $e->getCode();
-                        if ($errorCode == '23000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                            $errorStatus = 'NOK';
-                        } else {
-                            die("Erreur de connexion à la base de données : " . $e->getMessage());
-                        }
+                } catch (PDOException $e) {
+                    // Vérifier l'erreur spécifique de duplication de clé primaire
+                    $errorCode = $e->getCode();
+                    if ($errorCode == '23000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                        $errorStatus = 'NOK';
+                    } else {
+                        die("Erreur de connexion à la base de données : " . $e->getMessage());
                     }
+                }
 
-                break;
-                
+            break;  
             
             case 'AfficheTicket':
                 $num_com = $_GET['num_com'];
@@ -146,7 +150,7 @@
                 $contenu = $sideBarAll;
                 $contenu .= $affichCreatT_EC;
                 require_once '../vues/gabarit.php';
-                break;
+            break;
 
             case 'afficheTicket2':
                 $suggestions = getSuggestionsArticles();
@@ -164,11 +168,7 @@
                 $contenu .= $affichCreatT_EC;
                 // RemoveStockPrincipale($nom_article, $qte_concerne);
                 require_once '../vues/gabarit.php';
-                break;
-
-            
-    }
+            break;     
         }
-
-
+    }
 ?>

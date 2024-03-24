@@ -42,17 +42,10 @@ try {
                         $poste = $passwords[$key]['poste'];
                         if ($password === $storedPassword) {
                             session_start();
-                         /*    $_idtechnicien = $technicien['id'];
-                            $_roleTechnicien = $technicien['poste'];
-                            $_SESSION['email'] = $email;
-                          $_SESSION['idTechnicien'] =$_idtechnicien;
-                          $_SESSION["roleTechnicien"] = $_roleTechnicien;
-                            //  setcookie('technician_name', $firstName, time() + 3600, '/');
-                         */
                             $_SESSION['technician_name'] = $firstName;
                             $_SESSION['poste_technicien'] = $poste;
                             $_SESSION['id_technicien'] = $idTechnicien;
-                            header("location:../controler/commandes.php");
+                            header("location:../controler/tickets.php?action=allTickets");
 
                             exit();
                         }
@@ -93,25 +86,10 @@ try {
                             $_SESSION['poste_administrateur'] = $poste;
                             $_SESSION['id_administrateur'] = $idAdministrateur;
                             header("location:../controler/admin.php");
-
                             exit();
                         }
                     }
                 }
-                // Vérifier si l'email fourni existe dans la liste des emails des administrateurs
-                /*          if (in_array($email, $emails)) {
-                        $index = array_search($email, $emails);
-                        $storedPassword = $passwords[$index];
-                        // Vérifier si le mot de passe correspond
-                        if ($password === $storedPassword) {
-                            // Authentification réussie
-                            setcookie('admin_name', $adminFirstName, time() + 3600, '/');
-                       
-                            // Rediriger l'utilisateur vers la page d'accueil ou toute autre page appropriée
-                            header("location:../controler/admin.php");
-                            exit();
-                        }
-                    }*/
             }
 
             // Si l'email ou le mot de passe est incorrect, redirigez vers l'accueil avec un message d'erreur
