@@ -146,6 +146,10 @@
                 };
                 $detailCommande = getDetailCom($id);
                 // var_dump($detailCommande);
+
+                //affiche la modale de confirmation de l'envoie en stock SAV de l'article
+                $stockmodal = isset($_GET['stock']) ? $_GET['stock'] : '';
+                
                 $codeArticleTicket = getCodeArticleAvecTicketOuvert($id);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_detail.php';

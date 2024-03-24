@@ -8,7 +8,7 @@
  * @return void
  */
 function insertStockSAV($nom_article, $qte_article) {
-    try {
+    
         $bdd = getBdd();
         $code_article = getCodeArticleByNom($nom_article);
         if ($code_article === null) {
@@ -25,52 +25,50 @@ function insertStockSAV($nom_article, $qte_article) {
         $statementInsert->execute();
 
         echo "Une nouvelle ligne pour l'article '$nom_article' a été ajoutée au stock SAV avec succès.";
+    
+}
+
+
+function ajouterAuStockPrincipal($nom_article, $qte_article) {
+    try {
+        // Connexion à la base de données
+        $bdd = getBdd();
+        
+        // Vérifier si l'article existe dans le stock SAV
+        $code_article = getCodeArticleByNom($nom_article);
+        if ($code_article === null) {
+            echo "L'article avec le nom '$nom_article' n'existe pas dans le stock SAV.";
+            return; 
+        }
+        
+        // Vérifier si l'article existe déjà dans le stock principal
+        $sqlCheck = "SELECT COUNT(*) FROM STOCK_PRINCIPAL WHERE CODE_ARTICLE = :code_article";
+        $statementCheck = $bdd->prepare($sqlCheck);
+        $statementCheck->bindParam(':code_article', $code_article, PDO::PARAM_INT);
+        $statementCheck->execute();
+        $count = $statementCheck->fetchColumn();
+        
+        if ($count > 0) {
+            // Mettre à jour la quantité dans le stock principal
+            $sqlUpdate = "UPDATE STOCK_PRINCIPAL SET QUANTITE = QUANTITE + :qte_article WHERE CODE_ARTICLE = :code_article";
+            $statementUpdate = $bdd->prepare($sqlUpdate);
+            $statementUpdate->bindParam(':qte_article', $qte_article, PDO::PARAM_INT);
+            $statementUpdate->bindParam(':code_article', $code_article, PDO::PARAM_INT);
+            $statementUpdate->execute();
+            
+            echo "La quantité de l'article '$nom_article' a été mise à jour dans le stock principal avec succès.";
+        } else {
+            // Insérer une nouvelle ligne dans le stock principal
+            $sqlInsert = "INSERT INTO STOCK_PRINCIPAL (CODE_ARTICLE, NOM_ARTICLE, QUANTITE) VALUES (:code_article, :nom_article, :qte_article)";
+            $statementInsert = $bdd->prepare($sqlInsert);
+            $statementInsert->bindParam(':code_article', $code_article, PDO::PARAM_INT);
+            $statementInsert->bindParam(':nom_article', $nom_article, PDO::PARAM_STR);
+            $statementInsert->bindParam(':qte_article', $qte_article, PDO::PARAM_INT);
+            $statementInsert->execute();
+            
+            echo "Une nouvelle ligne pour l'article '$nom_article' a été ajoutée au stock principal avec succès.";
+        }
     } catch (PDOException $e) {
         die("Erreur de connexion à la base de données : " . $e->getMessage());
     }
 }
-
-
-// function transferStockToPrincipal($nom_article, $qte_article) {
-//     try {
-//         $bdd = getBdd();
-        
-//         // Récupérer le code de l'article depuis le nom de l'article
-//         $code_article = getCodeArticleByNom($nom_article);
-//         if ($code_article === null) {
-//             echo "L'article avec le nom '$nom_article' n'existe pas.";
-//             return; 
-//         }
-//         $sqlSelectStock = "SELECT QTE FROM STOCK_SAV WHERE CODE_ARTICLE = :code_article";
-//         $statementSelectStock = $bdd->prepare($sqlSelectStock);
-//         $statementSelectStock->bindParam(':code_article', $code_article, PDO::PARAM_INT);
-//         $statementSelectStock->execute();
-        
-//         // Vérifier si la requête a retourné des résultats
-//         if ($statementSelectStock->rowCount() > 0) {
-//             // Récupérer la quantité depuis le stock SAV
-//             $result = $statementSelectStock->fetch(PDO::FETCH_ASSOC);
-//             $qte_sav = $result['QTE'];
-//         } else {
-//             echo "Aucune entrée trouvée dans le stock SAV pour l'article avec le code '$code_article'.";
-//             return;
-//         }
-        
-//         // Mettre à jour la quantité dans le stock principal
-//         $sqlUpdatePrincipal = "UPDATE STOCK_PRINCIPAL SET QUANTITE = IFNULL(QUANTITE, 0) + :qte_sav WHERE CODE_ARTICLE = :code_article";
-//         $statementUpdatePrincipal = $bdd->prepare($sqlUpdatePrincipal);
-//         $statementUpdatePrincipal->bindParam(':qte_sav', $qte_sav, PDO::PARAM_INT);
-//         $statementUpdatePrincipal->bindParam(':code_article', $code_article, PDO::PARAM_INT);
-//         $statementUpdatePrincipal->execute();
-
-//         // Supprimer l'enregistrement du stock SAV
-//         $sqlDeleteSav = "DELETE FROM STOCK_SAV WHERE CODE_ARTICLE = :code_article";
-//         $statementDeleteSav = $bdd->prepare($sqlDeleteSav);
-//         $statementDeleteSav->bindParam(':code_article', $code_article, PDO::PARAM_INT);
-//         $statementDeleteSav->execute();
-      
-//         echo "Le stock principal a été mis à jour avec succès.";
-//     } catch (PDOException $e) {
-//         die("Erreur de connexion à la base de données : " . $e->getMessage());
-//     }
-// }
