@@ -58,6 +58,7 @@
                 if(is_array($controlTicket) && $controlTicket['CODE_TICKET'] == $code_ticket){
                     // Si le ticket existe déjà, afficher un message d'alerte et redirection
                     echo "<script>alert('Un ticket $code_ticket a déjà été créé')</script>";
+                    sleep(0.8);
                     echo "<script>window.location.href='commandes.php?num_com=$num_com&action=detail'</script>";
                 } else {
                     // Si le ticket n'existe pas encore donc je créer du ticket
