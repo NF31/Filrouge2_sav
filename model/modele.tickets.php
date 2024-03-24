@@ -55,12 +55,12 @@
      * @param  int $num_com
      * @return void
      */
-    function controlTicket(string $code_ticket, int $num_com){
+    function controlTicket( int $num_com){
         $bdd = getBdd();
-        $sql = "SELECT * FROM TICKET_EXP WHERE CODE_TICKET LIKE :code_ticket AND NUM_COMMANDE LIKE :num_com"; 
+        $sql = "SELECT * FROM TICKET_EXP WHERE  NUM_COMMANDE LIKE :num_com"; 
 
         $curseur = $bdd->prepare($sql);
-        $curseur->execute(array('code_ticket' => $code_ticket, 'num_com' => $num_com));
+        $curseur->execute(array('num_com' => $num_com));
         $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }

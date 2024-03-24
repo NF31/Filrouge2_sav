@@ -103,21 +103,21 @@
         </div>    
         <div class="p-3 row overflow-auto d-flex justify-content-center " style="max-height: 80%">
             <?php foreach ($detailCommande as $commande) { ?>
-                <?php if ($commande['STATUT_LIGN_COM'] === "En attente") {
+                <?php if (isset($tickets) && $tickets[0]['STATUT_TICKET'] === "ouvert") {
                         $colorBorder = 'border-danger';
-                        $vignette = "<span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger'>
+                        $vignette = "<span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-warning'>
                         en attente
                         <span class='visually-hidden'>unread messages</span>
                         </span>";
                         ?>
                     <?php
-                    } else {
+                    } else if (isset($tickets) && $tickets[0]['STATUT_TICKET'] === "FERMÉ") {
                         $colorBorder = 'border-success';
                         $vignette = "<span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success'>
                         Terminée
                         <span class='visually-hidden'>unread messages</span>
                         </span>";
-                    } ?>
+                    } else $vignette = ''?>
                 <div class="card  position-relative text-center mx-3 mb-3" style="width: 18rem;">
                     <?=$vignette?>
                    
@@ -125,7 +125,7 @@
                         <h5 class="pt-3 card-title text-secondary"><?= $commande['NOM_ARTICLE'] ?></h5>       
                         <span class='d-block '>Quantité : <?= $commande['QUANTITE_CONCERNE'] ?></span>
                         <div class="text-center row">
-                            <?php if($commande['STATUT_LIGN_COM'] !== "Terminée") { ?>
+                            <?php if(!isset($tickets)) { ?>
                             <div class='col-5 card-body mx-1 '>
                                 <form action="tickets.php?" method="GET" class="col-5 d-inline">
                                     <button type='submit' class='col-10 py-2 bg-white border-success rounded'>

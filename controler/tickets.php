@@ -54,10 +54,10 @@
                 require_once '../vues/gabarit.php';
             
                 // Vérification si un ticket avec le même code existe déjà
-                $controlTicket = controlTicket($code_ticket, $num_com);  
-                if(is_array($controlTicket) && $controlTicket['CODE_TICKET'] == $code_ticket){
+                $controlTicket = controlTicket( $num_com);  
+                if(isset($controlTicket['CODE_TICKET'])){
                     // Si le ticket existe déjà, afficher un message d'alerte et redirection
-                    echo "<script>alert('Un ticket $code_ticket a déjà été créé')</script>";
+                    echo "<script>alert('Un ticket  a déjà été créé')</script>";
                     sleep(0.8);
                     echo "<script>window.location.href='commandes.php?num_com=$num_com&action=detail'</script>";
                 } else {
