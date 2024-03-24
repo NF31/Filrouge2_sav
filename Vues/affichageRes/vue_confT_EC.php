@@ -46,6 +46,7 @@
                                 <input type="hidden" name='num_com'  value='<?= $num_com?>'>             
                                 <input type="hidden" name='code_ticket' value='<?= $code_ticket?>'> 
                                 <input type="hidden" name='code_article' value='<?= $code_article?>'>                         
+                                <input type="hidden" name='nom_article' value='<?= $nom_article?>'>                         
                                 <input type="hidden" name='qte_concerne' value="<?= $qte_concerne ?>">                       
                                 <input type="hidden" name='statut_ticket' value='<?= $statut_ticket?>'>             
                                 <input type="hidden" name='action' value='creatECOk'>             

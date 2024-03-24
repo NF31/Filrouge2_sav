@@ -107,53 +107,86 @@
                 require_once '../vues/gabarit.php';
                 break; 
 
-            case 'creatECOk':
-                $statut_ticket = $_GET['statut_ticket'];
-                $code_ticket = $_GET['code_ticket'];
-                $code_article = $_GET['code_article'];
-                $num_com = $_GET['num_com'];
-                $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
-                createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne);
-                header('location: commandes.php?num_com='.$num_com.'&action=detail');
-            break;    
+                case 'creatECOk':
+                    $statut_ticket = $_GET['statut_ticket'];
+                    $code_ticket = $_GET['code_ticket'];
+                    $code_article = $_GET['code_article'];
+                    $nom_article = $_GET['nom_article'];
+                    $num_com = $_GET['num_com'];
+                    $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
+                    try {
+                        insertStockSAV($nom_article, $qte_concerne);
+                        createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne, $idTech);
+                        header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=OK');
+
+                    } catch (PDOException $e) {
+                        // Vérifier l'erreur spécifique de duplication de clé primaire
+                        $errorCode = $e->getCode();
+                        if ($errorCode == '23000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                            $errorStatus = 'NOK';
+                        } else {
+                            die("Erreur de connexion à la base de données : " . $e->getMessage());
+                        }
+                    }
+
+                break;
+                
             
             case 'AfficheTicket':
-                $suggestions = getSuggestionsArticles();
                 $num_com = $_GET['num_com'];
                 $code_article = $_GET['code_article'];
                 // var_dump($num_com);
                 // var_dump($code_article);
                 $qte_concerne= getQuantiteConcernee($num_com, $code_article);
-                var_dump($qte_concerne);
-            
-            case 'AfficheTicketHotline': 
+                $commande = getComById($num_com);
+                require_once '../vues/sideBar/vue_sideBarAll.php';
+                require_once '../vues/affichageRes/vue_AfficherT_EC_STOCKPRINCIPAL.php';
+                $contenu = $sideBarAll;
+                $contenu .= $affichCreatT_EC;
+                require_once '../vues/gabarit.php';
                 break;
 
-           
+            case 'afficheTicket2':
+                $suggestions = getSuggestionsArticles();
+                $num_com = $_GET['num_com'];
+                $code_article = $_GET['code_article'];
+                $nom_article = $_GET['nom_article'];
+
+                $qte_concerne= getQuantiteConcernee($num_com, $code_article);
+                ajouterAuStockPrincipal($nom_article, $qte_concerne);
+
                 $commande = getComById($num_com);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
-                require_once '../vues/affichageRes/vue_AfficherT_EC.php';
+                require_once '../vues/affichageRes/vue_AfficherT_EC_EXPEDITION.php';
                 $contenu = $sideBarAll;
                 $contenu .= $affichCreatT_EC;
+                // RemoveStockPrincipale($nom_article, $qte_concerne);
                 require_once '../vues/gabarit.php';
                 break;
+
+            case'TicketExpeditionEC':   
             
-            case 'RetourStock_EC':
-                $commande = getComById($num_com);
-                $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
-                $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
-                insertStockSAV($nom_article, $qte_concerne);
-                require_once '../vues/sideBar/vue_sideBarAll.php';
-                require_once '../vues/affichageRes/vue_AfficherT_EC_EXP.php';
-                $contenu = $sideBarAll;
-                $contenu .= $affichCreatT_EC;
-                require_once '../vues/gabarit.php';
+            // case 'AfficheTicketHotline': 
+            //     break;
+
+           
+        
+            
+            // case 'RetourStock_EC':
+            //     $commande = getComById($num_com);
+            //     $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
+            //     $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
+            //     insertStockSAV($nom_article, $qte_concerne);
+            //     require_once '../vues/sideBar/vue_sideBarAll.php';
+            //     require_once '../vues/affichageRes/vue_AfficherT_EC_EXP.php';
+            //     $contenu = $sideBarAll;
+            //     $contenu .= $affichCreatT_EC;
+            //     require_once '../vues/gabarit.php';
 
             //   case 'RetourStock_PRINCIPAL':
             //     $commande = getComById($num_com);
             //     $nom_article = isset($_GET['nom_article']) ? $_GET['nom_article'] : '';
             //     $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : '';
-            //     transferStockToPrincipal($nom_article, $qte_concerne);
             //     require_once '../vues/sideBar/vue_sideBarAll.php';
             //     require_once '../vues/affichageRes/vue_AfficherT_EC_STOCKPRINCIPAL.php';
             //     $contenu = $sideBarAll;
