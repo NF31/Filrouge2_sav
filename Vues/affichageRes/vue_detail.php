@@ -172,5 +172,50 @@
             <div class="alert alert-warning text-center" role="alert">
                 Cette commande ne contient aucun article
             </div>
-            <?php }   $affichDetail = ob_get_clean(); ?>
-    </div>  
+
+            <?php } if ($stockmodal === 'OK') { ?>
+        <!-- Modal -->
+        <div class="modal fade show" id="simpleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" style="color: green;">Stock mis à jour</h5>
+                    </div>
+                    <div class="modal-body">
+                        Le stock SAV a été mis à jour avec succès.
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    <?php if ($stockmodal === 'NOK') { ?>
+        <!-- Modal -->
+        <div class="modal fade show" id="simpleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" style="color: red;">ERREUR</h5>
+                    </div>
+                    <div class="modal-body">
+                       Cet article à déjà été envoyé en stock SAV
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+</div>  
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#simpleModal').modal('show');
+    });
+</script>
+
+<?php $affichDetail = ob_get_clean(); ?>
