@@ -8,7 +8,7 @@ ob_start();
 ?>
 
 <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light' style='max-height: 80vh'>
-    <h3 class="rounded border border-warning text-center mx-3 py-3 my-3 text-black ">Renvoie en stock principal</h3>
+    <h3 class="rounded border border-warning text-center mx-3 py-3 my-3 text-black ">Expedition du nouvel article</h3>
     <div class='flex-column text-center justify-content-between px-3 py-3 m-3 border rounded'>
         <p>Récapitulatif des informations</p>
         <div class="d-flex justify-content-around  row">
@@ -29,10 +29,10 @@ ob_start();
         </div>
         <form action="tickets.php?" method='GET'>
             <div class='col-4 mx-auto text-center py-3'>
-                <strong>Nom de l'article retourné:</strong>
-                <input type="text" name="nom_article" id="nom_article" class="form-control mt-2 mb-2" value="<?= $nom_article ?>" required readonly>
+                <strong>Nom de l'article à envoyer:</strong>
+                <input type="text" name="nom_article" id="nom_articleEXP" class="form-control mt-2 mb-2" value="<?= $nom_article ?>" required >
                 <strong>Quantité de l'article :</strong>
-                <input type="text" name="qte_concerne" id="qte_concerne" class="form-control mt-2 mb-2" value="<?= $qte_concerne ?>" required readonly>
+                <input type="text" name="qte_concerne" id="qte_concerne" class="form-control mt-2 mb-2" value="<?= $qte_concerne ?>" required >
 
                 <strong>Code ticket:</strong>
                 <select id='select_code_ticket_modal' class="form-select mt-2" name='code_ticket' >
@@ -43,8 +43,7 @@ ob_start();
                 <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
                 <input type='submit' value='Renvoyer' class='col-4  bg-success text-light rounded border-0 py-2'> 
                 <input type="hidden" name='num_com'  value='<?= $commande['NUM_COMMANDE']?>'>             
-                <input type="hidden" name='code_article'  value='<?= $code_article?>'>             
-                <input type="hidden" name='action' value='afficheTicket2'>             
+                <input type="hidden" name='action' value='detail'>             
                 <input type="hidden" name='statut_ticket' value='ouvert'>             
             </div>
         </form>    
@@ -55,11 +54,11 @@ ob_start();
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel">Stock mis à jour</h5>
+        <h5 class="modal-title" id="successModalLabel">Stock PRINCIPAL mis à jour</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Le stock principal a été mis à jour avec succès.
+        L'envoie du nouvel article à été enregistrer dans la base de donnée.
       </div>
       <div class="modal-footer">
         <!-- Ajoutez un bouton pour soumettre le formulaire -->
@@ -85,6 +84,44 @@ ob_start();
       form.submit(); // Soumettre le formulaire
     });
   });
+</script>
+
+<!-- Script JavaScript pour gérer les suggestions -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nom_articleInput = document.getElementById('nom_articleEXP');
+        const suggestionsList = document.createElement('ul');
+        suggestionsList.setAttribute('id', 'suggestions');
+        suggestionsList.setAttribute('class', 'list-group'); // Ajout de la classe list-group pour la mise en forme Bootstrap
+        nom_articleInput.parentNode.insertBefore(suggestionsList, nom_articleInput.nextSibling);
+
+        nom_articleInput.addEventListener('input', function() {
+            const query = nom_articleInput.value;
+            suggestionsList.innerHTML = ''; // Efface la liste de suggestions précédente
+
+            <?php
+            $jsonSuggestions = json_encode($suggestions);
+            echo "const suggestions = " . $jsonSuggestions . ";";
+            ?>
+
+            let count = 0; // Compteur pour limiter les suggestions à 5
+            suggestions.forEach(suggestion => {
+                if (suggestion.NOM_ARTICLE.toLowerCase().includes(query.toLowerCase())) {
+                    if (count < 5) { // Limiter à 5 suggestions
+                        const li = document.createElement('li');
+                        li.setAttribute('class', 'list-group-item'); // Ajout de la classe list-group-item pour la mise en forme Bootstrap
+                        li.textContent = suggestion.NOM_ARTICLE;
+                        li.addEventListener('click', function() {
+                            nom_articleInput.value = suggestion.NOM_ARTICLE; // Remplir le champ avec la suggestion sélectionnée
+                            suggestionsList.innerHTML = ''; // Effacer la liste des suggestions après la sélection
+                        });
+                        suggestionsList.appendChild(li);
+                        count++;
+                    }
+                }
+            });
+        });
+    });
 </script>
 
 
