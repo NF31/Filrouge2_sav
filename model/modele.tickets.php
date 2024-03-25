@@ -40,6 +40,15 @@
         return $resultat;
     }
 
+    function getTicketEC() {
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET WHERE CODE_TICKET LIKE 'EC'";
+        $curseur = $bdd->query($sql);
+        $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+    
+
 
 
     ////////////////////////////////////////////////////
@@ -137,27 +146,39 @@
         $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }
+    function getTicketECById(int $num_ticket){
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET WHERE NUM_TICKET LIKE :num_ticket";
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array('num_ticket' => $num_ticket));
+        $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
 
+       
     /**
-     * La fonction créer un ticket Erreur Client
+     * la fonction créer un ticket ERREUR CLIENT
      *
-     * @param  mixed $code_ticket = ERREUR TICKET
-     * @param  mixed $num_com 
-     * @param  mixed $statut_ticket= EN COURS / TERMINEE
-     * @param  mixed $cdeArticle = 
+     * @param  int $code_ticket
+     * @param  int $num_com
+     * @param  string $statut_ticket
+     * @param  int $cdeArticle
+     * @param  int $qteConcerne
+     * @param  int $idTech
      * @return void
      */
-    function createTicketEC(string $code_ticket, int $num_com, string $statut_ticket, int $cdeArticle, int $qteConcerne){
+    function createTicketEC(string $code_ticket, int $num_com, string $statut_ticket, int $cdeArticle, int $qteConcerne, int $idTech){
         $bdd = getBdd(); 
-        $sql = "INSERT INTO TICKET (CODE_TICKET, NUM_COMMANDE, CODE_ARTICLE, STATUT_TICKET, QUANTITE_CONCERNEE)
-                VALUES (:CODE_TICKET, :NUM_COMMANDE, :CODE_ARTICLE, :STATUT_TICKET,:QUANTITE_CONCERNEE )"; 
+        $sql = "INSERT INTO TICKET (CODE_TICKET, NUM_COMMANDE, CODE_ARTICLE, STATUT_TICKET, QUANTITE_CONCERNEE, id_technicien)
+                VALUES (:CODE_TICKET, :NUM_COMMANDE, :CODE_ARTICLE, :STATUT_TICKET,:QUANTITE_CONCERNEE, :idTech)"; 
         $curseur = $bdd->prepare($sql);
         $curseur->execute(array(
             'CODE_TICKET' => $code_ticket, 
             'NUM_COMMANDE' => $num_com, 
             'CODE_ARTICLE' => $cdeArticle,
             'STATUT_TICKET' => $statut_ticket,
-            'QUANTITE_CONCERNEE' => $qteConcerne
+            'QUANTITE_CONCERNEE' => $qteConcerne,
+            'idTech' => $idTech
         ));
         
     }
@@ -165,7 +186,7 @@
     /**
      * fermer un ticket d'expédition
      *
-     * @param  mixed $num_ticket
+     * @param  int $num_ticket
      * @return void
      */
     function closeTicketExp(int $num_ticket){
@@ -175,17 +196,24 @@
         $curseur->execute(array('num_ticket' => $num_ticket));
     }
         
+        
     /**
-     * fermer un ticket ERREUR CLIENT
+     * fermer un ticket ERREUR COMMANDE
      *
-     * @param  int $num_ticket
+     * @param  int $num_commande
+     * @param  int $code_article
      * @return void
      */
-    function closeTicketEC(int $num_ticket){
+    function closeTicketEC($num_commande, $code_article) {
         $bdd = getBdd();
-        $sql = "UPDATE TICKET SET STATUT_TICKET = 'FERMÉ' WHERE NUM_TICKET = :num_ticket";
-        $curseur = $bdd->prepare($sql);
-        $curseur->execute(array('num_ticket' => $num_ticket));
+        
+        // Requête pour modifier le statut du ticket à "FERMÉE"
+        $sql = "UPDATE TICKET SET STATUT_TICKET = 'FERMÉ' WHERE NUM_COMMANDE = :num_commande AND CODE_ARTICLE = :code_article";
+        $statement = $bdd->prepare($sql);
+        $statement->bindParam(':num_commande', $num_commande, PDO::PARAM_INT);
+        $statement->bindParam(':code_article', $code_article, PDO::PARAM_INT);
+        $statement->execute();
+        
     }
-
+    
 ?>

@@ -140,9 +140,17 @@
             case 'detail':
                 if(isset($_GET['num_com'])){
                     $id = $_GET['num_com'];
+                  
+                   
                 }
                 if(count(getTicketExp($id))!=0){
                     $tickets = getTicketExp($id);
+                    $infoTicket ='NPAI';
+                   
+                };
+                if(count(getTicketEC($id))!=0){
+                    $tickets = getTicketEC($id);
+                    $infoTicket ='EC';
                 };
                 $detailCommande = getDetailCom($id);
                 // var_dump($detailCommande);

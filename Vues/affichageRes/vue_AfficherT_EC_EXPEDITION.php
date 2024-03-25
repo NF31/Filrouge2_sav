@@ -43,6 +43,7 @@ ob_start();
                 <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
                 <input type='submit' value='Renvoyer' class='col-4  bg-success text-light rounded border-0 py-2'> 
                 <input type="hidden" name='num_com'  value='<?= $commande['NUM_COMMANDE']?>'>             
+                <input type="hidden" name='code_article'  value='<?= $code_article?>'>             
                 <input type="hidden" name='action' value='fermerTicketEC'>             
                 <input type="hidden" name='statut_ticket' value='fermé'>             
             </div>
