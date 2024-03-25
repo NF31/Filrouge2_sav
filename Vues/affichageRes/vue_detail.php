@@ -18,7 +18,7 @@
                 <strong>Statut commande : </strong><br> 
                 <?=$detailCommande[1]['STATU_COMMANDE']?><br>
                 <div class='card border rounded bg-light-subtle mt-auto p-2 overflow-auto ' style='height:60%'>
-                    <strong>Tickets commande : </strong>
+                    <strong>Tickets : </strong>
                     
                     <!-- afficher le ticket uniquement si il en existe -->
                     <?php if(isset($tickets) && !empty($tickets)){
