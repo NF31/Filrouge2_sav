@@ -10,7 +10,7 @@
 ?>        
 
 <div class='col-lg-7 col-sm-11 shadow-lg rounded bg-light overflow-auto ' style='max-height: 80vh'>
-        <h3 class="bg-warning text-center mx-3 py-3 my-3 text-light rounded">Ticket de réexpédition</h3>
+        <h3 class="bg-warning text-center mx-3 py-3 my-3 text-light rounded"><?= $titreTicket; ?></h3>
         <div class='d-flex justify-content-between px-3 py-3 m-3 border rounded'>
             <div class="col-2">
                 <strong><span>Numero de ticket</span></strong><br>
@@ -30,7 +30,12 @@
             </div>
             <div class="col-2">
                 <strong><span>Id technicien</span></strong><br>
-                <span><?=$ticket['ID'] ?></span>
+                <span>   
+                    <?php if (isset($ticket['id_technicien'])) : ?>
+                        <?= $ticket['id_technicien'] ?>
+                    <?php elseif (isset($ticket['ID'])) : ?>
+                        <?= $ticket['ID'] ?>
+                    <?php endif; ?></span>
             </div>
         </div>
             <div class='text-center'>

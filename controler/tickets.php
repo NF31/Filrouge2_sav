@@ -22,6 +22,7 @@
                 $allTickets = getAllTicketsExp(); 
                 $ticketNPAI = getTicketNPAI();
                 $ticketNP = getTicketNP();
+                $ticketEC = getTicketEC();
                 require_once '../vues/affichageRes/vue_allTickets.php';
                 $contenu = $affichAllTickets;
                 require_once '../vues/gabarit.php';
@@ -29,13 +30,25 @@
 
             case 'showticket':
                 $num_ticket = $_GET['num_ticket'];
-                $ticket = getTicketById($num_ticket);
+                $infoTicket = $_GET['infoTicket'] ? $_GET['infoTicket'] : 'NPAI' ;
+
+                if($infoTicket=== 'NPAI'){
+                    $ticket = getTicketById($num_ticket);
+                    $titreTicket = 'Ticket de réexpédition';
+                }
+                else if($infoTicket=== 'EC'){
+                    $ticket = getTicketECById($num_ticket);
+                    $titreTicket = 'Ticket Erreur client';
+                }
+           
+                
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_ticket.php';
                 $contenu = $sideBarAll;
                 $contenu .= $affichTicket;
                 require_once '../vues/gabarit.php';
                 break;
+
             case 'fermerTicketExp': 
                 $num_ticket = $_GET['num_ticket'];
                 closeTicketExp($num_ticket);    
@@ -82,7 +95,8 @@
                 
             case 'creatOk':
                 $statut_ticket = $_GET['statut_ticket'];
-                $code_ticket = $_GET['code_ticket'];
+                $code_ticket = $_GET['code_ticket'];                
+
                 $nouveauTicket = creatTicketExp($code_ticket,  $num_com,  $statut_ticket, $idTech);
                 header('location: commandes.php?num_com='.$num_com.'&action=detail');
             break;  
@@ -120,6 +134,7 @@
                 $code_article = $_GET['code_article'];
                 $nom_article = $_GET['nom_article'];
                 $num_com = $_GET['num_com'];
+              
                 $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
                 $checkStockSAV= checkStockSAV($num_com, $code_article);
 
@@ -156,6 +171,7 @@
                 $num_com = $_GET['num_com'];
                 $code_article = $_GET['code_article'];
                 $nom_article = $_GET['nom_article'];
+               
 
                 $suggestions = getSuggestionsArticles();
                 $qte_concerne= getQuantiteConcernee($num_com, $code_article);
@@ -171,6 +187,10 @@
             case 'fermerTicketEC':  
 
                 // closeTicketEC($num_ticket);
+            
+                $num_com = $_GET['num_com'];
+                // $commande = getComById($num_com);
+                $code_article = $_GET['code_article'];
                 $nom_article = $_GET['nom_article'];
                 $qte_concerne= $_GET['qte_concerne'];
                 $statut_ticket = $_GET['statut_ticket'];
@@ -178,8 +198,11 @@
                 var_dump($qte_concerne);
                 var_dump($statut_ticket);
                 reduitStockPrincipal($nom_article,$qte_concerne);
+                closeTicketEC($num_com, $code_article);
+                header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=CLOSEOK');
+                break;
 
-
+            case 'createT_EP':
         }
     }
 ?>

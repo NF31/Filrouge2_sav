@@ -54,7 +54,6 @@ function transferStockSAVToStockPrincipal($num_commande, $code_article) {
     $statementUpdate = $bdd->prepare($sqlUpdate);
     $statementUpdate->bindParam(':quantite', $quantite_retrouvee, PDO::PARAM_INT);
     $statementUpdate->bindParam(':code_article', $code_article, PDO::PARAM_INT);
-    var_dump($code_article);
     $statementUpdate->execute();
     
     // Supprimer la ligne correspondante de la table STOCK_SAV

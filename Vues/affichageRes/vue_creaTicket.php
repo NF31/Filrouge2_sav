@@ -61,7 +61,7 @@ ob_start();
         if (selectedCodeTicket === 'EC') {
             actionInput.value = 'createT_EC';
         } else {
-            actionInput.value = ''; // Définir la valeur par défaut si nécessaire
+            actionInput.value = 'createT_EP'; // Définir la valeur par défaut si nécessaire
         }
     }
 

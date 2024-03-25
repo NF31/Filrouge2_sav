@@ -373,4 +373,13 @@
         return $resultat;
     }
 
+    function getTicketEC(int $num_com) {
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET WHERE NUM_COMMANDE = :num_com";
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array('num_com' => $num_com));
+        $resultat = $curseur->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
     

@@ -29,12 +29,17 @@
                             $colorLink = 'text-warning';
                         }?>
                        
-                        <a class=' <?= $colorLink?> border-bottom mb-2'  href="tickets.php?action=showticket&num_com=<?=$detailCommande[1]['NUM_COMMANDE']?>&num_ticket=<?=$ticket['NUM_TICKET']?>">
+                        <a class=' <?= $colorLink?> border-bottom mb-2'  href="tickets.php?action=showticket&num_com=<?=$detailCommande[1]['NUM_COMMANDE']?>&num_ticket=<?=$ticket['NUM_TICKET']?>&infoTicket=<?=$infoTicket?>">
                             <span>
                                 <strong>N° Ticket :  </strong><?=$ticket['NUM_TICKET'] ?>
                                 <strong>Code Ticket : </strong><?=$ticket['CODE_TICKET'] ?>
                                 <strong>Statut Ticket : </strong><?=$ticket['STATUT_TICKET'] ?>
-                                <strong>ID tech : </strong><?=$ticket['ID'] ?>
+                                <strong>ID tech : </strong>
+                                    <?php if (isset($ticket['id_technicien'])) : ?>
+                                        <?= $ticket['id_technicien'] ?>
+                                    <?php elseif (isset($ticket['ID'])) : ?>
+                                        <?= $ticket['ID'] ?>
+                                    <?php endif; ?>
                             </span>
                         </a>
                         <?php }
@@ -202,6 +207,23 @@
                     </div>
                     <div class="modal-body">
                        Cet article à déjà été envoyé en stock SAV
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    <?php  if ($stockmodal === 'CLOSEOK') { ?>
+        <!-- Modal -->
+        <div class="modal fade show" id="simpleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" style="color: green;">Ticket cloturé</h5>
+                    </div>
+                    <div class="modal-body">
+                    Le ticket a été cloturé avec succès
                     </div>
                     <div class="modal-footer">
                     </div>
