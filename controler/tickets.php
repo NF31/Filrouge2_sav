@@ -121,22 +121,21 @@
                 $nom_article = $_GET['nom_article'];
                 $num_com = $_GET['num_com'];
                 $qte_concerne = isset($_GET['qte_concerne']) ? $_GET['qte_concerne'] : null;
-                try {
-                    insertStockSAV($nom_article, $qte_concerne);
-                    createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne, $idTech);
-                    header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=OK');
+                $checkStockSAV= checkStockSAV($num_com, $code_article);
 
-                } catch (PDOException $e) {
-                    // Vérifier l'erreur spécifique de duplication de clé primaire
-                    $errorCode = $e->getCode();
-                    if ($errorCode == '23000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                        $errorStatus = 'NOK';
-                    } else {
-                        die("Erreur de connexion à la base de données : " . $e->getMessage());
-                    }
+                // Vérifier si le ticket existe déjà
+                $controle_ticket = controlTicketEC($num_com, $code_article);
+                if ($checkStockSAV) {
+                    // Rediriger vers la page avec les paramètres appropriés
+                    header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=NOK');
+                    exit; // Arrêter le script après la redirection
                 }
-
-            break;  
+            
+                // Si le ticket n'existe pas, insérer dans la base de données et rediriger
+                insertStockSAV($num_com,$nom_article, $qte_concerne);
+                createTicketEC($code_ticket, $num_com, $statut_ticket, $code_article, $qte_concerne, $idTech);
+                header('location: commandes.php?num_com='.$num_com.'&action=detail&stock=OK');
+                break;
             
             case 'AfficheTicket':
                 $num_com = $_GET['num_com'];
@@ -152,23 +151,35 @@
                 require_once '../vues/gabarit.php';
             break;
 
-            case 'afficheTicket2':
-                $suggestions = getSuggestionsArticles();
+            case 'afficheTicket2': 
+
                 $num_com = $_GET['num_com'];
                 $code_article = $_GET['code_article'];
                 $nom_article = $_GET['nom_article'];
 
+                $suggestions = getSuggestionsArticles();
                 $qte_concerne= getQuantiteConcernee($num_com, $code_article);
-                ajouterAuStockPrincipal($nom_article, $qte_concerne);
-
+                transferStockSAVToStockPrincipal($num_com, $code_article);
                 $commande = getComById($num_com);
                 require_once '../vues/sideBar/vue_sideBarAll.php';
                 require_once '../vues/affichageRes/vue_AfficherT_EC_EXPEDITION.php';
                 $contenu = $sideBarAll;
                 $contenu .= $affichCreatT_EC;
-                // RemoveStockPrincipale($nom_article, $qte_concerne);
                 require_once '../vues/gabarit.php';
-            break;     
+            break;   
+
+            case 'fermerTicketEC':  
+
+                // closeTicketEC($num_ticket);
+                $nom_article = $_GET['nom_article'];
+                $qte_concerne= $_GET['qte_concerne'];
+                $statut_ticket = $_GET['statut_ticket'];
+                var_dump($nom_article);
+                var_dump($qte_concerne);
+                var_dump($statut_ticket);
+                reduitStockPrincipal($nom_article,$qte_concerne);
+
+
         }
     }
 ?>

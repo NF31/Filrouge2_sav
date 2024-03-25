@@ -101,6 +101,27 @@
         $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }
+        
+    /**
+     *La fonction contrôle si un ticket EC du même type existe déjà
+
+     *
+     * @param  int $num_com
+     * @param  int $cdeArticle
+     * @return void
+     */
+    function controlTicketEC(int $num_com, int $code_article){
+        $bdd = getBdd();
+        $sql = "SELECT * FROM TICKET WHERE NUM_COMMANDE = :num_com AND CODE_ARTICLE = :code_article"; 
+    
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array(
+            'num_com' => $num_com,
+            'code_article' => $code_article
+        ));
+        $resultat = $curseur->fetch(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
     
     /**
      * La fonction permet de récupérer un ticket d'expédition grâce à son numéro
@@ -150,6 +171,19 @@
     function closeTicketExp(int $num_ticket){
         $bdd = getBdd();
         $sql = "UPDATE TICKET_EXP SET STATUT_TICKET = 'FERMÉ' WHERE NUM_TICKET = :num_ticket";
+        $curseur = $bdd->prepare($sql);
+        $curseur->execute(array('num_ticket' => $num_ticket));
+    }
+        
+    /**
+     * fermer un ticket ERREUR CLIENT
+     *
+     * @param  int $num_ticket
+     * @return void
+     */
+    function closeTicketEC(int $num_ticket){
+        $bdd = getBdd();
+        $sql = "UPDATE TICKET SET STATUT_TICKET = 'FERMÉ' WHERE NUM_TICKET = :num_ticket";
         $curseur = $bdd->prepare($sql);
         $curseur->execute(array('num_ticket' => $num_ticket));
     }

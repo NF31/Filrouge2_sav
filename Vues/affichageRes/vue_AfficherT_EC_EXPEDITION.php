@@ -32,7 +32,7 @@ ob_start();
                 <strong>Nom de l'article à envoyer:</strong>
                 <input type="text" name="nom_article" id="nom_articleEXP" class="form-control mt-2 mb-2" value="<?= $nom_article ?>" required >
                 <strong>Quantité de l'article :</strong>
-                <input type="text" name="qte_concerne" id="qte_concerne" class="form-control mt-2 mb-2" value="<?= $qte_concerne ?>" required >
+                <input type="text" name="qte_concerne" id="qte_concerne" class="form-control mt-2 mb-2" value="<?= $qte_concerne ?>" readonly required >
 
                 <strong>Code ticket:</strong>
                 <select id='select_code_ticket_modal' class="form-select mt-2" name='code_ticket' >
@@ -43,8 +43,8 @@ ob_start();
                 <input type='button' value='Annuler' onclick='window.history.back();' class='col-4 bg-danger text-light rounded border- py-2'>
                 <input type='submit' value='Renvoyer' class='col-4  bg-success text-light rounded border-0 py-2'> 
                 <input type="hidden" name='num_com'  value='<?= $commande['NUM_COMMANDE']?>'>             
-                <input type="hidden" name='action' value='detail'>             
-                <input type="hidden" name='statut_ticket' value='ouvert'>             
+                <input type="hidden" name='action' value='fermerTicketEC'>             
+                <input type="hidden" name='statut_ticket' value='fermé'>             
             </div>
         </form>    
     </div>
@@ -54,7 +54,7 @@ ob_start();
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel">Stock PRINCIPAL mis à jour</h5>
+        <h5 class="modal-title " id="successModalLabel">Stock PRINCIPAL mis à jour</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
